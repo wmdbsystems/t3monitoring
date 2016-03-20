@@ -1,0 +1,311 @@
+<f:layout name="Simple" />
+
+<f:section name="content">
+	<!--<h1>Monitoring</h1>-->
+	<f:if condition="{showIntro}">
+		<div class="row">
+			<div class="col-md-3">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						Clients ({numberOfClients} total)
+					</div>
+					<table class="table table-striped table-hover">
+						<tr>
+							<th>
+								<f:if condition="{clientsWithErrorMessages}">
+									<f:then>
+										<f:link.action additionalParams="{tx_t3monitoring_tools_t3monitoringt3monitor:{filter:{withErrorMessage:'1'}}}">
+											Not reachable
+										</f:link.action>
+									</f:then>
+									<f:else>
+										Not reachable
+									</f:else>
+								</f:if>
+							</th>
+							<td>
+								<span class="badge badge-{f:if(condition:clientsWithErrorMessages,then:'warning',else:'success')}">{clientsWithErrorMessages}</span>
+							</td>
+						</tr>
+						<tr>
+							<th>
+								<f:if condition="{clientsWithInsecureCore}">
+									<f:then>
+										<f:link.action additionalParams="{tx_t3monitoring_tools_t3monitoringt3monitor:{filter:{withInsecureCore: '1'}}}">
+											Insecure core
+										</f:link.action>
+									</f:then>
+									<f:else>
+										Insecure core
+									</f:else>
+								</f:if>
+							</th>
+							<td>
+								<span class="badge badge-{f:if(condition:clientsWithInsecureCore,then:'danger',else:'success')}">{clientsWithInsecureCore}</span>
+							</td>
+						</tr>
+						<tr>
+							<th>
+								<f:if condition="{clientsWithOutdatedCore}">
+									<f:then>
+										<f:link.action additionalParams="{tx_t3monitoring_tools_t3monitoringt3monitor:{filter:{withOutdatedCore: '1'}}}">
+											Outdated core
+										</f:link.action>
+									</f:then>
+									<f:else>
+										Outdated core
+									</f:else>
+								</f:if>
+							</th>
+							<td>
+								<span class="badge badge-{f:if(condition:clientsWithOutdatedCore,then:'warning',else:'success')}">{clientsWithOutdatedCore}</span>
+							</td>
+						</tr>
+						<tr>
+							<th>
+								<f:if condition="{clientsWithInsecureExtensions}">
+									<f:then>
+										<f:link.action additionalParams="{tx_t3monitoring_tools_t3monitoringt3monitor:{filter:{withInsecureExtensions:1}}}">
+											Insecure extensions
+										</f:link.action>
+									</f:then>
+									<f:else>
+										Insecure extensions
+									</f:else>
+								</f:if>
+							</th>
+							<td>
+								<span class="badge badge-{f:if(condition:clientsWithInsecureExtensions,then:'danger',else:'success')}">{clientsWithInsecureExtensions}</span>
+							</td>
+						</tr>
+						<tr>
+							<th>
+								<f:if condition="{clientsWithOutdatedExtensions}">
+									<f:then>
+										<f:link.action additionalParams="{tx_t3monitoring_tools_t3monitoringt3monitor:{filter:{withOutdatedExtensions:1}}}">
+											Outdated extensions
+										</f:link.action>
+									</f:then>
+									<f:else>
+										Outdated extensions
+									</f:else>
+								</f:if>
+							</th>
+							<td>
+								<span class="badge badge-{f:if(condition:clientsWithInsecureExtensions,then:'notice',else:'success')}">{clientsWithOutdatedExtensions}</span>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						Used core versions ({coreVersionUsage -> f:count()})
+					</div>
+					<table class="table table-striped table-hover">
+						<thead>
+						<tr>
+							<th>Version</th>
+							<th>Count</th>
+						</tr>
+						</thead>
+						<tbody>
+						<f:for each="{coreVersionUsage}" as="line">
+							<tr>
+								<td class="{f:if(condition:line.insecureCore,then:'danger',else:'success')}">
+									<f:link.action action="clientByVersion" arguments="{version:line.version_integer}">{line.version}</f:link.action>
+								</td>
+								<td>{line.count}</td>
+							</tr>
+						</f:for>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<h3>Latest security bulletins</h3>
+				<f:if condition="{feedItems}">
+					<f:then>
+						<ul>
+							<f:for each="{feedItems}" as="item">
+								<li>
+									<f:link.external target="_blank" uri="{item.link}">
+										{item.title}
+									</f:link.external>
+									<f:if condition="{item.date}">
+										<i>{item.date -> f:format.date(format:'d.m.Y')}</i>
+									</f:if>
+								</li>
+							</f:for>
+						</ul>
+					</f:then>
+					<f:else>
+						<div class="alert alert-warning">Sorry, the bulletins could not be fetched!</div>
+					</f:else>
+				</f:if>
+				<p>
+					<a href="https://typo3.org/teams/security/security-bulletins/" target="_blank" class="t3-link">All bulletins</a>
+				</p>
+			</div>
+		</div>
+	</f:if>
+
+	<f:form action="index" name="filter" object="{filter}" class="xform-horizontal">
+		<div class="row">
+			<div class="col-md-2">
+				<div class="form-group">
+					<label for="form-client">Client</label>
+					<f:form.textfield property="searchWord" id="form-client" class="form-control" />
+				</div>
+
+				<div class="form-group">
+					<label for="form-core">Core</label>
+					<f:form.select property="version" id="form-core" options="{coreVersions}" optionValueField="versionInteger" optionLabelField="version" class="form-control" prependOptionLabel="" prependOptionValue="" />
+				</div>
+
+				<div class="form-group">
+					<label for="form-sla">SLA</label>
+					<f:form.select property="sla" id="form-sla" options="{slaVersions}" optionValueField="uid" optionLabelField="title" class="form-control" prependOptionLabel="" prependOptionValue="" />
+				</div>
+
+				<div class="checkbox">
+					<label>
+						<f:form.checkbox property="withInsecureCore" value="1" />
+						Insecure core </label>
+				</div>
+
+				<div class="checkbox">
+					<label>
+						<f:form.checkbox property="withOutdatedCore" value="1" />
+						Outdated core </label>
+				</div>
+				<div class="checkbox">
+					<label>
+						<f:form.checkbox property="withOutdatedExtensions" value="1" />
+						Outdated extensions </label>
+				</div>
+
+				<div class="checkbox">
+					<label>
+						<f:form.checkbox property="withInsecureExtensions" value="1" />
+						Insecure extensions </label>
+				</div>
+
+				<div class="checkbox">
+					<label>
+						<f:form.checkbox property="withErrorMessage" value="1" />
+						Connection errors </label>
+				</div>
+
+				<div class="form-group">
+					<f:form.submit value="Filter" class="btn btn-default" />
+				</div>
+
+			</div>
+			<div class="col-md-10">
+				<f:if condition="{showSearch}">
+					<f:then>
+						<f:if condition="{clients}">
+							<f:then>
+								<div class="panel panel-default">
+									<table class="table table-striped table-hover">
+										<thead>
+										<tr>
+											<th>Client</th>
+											<th>SLA</th>
+											<th>Core</th>
+											<th colspan="3">Extensions</th>
+										</tr>
+										</thead>
+										<tbody>
+										<f:for each="{clients}" as="client">
+											<tr>
+												<td>
+													<f:link.action action="client" arguments="{client:client.uid}">{client.title} - {client.domain}</f:link.action>
+													<f:if condition="{client.errorMessage}">
+														<br><span class="text-danger">{client.errorMessage}</span>
+													</f:if>
+												</td>
+												<td class="text-nowrap">
+													<f:if condition="{client.sla}">
+														<f:then>
+															<f:link.action action="show" controller="Sla" arguments="{sla:client.sla}">{client.sla.title}</f:link.action>
+														</f:then>
+														<f:else>-</f:else>
+													</f:if>
+												</td>
+												<td class="text-nowrap {f:if(condition:client.core.insecure,then:'danger',else:'success')}">
+													<f:link.action action="clientByVersion" arguments="{version:client.core.versionInteger}">{client.core.version}</f:link.action>
+												</td>
+												<td class="text-center">
+													<f:if condition="{client.extensions}">
+														<span title="Number of extensions" class="badge badge-default">{client.extensions -> f:count()}</span>
+													</f:if>
+												</td>
+												<td class="text-center">
+													<f:if condition="{client.insecureExtensions}">
+														<span title="Insecure extensions" class="badge badge-danger">{client.insecureExtensions}</span>
+													</f:if>
+												</td>
+												<td class="text-center">
+													<f:if condition="{client.outdatedExtensions}">
+														<span title="Outdated extensions" class="badge badge-info">{client.outdatedExtensions}</span>
+													</f:if>
+												</td>
+											</tr>
+										</f:for>
+										</tbody>
+									</table>
+								</div>
+							</f:then>
+							<f:else>
+								<div class="alert alert-notice">
+									Nothing found
+								</div>
+							</f:else>
+						</f:if>
+					</f:then>
+					<f:else>
+						<div class="callout callout-info">
+							<div class="media">
+								<div class="media-left">
+									<span class="fa-stack fa-lg callout-icon"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-info fa-stack-1x"></i></span>
+								</div>
+								<div class="media-body"><h4 class="callout-title">Search</h4>
+									<div class="callout-body">
+										<p>Use the search on the left to filter the clients for specific properties.</p>
+										<f:form.submit value="List all" class="btn btn-info" />
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<h3>Last imports</h3>
+						<table class="table table-striped table-hover">
+							<f:for each="{importTimes}" as="time" key="key">
+								<tr>
+									<th>
+										{key}
+									</th>
+									<td>
+										<f:if condition="{time}">
+											<f:then>
+												<f:format.date date="{time}" format="c" />
+											</f:then>
+											<f:else>
+												<div class="text-danger">No import yet!</div>
+											</f:else>
+										</f:if>
+									</td>
+								</tr>
+							</f:for>
+
+						</table>
+					</f:else>
+				</f:if>
+			</div>
+		</div>
+	</f:form>
+
+</f:section>
