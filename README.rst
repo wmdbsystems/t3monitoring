@@ -8,7 +8,7 @@ This extensions provides the possibility to monitor all of your TYPO3 installati
 
 **Requirements**
 
-- TYPO3 CMS 7 LTS (monitoring works also for 6.2 accounts
+- TYPO3 CMS 7 LTS (monitoring works also for 6.2 installations)
 
 Important: This extension is still alpha and things might change!
 
