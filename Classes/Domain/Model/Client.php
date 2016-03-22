@@ -40,7 +40,7 @@ class Client extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @validate NotEmpty
      */
     protected $title = '';
-    
+
     /**
      * domain
      *
@@ -48,7 +48,7 @@ class Client extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @validate NotEmpty
      */
     protected $domain = '';
-    
+
     /**
      * secret
      *
@@ -56,63 +56,63 @@ class Client extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @validate NotEmpty
      */
     protected $secret = '';
-    
+
     /**
      * email
      *
      * @var string
      */
     protected $email = '';
-    
+
     /**
      * phpVersion
      *
      * @var string
      */
     protected $phpVersion = '';
-    
+
     /**
      * mysqlVersion
      *
      * @var string
      */
     protected $mysqlVersion = '';
-    
+
     /**
      * insecureCore
      *
      * @var bool
      */
     protected $insecureCore = false;
-    
+
     /**
      * outdatedCore
      *
      * @var bool
      */
     protected $outdatedCore = false;
-    
+
     /**
      * insecureExtensions
      *
      * @var int
      */
     protected $insecureExtensions = 0;
-    
+
     /**
      * outdatedExtensions
      *
      * @var int
      */
     protected $outdatedExtensions = 0;
-    
+
     /**
      * errorMessage
      *
      * @var string
      */
     protected $errorMessage = '';
-    
+
     /**
      * extensions
      *
@@ -120,7 +120,7 @@ class Client extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @lazy
      */
     protected $extensions = null;
-    
+
     /**
      * core
      *
@@ -128,7 +128,7 @@ class Client extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @lazy
      */
     protected $core = null;
-    
+
     /**
      * sla
      *
@@ -136,7 +136,7 @@ class Client extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @lazy
      */
     protected $sla = null;
-    
+
     /**
      * __construct
      */
@@ -145,7 +145,7 @@ class Client extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         //Do not remove the next line: It would break the functionality
         $this->initStorageObjects();
     }
-    
+
     /**
      * Initializes all ObjectStorage properties
      * Do not modify this method!
@@ -158,7 +158,7 @@ class Client extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->extensions = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
     }
-    
+
     /**
      * Returns the title
      *
@@ -168,7 +168,7 @@ class Client extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->title;
     }
-    
+
     /**
      * Sets the title
      *
@@ -179,7 +179,7 @@ class Client extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->title = $title;
     }
-    
+
     /**
      * Returns the domain
      *
@@ -189,7 +189,7 @@ class Client extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->domain;
     }
-    
+
     /**
      * Sets the domain
      *
@@ -200,7 +200,7 @@ class Client extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->domain = $domain;
     }
-    
+
     /**
      * Returns the secret
      *
@@ -210,7 +210,7 @@ class Client extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->secret;
     }
-    
+
     /**
      * Sets the secret
      *
@@ -221,7 +221,7 @@ class Client extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->secret = $secret;
     }
-    
+
     /**
      * Returns the email
      *
@@ -231,7 +231,7 @@ class Client extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->email;
     }
-    
+
     /**
      * Sets the email
      *
@@ -242,7 +242,7 @@ class Client extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->email = $email;
     }
-    
+
     /**
      * Returns the phpVersion
      *
@@ -252,7 +252,7 @@ class Client extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->phpVersion;
     }
-    
+
     /**
      * Sets the phpVersion
      *
@@ -263,7 +263,7 @@ class Client extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->phpVersion = $phpVersion;
     }
-    
+
     /**
      * Returns the mysqlVersion
      *
@@ -273,7 +273,7 @@ class Client extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->mysqlVersion;
     }
-    
+
     /**
      * Sets the mysqlVersion
      *
@@ -284,7 +284,7 @@ class Client extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->mysqlVersion = $mysqlVersion;
     }
-    
+
     /**
      * Returns the insecureCore
      *
@@ -294,7 +294,7 @@ class Client extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->insecureCore;
     }
-    
+
     /**
      * Sets the insecureCore
      *
@@ -305,7 +305,7 @@ class Client extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->insecureCore = $insecureCore;
     }
-    
+
     /**
      * Returns the boolean state of insecureCore
      *
@@ -315,7 +315,7 @@ class Client extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->insecureCore;
     }
-    
+
     /**
      * Returns the outdatedCore
      *
@@ -325,7 +325,7 @@ class Client extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->outdatedCore;
     }
-    
+
     /**
      * Sets the outdatedCore
      *
@@ -336,7 +336,7 @@ class Client extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->outdatedCore = $outdatedCore;
     }
-    
+
     /**
      * Returns the boolean state of outdatedCore
      *
@@ -346,7 +346,7 @@ class Client extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->outdatedCore;
     }
-    
+
     /**
      * Returns the insecureExtensions
      *
@@ -356,7 +356,7 @@ class Client extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->insecureExtensions;
     }
-    
+
     /**
      * Sets the insecureExtensions
      *
@@ -367,7 +367,7 @@ class Client extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->insecureExtensions = $insecureExtensions;
     }
-    
+
     /**
      * Returns the outdatedExtensions
      *
@@ -377,7 +377,7 @@ class Client extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->outdatedExtensions;
     }
-    
+
     /**
      * Sets the outdatedExtensions
      *
@@ -388,7 +388,7 @@ class Client extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->outdatedExtensions = $outdatedExtensions;
     }
-    
+
     /**
      * Returns the errorMessage
      *
@@ -398,7 +398,7 @@ class Client extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->errorMessage;
     }
-    
+
     /**
      * Sets the errorMessage
      *
@@ -409,7 +409,7 @@ class Client extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->errorMessage = $errorMessage;
     }
-    
+
     /**
      * Adds a Extension
      *
@@ -420,7 +420,7 @@ class Client extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->extensions->attach($extension);
     }
-    
+
     /**
      * Removes a Extension
      *
@@ -431,7 +431,7 @@ class Client extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->extensions->detach($extensionToRemove);
     }
-    
+
     /**
      * Returns the extensions
      *
@@ -441,7 +441,7 @@ class Client extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->extensions;
     }
-    
+
     /**
      * Sets the extensions
      *
@@ -452,7 +452,7 @@ class Client extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->extensions = $extensions;
     }
-    
+
     /**
      * Returns the core
      *
@@ -462,7 +462,7 @@ class Client extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->core;
     }
-    
+
     /**
      * Sets the core
      *
@@ -473,7 +473,7 @@ class Client extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->core = $core;
     }
-    
+
     /**
      * Returns the sla
      *
@@ -483,7 +483,7 @@ class Client extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->sla;
     }
-    
+
     /**
      * Sets the sla
      *

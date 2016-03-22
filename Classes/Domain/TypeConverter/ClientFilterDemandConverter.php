@@ -53,6 +53,7 @@ class ClientFilterDemandConverter extends AbstractTypeConverter
         array $convertedChildProperties = array(),
         PropertyMappingConfigurationInterface $configuration = null
     ) {
+
         if (!$this->isAllowed()) {
             return null;
         }

@@ -19,9 +19,11 @@ call_user_func(
                 't3monitor',	// Submodule key
                 '',						// Position
                 [
-                    'Statistic' => 'index,client,clientByVersion,administration',
-                    'Sla' => 'list, show',
+                    'Statistic' => 'index,administration',
+                    'Core' => 'list, show',
                     'Client' => 'list, show',
+                    'Extension' => 'list, show',
+                    'Sla' => 'list, show',
                 ],
                 [
                     'access' => 'user,group',
@@ -32,18 +34,11 @@ call_user_func(
 
         }
 
-        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile($extKey, 'Configuration/TypoScript', 'Monitioring for TYPO3 installations');
+        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile($extKey, 'Configuration/TypoScript', 'Monitoring for TYPO3 installations');
 
-        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr('tx_t3monitoring_domain_model_client', 'EXT:t3monitoring/Resources/Private/Language/locallang_csh_tx_t3monitoring_domain_model_client.xlf');
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_t3monitoring_domain_model_client');
-
-        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr('tx_t3monitoring_domain_model_extension', 'EXT:t3monitoring/Resources/Private/Language/locallang_csh_tx_t3monitoring_domain_model_extension.xlf');
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_t3monitoring_domain_model_extension');
-
-        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr('tx_t3monitoring_domain_model_core', 'EXT:t3monitoring/Resources/Private/Language/locallang_csh_tx_t3monitoring_domain_model_core.xlf');
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_t3monitoring_domain_model_core');
-
-        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr('tx_t3monitoring_domain_model_sla', 'EXT:t3monitoring/Resources/Private/Language/locallang_csh_tx_t3monitoring_domain_model_sla.xlf');
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_t3monitoring_domain_model_sla');
 
     },

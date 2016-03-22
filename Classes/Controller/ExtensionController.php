@@ -1,57 +1,31 @@
 <?php
 namespace T3Monitor\T3monitoring\Controller;
 
+use T3Monitor\T3monitoring\Domain\Model\Dto\ExtensionFilterDemand;
 
-/***************************************************************
- *
- *  Copyright notice
- *
- *  (c) 2016 Georg Ringer, www.sup7.at
- *
- *  All rights reserved
- *
- *  This script is part of the TYPO3 project. The TYPO3 project is
- *  free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  The GNU General Public License can be found at
- *  http://www.gnu.org/copyleft/gpl.html.
- *
- *  This script is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  This copyright notice MUST APPEAR in all copies of the script!
- ***************************************************************/
 
 /**
  * ExtensionController
  */
-class ExtensionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
+class ExtensionController extends BaseController
 {
 
     /**
-     * extensionRepository
-     *
-     * @var \T3Monitor\T3monitoring\Domain\Repository\ExtensionRepository
-     * @inject
+     * @param ExtensionFilterDemand $filter
      */
-    protected $extensionRepository = NULL;
-    
-    /**
-     * action list
-     *
-     * @return void
-     */
-    public function listAction()
+    public function listAction(ExtensionFilterDemand $filter = null)
     {
-        $extensions = $this->extensionRepository->findAll();
-        $this->view->assign('extensions', $extensions);
+        if (is_null($filter)) {
+            /** @var ExtensionFilterDemand $filter */
+            $filter = $this->objectManager->get(ExtensionFilterDemand::class);
+        }
+
+        $this->view->assignMultiple([
+            'filter' => $filter,
+            'extensions' => $this->extensionRepository->findByDemand($filter)
+        ]);
     }
-    
+
     /**
      * action show
      *
@@ -62,5 +36,13 @@ class ExtensionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContro
     {
         $this->view->assign('extension', $extension);
     }
+
+    /**
+     * extensionRepository
+     *
+     * @var \T3Monitor\T3monitoring\Domain\Repository\ExtensionRepository
+     * @inject
+     */
+    protected $extensionRepository = null;
 
 }

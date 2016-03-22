@@ -42,12 +42,16 @@ class StatisticController extends BaseController
         $outdatedCoreDemand = $this->getClientFilterDemand()->setWithOutdatedCore(true);
         $outdatedExtensionDemand = $this->getClientFilterDemand()->setWithOutdatedExtensions(true);
 
-        /** @var BulletinImport $bulletinImport */
-        $bulletinImport = GeneralUtility::makeInstance(BulletinImport::class,
-            'https://typo3.org/xml-feeds/security/1/rss.xml', 5);
-
+        $feedItems = null;
+        if ($this->emConfiguration->getLoadBulletins()) {
+            /** @var BulletinImport $bulletinImport */
+            $bulletinImport = GeneralUtility::makeInstance(BulletinImport::class,
+                'https://typo3.org/xml-feeds/security/1/rss.xml', 5);
+            $feedItems = $bulletinImport->start();
+        }
 
         $this->view->assignMultiple([
+            'emConfiguration' => $this->emConfiguration,
             'filter' => $filter,
             'clients' => $this->clientRepository->findByDemand($filter),
             'coreVersions' => $this->coreRepository->findAll(CoreRepository::USED_ONLY),
@@ -59,43 +63,12 @@ class StatisticController extends BaseController
             'clientsWithOutdatedCore' => $this->clientRepository->countByDemand($outdatedCoreDemand),
             'numberOfClients' => $this->clientRepository->countAll(),
             'slaVersions' => $this->slaRepository->findAll(),
-            'feedItems' => $bulletinImport->start(),
+            'feedItems' => $feedItems,
             'importTimes' => [
                 'client' => $this->registry->get('t3monitoring', 'importClient'),
                 'core' => $this->registry->get('t3monitoring', 'importCore'),
                 'extension' => $this->registry->get('t3monitoring', 'importExtension'),
             ],
-        ]);
-    }
-
-    /**
-     * @param int $client
-     */
-    public function clientAction($client = 0)
-    {
-        if ((int)$client === 0) {
-            $this->redirect('index');
-        }
-
-        $this->view->assignMultiple([
-            'client' => $this->clientRepository->findByUid($client),
-        ]);
-    }
-
-    /**
-     * @param int $version
-     */
-    public function clientByVersionAction($version = 0)
-    {
-        if ((int)$version === 0) {
-            $this->redirect('index');
-        }
-
-        $demand = $this->getClientFilterDemand();
-        $demand->setVersion($version);
-        $this->view->assignMultiple([
-            'version' => $this->coreRepository->findByVersionAsInteger($version),
-            'clients' => $this->statisticRepository->getClientsByDemand($demand),
         ]);
     }
 

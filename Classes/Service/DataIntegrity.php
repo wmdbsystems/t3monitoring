@@ -204,6 +204,14 @@ class DataIntegrity
             );
         }
 
+        // Used extensions
+        $this->getDatabaseConnection()->sql_query('
+            UPDATE tx_t3monitoring_domain_model_extension
+            SET is_used=1
+            WHERE uid IN (
+              SELECT uid_foreign FROM tx_t3monitoring_client_extension_mm
+            );'
+        );
     }
 
     /**

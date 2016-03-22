@@ -114,7 +114,9 @@
 						<f:for each="{coreVersionUsage}" as="line">
 							<tr>
 								<td class="{f:if(condition:line.insecureCore,then:'danger',else:'success')}">
-									<f:link.action action="clientByVersion" arguments="{version:line.version_integer}">{line.version}</f:link.action>
+									<f:link.action additionalParams="{tx_t3monitoring_tools_t3monitoringt3monitor:{filter:{version:line.version_integer}}}">
+										{line.version}
+									</f:link.action>
 								</td>
 								<td>{line.count}</td>
 							</tr>
@@ -125,23 +127,32 @@
 			</div>
 			<div class="col-md-6">
 				<h3>Latest security bulletins</h3>
-				<f:if condition="{feedItems}">
+				<f:if condition="{emConfiguration.loadBulletins}">
 					<f:then>
-						<ul>
-							<f:for each="{feedItems}" as="item">
-								<li>
-									<f:link.external target="_blank" uri="{item.link}">
-										{item.title}
-									</f:link.external>
-									<f:if condition="{item.date}">
-										<i>{item.date -> f:format.date(format:'d.m.Y')}</i>
-									</f:if>
-								</li>
-							</f:for>
-						</ul>
+						<f:if condition="{feedItems}">
+							<f:then>
+								<ul>
+									<f:for each="{feedItems}" as="item">
+										<li>
+											<f:link.external target="_blank" uri="{item.link}">
+												{item.title}
+											</f:link.external>
+											<f:if condition="{item.date}">
+												<i>{item.date -> f:format.date(format:'d.m.Y')}</i>
+											</f:if>
+										</li>
+									</f:for>
+								</ul>
+							</f:then>
+							<f:else>
+								<div class="alert alert-warning">Sorry, the bulletins could not be fetched!</div>
+							</f:else>
+						</f:if>
 					</f:then>
 					<f:else>
-						<div class="alert alert-warning">Sorry, the bulletins could not be fetched!</div>
+						<div class="alert alert-notice">
+							Loading the bulletins is disabled.
+						</div>
 					</f:else>
 				</f:if>
 				<p>
@@ -222,7 +233,7 @@
 										<f:for each="{clients}" as="client">
 											<tr>
 												<td>
-													<f:link.action action="client" arguments="{client:client.uid}">{client.title} - {client.domain}</f:link.action>
+													<f:link.action action="show" controller="Client" arguments="{client:client}">{client.title} - {client.domain}</f:link.action>
 													<f:if condition="{client.errorMessage}">
 														<br><span class="text-danger">{client.errorMessage}</span>
 													</f:if>
@@ -236,7 +247,7 @@
 													</f:if>
 												</td>
 												<td class="text-nowrap {f:if(condition:client.core.insecure,then:'danger',else:'success')}">
-													<f:link.action action="clientByVersion" arguments="{version:client.core.versionInteger}">{client.core.version}</f:link.action>
+													{client.core.version}
 												</td>
 												<td class="text-center">
 													<f:if condition="{client.extensions}">
@@ -300,8 +311,17 @@
 									</td>
 								</tr>
 							</f:for>
-
 						</table>
+
+						<div class="alert alert-danger">
+							<strong>Dev zone</strong>
+
+							<ul>
+								<li>
+									<f:link.action action="list" controller="Extension">Extension list</f:link.action>
+								</li>
+							</ul>
+						</div>
 					</f:else>
 				</f:if>
 			</div>

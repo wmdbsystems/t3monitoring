@@ -26,6 +26,9 @@ class EmMonitoringConfiguration implements SingletonInterface
     /** @var int */
     protected $pid = 0;
 
+    /** @var bool */
+    protected $loadBulletins = true;
+
     public function __construct()
     {
         $settings = (array)unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['t3monitoring']);
@@ -43,4 +46,14 @@ class EmMonitoringConfiguration implements SingletonInterface
     {
         return (int)$this->pid;
     }
+
+    /**
+     * @return boolean
+     */
+    public function getLoadBulletins()
+    {
+        return (bool)$this->loadBulletins;
+    }
+
+
 }

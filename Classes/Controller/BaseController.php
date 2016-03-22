@@ -3,6 +3,7 @@ namespace T3Monitor\T3monitoring\Controller;
 
 
 use T3Monitor\T3monitoring\Domain\Model\Dto\ClientFilterDemand;
+use T3Monitor\T3monitoring\Domain\Model\Dto\EmMonitoringConfiguration;
 use T3Monitor\T3monitoring\Domain\Repository\ClientRepository;
 use T3Monitor\T3monitoring\Domain\Repository\CoreRepository;
 use T3Monitor\T3monitoring\Domain\Repository\SlaRepository;
@@ -28,6 +29,7 @@ class BaseController extends ActionController
         $this->coreRepository = $this->objectManager->get(CoreRepository::class);
         $this->iconFactory = GeneralUtility::makeInstance(IconFactory::class);
         $this->registry = GeneralUtility::makeInstance(Registry::class);
+        $this->emConfiguration = GeneralUtility::makeInstance(EmMonitoringConfiguration::class);
 
         parent::initializeAction();
     }
@@ -58,6 +60,10 @@ class BaseController extends ActionController
 
     /** @var  Registry */
     protected $registry;
+
+    /** @var EmMonitoringConfiguration */
+    protected $emConfiguration;
+
 
     /**
      * Set up the doc header properly here

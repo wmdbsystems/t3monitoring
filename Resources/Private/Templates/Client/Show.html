@@ -1,22 +1,136 @@
+{namespace monitor = T3Monitor\T3monitoring\ViewHelpers}
 
-<f:layout name="Default" />
+<f:layout name="Simple" />
 
-This Template is responsible for displaying a single view for a domain object
+<f:section name="content">
+	<h1>Client: {client.title}</h1>
 
-If you modify this template, do not forget to change the overwrite settings
-in /Configuration/ExtensionBuilder/settings.yaml:
-  Resources:
-    Private:
-      Templates:
-        Show.html: keep
+	<table class="table table-striped table-hover">
+		<tr>
+			<th>Domain</th>
+			<td>
+				<f:link.external uri="{client.domain}">{client.domain}</f:link.external>
+			</td>
+		</tr>
+		<f:if condition="{client.sla}">
+			<tr>
+				<th>SLA</th>
+				<td>
+					<f:link.action action="show" controller="Sla" arguments="{sla:client.sla}">{client.sla.title}</f:link.action>
+				</td>
+			</tr>
+		</f:if>
+		<tr>
+			<th><i class="icon icon-size-small icon-state-default icon-apps-pagetree-root"></i> TYPO3 Version</th>
+			<td>{client.core.version}</td>
+		</tr>
+		<tr>
+			<th><i class="fa fa-database"></i> Mysql Version</th>
+			<td>{client.mysqlVersion}</td>
+		</tr>
+		<tr>
+			<th><i class="fa fa-code"></i> PHP Version</th>
+			<td>{client.phpVersion}</td>
+		</tr>
+	</table>
 
-Otherwise your changes will be overwritten the next time you save the extension in the extension builder
+	<f:if condition="{client.errorMessage}">
+		<div class="alert alert-danger">
+			<div class="alert-title">Error during fetch</div>
+			Message: {client.errorMessage}
+		</div>
+	</f:if>
 
-<f:section name="main">
-<h1>Single View for Client</h1>
-
-<f:flashMessages />
-<f:render partial="Client/Properties" arguments="{client:client}" />
-<f:link.action action="list">Back to list</f:link.action><br />
-<f:link.action action="new">New Client</f:link.action>
+	<f:if condition="{client.extensions}">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				Available extensions ({client.extensions -> f:count()})
+			</div>
+			<table class="table table-striped table-hover">
+				<thead>
+				<tr>
+					<th>Name</th>
+					<th>Version</th>
+					<th>State</th>
+					<th>Update available</th>
+					<th>Category</th>
+					<th>Secure</th>
+					<th>Loaded</th>
+					<th>Found in TER</th>
+				</tr>
+				</thead>
+				<f:for each="{client.extensions}" as="extension">
+					<monitor:additionalExtensionData as="extra" client="{client.uid}" extension="{extension.uid}">
+						<tr class="{f:if(condition:extra.is_loaded,then:'',else:'t3-page-ce-hidden')}{f:if(condition:extension.insecure,then:'danger',else:'')}">
+							<td>
+								<span data-toggle="tooltip" data-title="{extension.title}" data-html="true" data-placement="right">{extension.name}</span>
+							</td>
+							<td>{extension.version}</td>
+							<td><span class="label label-{extension.stateString}">{extension.stateString}</span></td>
+							<td>
+								<f:if condition="{extension.insecure}">
+									<f:then>
+										<br>
+										<f:if condition="{extension.nextSecureVersion}">
+											<f:then>
+												Next secure version: {extension.nextSecureVersion}
+											</f:then>
+											<f:else>
+												No official update available
+											</f:else>
+										</f:if>
+									</f:then>
+									<f:else>
+										<monitor:availableUpdates extension="{extension}" as="list">
+											<f:if condition="{list}">
+												<f:then>
+													<f:for each="{list}" as="version">
+														<span class="badge">{version}</span>
+													</f:for>
+												</f:then>
+												<f:else>
+													-
+												</f:else>
+											</f:if>
+										</monitor:availableUpdates>
+									</f:else>
+								</f:if>
+							</td>
+							<td>{extension.categoryString}</td>
+							<td class="{f:if(condition:extension.insecure,then:'danger',else:'success')}">
+								<f:if condition="{extension.insecure}">
+									<f:then>
+										<span class="text-danger">no</span>
+									</f:then>
+									<f:else>
+										<span class="text-success">yes</span>
+									</f:else>
+								</f:if>
+							</td>
+							<td class="{f:if(condition:extra.is_loaded,then:'success',else:'danger')}">
+								<f:if condition="{extra.is_loaded}">
+									<f:then>
+										<span class="text-success">yes</span>
+									</f:then>
+									<f:else>
+										<span class="text-danger">no</span>
+									</f:else>
+								</f:if>
+							</td>
+							<td class="{f:if(condition:extension.isOfficial,then:'success',else:'warning')}">
+								<f:if condition="{extension.isOfficial}">
+									<f:then>
+										<span class="text-success">yes</span>
+									</f:then>
+									<f:else>
+										<span class="text-warning">no</span>
+									</f:else>
+								</f:if>
+							</td>
+						</tr>
+					</monitor:additionalExtensionData>
+				</f:for>
+			</table>
+		</div>
+	</f:if>
 </f:section>

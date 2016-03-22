@@ -1,3 +1,6 @@
 
 # cat=records/enable/101; type=string; label=Pid:Used page for storing records
 pid = 1
+
+# cat=records/enable/102; type=boolean; label=Load Bulletings:If set, the security bulletins are fetched and displayed
+loadBulletins = 1
