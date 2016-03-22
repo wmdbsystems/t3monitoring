@@ -5,31 +5,58 @@
 <f:section name="content">
 	<h1>Extensions</h1>
 
-	<f:form name="filter" object="{filter}" class="form-horizontal">
-		<f:form.textfield property="name" />
-		<f:form.checkbox property="exactSearch" value="1" />
-		<f:form.submit value="Filter" />
+	<f:form name="filter" object="{filter}" class="form-inline">
+
+		<div class="form-group">
+			<label>Suche
+
+			</label>
+			<f:form.textfield property="name" class="form-control" />
+		</div>
+
+		<div class="form-group">
+			<label>Exact search</label>
+			<div class="checkbox">
+				<f:form.checkbox property="exactSearch" value="1" />
+			</div>
+		</div>
+		<f:form.submit class="btn btn-default" value="Filter" />
+
 	</f:form>
 
-	<table class="table table-striped table-hover">
-		<thead>
-		<tr>
-			<th>Name</th>
-			<th>version</th>
-		</tr>
-		</thead>
-		<f:groupedFor each="{extensions}" as="groupedExtensions" groupBy="name" groupKey="name">
-			<f:for each="{groupedExtensions}" as="fo" iteration="i">
-				<tr>
-					<f:if condition="{i.isFirst}">
-						<td rowspan="{groupedExtensions -> f:count()}">{name} => {groupedExtensions -> f:count()}
+	<div class="panel panel-default panel-space">
+		<div class="panel-heading">
+			Extensions ({extensions -> f:count()} total)
+		</div>
+		<table class="table table-striped table-hover">
+			<thead>
+			<tr>
+				<th style="width:250px;">Name</th>
+				<th style="width:150px;">version</th>
+				<th>Client</th>
+			</tr>
+			</thead>
+			<f:for each="{extensions}" as="versions" key="name" iteration="i">
+				<f:for each="{versions}" as="v" key="versionName" iteration="i2">
+					<tr>
+						<f:if condition="{i2.isFirst}">
+							<td rowspan="{versions -> f:count()}">{name}</td>
+						</f:if>
+						<td>{versionName}</td>
+						<td>
+							<table>
+								<f:for each="{v.clients}" as="client">
+									<tr>
+										<td>
+											<f:link.action action="show" controller="Client" arguments="{client:client.clientUid}">{client.title}</f:link.action>
+										</td>
+									</tr>
+								</f:for>
+							</table>
 						</td>
-					</f:if>
-
-					<td>{fo.version}</td>
-
-				</tr>
+					</tr>
+				</f:for>
 			</f:for>
-		</f:groupedFor>
-	</table>
+		</table>
+	</div>
 </f:section>

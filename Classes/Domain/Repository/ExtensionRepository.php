@@ -28,7 +28,11 @@ class ExtensionRepository extends BaseRepository
             'ext.name,ext.version_integer DESC,client.title'
         );
 
-        return $rows;
+        $result = [];
+        foreach ($rows as $row) {
+            $result[$row['name']][$row['version']]['clients'][] = $row;
+        }
+        return $result;
     }
 
     /**
