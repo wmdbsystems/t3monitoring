@@ -19,7 +19,7 @@ class ExtensionRepository extends BaseRepository
     public function findByDemand(ExtensionFilterDemand $demand)
     {
         $rows = $this->getDatabaseConnection()->exec_SELECTgetRows(
-            'client.title,client.uid as clientUid,ext.name, ext.version',
+            'client.title,client.uid as clientUid,ext.name, ext.version,ext.insecure',
             'tx_t3monitoring_domain_model_extension ext
                 RIGHT JOIN tx_t3monitoring_client_extension_mm mm on mm.uid_foreign = ext.uid
                 RIGHT JOIN tx_t3monitoring_domain_model_client client on mm.uid_local=client.uid',
@@ -30,6 +30,7 @@ class ExtensionRepository extends BaseRepository
 
         $result = [];
         foreach ($rows as $row) {
+            $result[$row['name']][$row['version']]['insecure'] = $row['insecure'];
             $result[$row['name']][$row['version']]['clients'][] = $row;
         }
         return $result;

@@ -44,9 +44,9 @@
 						</f:if>
 						<td>{versionName}</td>
 						<td>
-							<table>
+							<table class="table table-no-borders table-transparent" style="background-color: transparent">
 								<f:for each="{v.clients}" as="client">
-									<tr>
+									<tr class="{f:if(condition:client.insecure,then:'danger',else:'')}">
 										<td>
 											<f:link.action action="show" controller="Client" arguments="{client:client.clientUid}">{client.title}</f:link.action>
 										</td>
