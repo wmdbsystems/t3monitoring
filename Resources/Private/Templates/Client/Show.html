@@ -12,18 +12,18 @@
 				<f:link.external uri="{client.domain}">{client.domain}</f:link.external>
 			</td>
 		</tr>
+		<tr class="{f:if(condition:client.core.insecure,then:'danger',else:'success')}">
+			<th>{core:icon(identifier:'apps-pagetree-root')} TYPO3 Version</th>
+			<td>{client.core.version}</td>
+		</tr>
 		<f:if condition="{client.sla}">
 			<tr>
-				<th>SLA</th>
+				<th>{core:icon(identifier:'actions-document')} SLA</th>
 				<td>
 					<f:link.action action="show" controller="Sla" arguments="{sla:client.sla}">{client.sla.title}</f:link.action>
 				</td>
 			</tr>
 		</f:if>
-		<tr>
-			<th>{core:icon(identifier:'apps-pagetree-root')} TYPO3 Version</th>
-			<td>{client.core.version}</td>
-		</tr>
 		<tr>
 			<th><i class="fa fa-database"></i> Mysql Version</th>
 			<td>{client.mysqlVersion}</td>

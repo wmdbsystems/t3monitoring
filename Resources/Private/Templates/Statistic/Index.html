@@ -1,3 +1,4 @@
+{namespace core = TYPO3\CMS\Core\ViewHelpers}
 <f:layout name="Simple" />
 
 <f:section name="content">
@@ -150,7 +151,7 @@
 						</f:if>
 					</f:then>
 					<f:else>
-						<div class="alert alert-notice">
+						<div class="callout callout-notice">
 							Loading the bulletins is disabled.
 						</div>
 					</f:else>
@@ -210,7 +211,9 @@
 				</div>
 
 				<div class="form-group">
-					<f:form.submit value="Filter" class="btn btn-default" />
+					<button class="btn btn-default">
+						{core:icon(identifier:'actions-search')} Search
+					</button>
 				</div>
 
 			</div>
@@ -271,7 +274,7 @@
 								</div>
 							</f:then>
 							<f:else>
-								<div class="alert alert-notice">
+								<div class="callout callout-notice">
 									Nothing found
 								</div>
 							</f:else>
