@@ -215,7 +215,6 @@
 						{core:icon(identifier:'actions-search')} Search
 					</button>
 				</div>
-
 			</div>
 			<div class="col-md-10">
 				<f:if condition="{showSearch}">
@@ -223,6 +222,9 @@
 						<f:if condition="{clients}">
 							<f:then>
 								<div class="panel panel-default">
+									<div class="panel-heading">
+										Clients ({clients -> f:count()})
+									</div>
 									<table class="table table-striped table-hover">
 										<thead>
 										<tr>
@@ -254,17 +256,17 @@
 												</td>
 												<td class="text-center">
 													<f:if condition="{client.extensions}">
-														<span title="Number of extensions" class="badge badge-default">{client.extensions -> f:count()}</span>
+														<span data-toggle="tooltip" data-title="Number of extensions" data-placement="left" class="badge badge-default">{client.extensions -> f:count()}</span>
 													</f:if>
 												</td>
 												<td class="text-center">
 													<f:if condition="{client.insecureExtensions}">
-														<span title="Insecure extensions" class="badge badge-danger">{client.insecureExtensions}</span>
+														<span data-toggle="tooltip" data-title="Insecure extensions" data-placement="left" class="badge badge-danger">{client.insecureExtensions}</span>
 													</f:if>
 												</td>
 												<td class="text-center">
 													<f:if condition="{client.outdatedExtensions}">
-														<span title="Outdated extensions" class="badge badge-info">{client.outdatedExtensions}</span>
+														<span data-toggle="tooltip" data-title="Outdated extensions" data-placement="left" class="badge badge-info">{client.outdatedExtensions}</span>
 													</f:if>
 												</td>
 											</tr>

@@ -11,6 +11,7 @@ use T3Monitor\T3monitoring\Domain\Repository\StatisticRepository;
 use TYPO3\CMS\Backend\View\BackendTemplateView;
 use TYPO3\CMS\Core\Imaging\Icon;
 use TYPO3\CMS\Core\Imaging\IconFactory;
+use TYPO3\CMS\Core\Page\PageRenderer;
 use TYPO3\CMS\Core\Registry;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
@@ -76,10 +77,13 @@ class BaseController extends ActionController
         parent::initializeView($view);
         $view->getModuleTemplate()->getDocHeaderComponent()->setMetaInformation([]);
 
+        /** @var PageRenderer $pageRenderer */
+        $pageRenderer = GeneralUtility::makeInstance(PageRenderer::class);
+        $pageRenderer->loadRequireJsModule('TYPO3/CMS/Backend/Tooltip');
+
 //        $this->createMenu();
         $this->getButtons();
     }
-
 
     protected function createMenu()
     {

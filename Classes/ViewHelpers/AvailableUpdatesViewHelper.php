@@ -38,7 +38,7 @@ class AvailableUpdatesViewHelper extends AbstractViewHelper
         $result = [];
         foreach ($versions as $name => $version) {
             if (!empty($version) && $extension->getVersion() !== $version && !isset($result[$version])) {
-                $result[$version] = $version;
+                $result[$version] = $name;
             }
         }
 
