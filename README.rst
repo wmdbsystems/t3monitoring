@@ -30,6 +30,11 @@ Screenshots
 .. figure:: Resources/Public/Screenshots/t3monitoring-client.png
 		:alt: Client
 
+**List of all used extensions**
+
+.. figure:: Resources/Public/Screenshots/t3monitoring-extensions.png
+		:alt: Extensions
+
 How to start
 ------------
 Before you can actually monitor any installation, you need to install the extension *t3monitoring_client* on every installation (called "client").
