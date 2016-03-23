@@ -93,6 +93,8 @@ class BaseController extends ActionController
         $actions = [
             ['controller' => 'Statistic', 'action' => 'index', 'label' => 'Home'],
             ['controller' => 'Extension', 'action' => 'list', 'label' => 'Extension list'],
+            ['controller' => 'Core', 'action' => 'list', 'label' => 'Core versions'],
+            ['controller' => 'Sla', 'action' => 'list', 'label' => 'SLA'],
             ['controller' => 'Statistic', 'action' => 'administration', 'label' => 'Administration'],
         ];
 

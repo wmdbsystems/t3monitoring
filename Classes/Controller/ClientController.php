@@ -11,17 +11,6 @@ class ClientController extends BaseController
 {
 
     /**
-     * action list
-     *
-     * @return void
-     */
-    public function listAction()
-    {
-        $clients = $this->clientRepository->findAll();
-        $this->view->assign('clients', $clients);
-    }
-
-    /**
      * action show
      *
      * @param Client $client

@@ -127,35 +127,41 @@
 				</div>
 			</div>
 			<div class="col-md-6">
-				<h3>Latest security bulletins</h3>
-				<f:if condition="{emConfiguration.loadBulletins}">
-					<f:then>
-						<f:if condition="{feedItems}">
-							<f:then>
-								<ul>
-									<f:for each="{feedItems}" as="item">
-										<li>
-											<f:link.external target="_blank" uri="{item.link}">
-												{item.title}
-											</f:link.external>
-											<f:if condition="{item.date}">
-												<i>{item.date -> f:format.date(format:'d.m.Y')}</i>
-											</f:if>
-										</li>
-									</f:for>
-								</ul>
-							</f:then>
-							<f:else>
-								<div class="alert alert-warning">Sorry, the bulletins could not be fetched!</div>
-							</f:else>
-						</f:if>
-					</f:then>
-					<f:else>
-						<div class="callout callout-notice">
-							Loading the bulletins is disabled.
-						</div>
-					</f:else>
-				</f:if>
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						Latest security bulletins
+					</div>
+
+					<f:if condition="{emConfiguration.loadBulletins}">
+						<f:then>
+							<f:if condition="{feedItems}">
+								<f:then>
+									<ul>
+										<f:for each="{feedItems}" as="item">
+											<li>
+												<f:link.external target="_blank" uri="{item.link}">
+													{item.title}
+												</f:link.external>
+												<f:if condition="{item.date}">
+													<i>{item.date -> f:format.date(format:'d.m.Y')}</i>
+												</f:if>
+											</li>
+										</f:for>
+									</ul>
+								</f:then>
+								<f:else>
+									<div class="alert alert-warning">Sorry, the bulletins could not be fetched!</div>
+								</f:else>
+							</f:if>
+						</f:then>
+						<f:else>
+							<div class="callout callout-notice" style="margin:0">
+								Loading the bulletins is disabled.
+							</div>
+						</f:else>
+					</f:if>
+				</div>
+
 				<p>
 					<a href="https://typo3.org/teams/security/security-bulletins/" target="_blank" class="t3-link">All bulletins</a>
 				</p>

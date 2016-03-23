@@ -21,7 +21,7 @@ call_user_func(
                 [
                     'Statistic' => 'index,administration',
                     'Core' => 'list, show',
-                    'Client' => 'list, show',
+                    'Client' => 'show',
                     'Extension' => 'list, show',
                     'Sla' => 'list, show',
                 ],

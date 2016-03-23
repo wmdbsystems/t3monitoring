@@ -6,17 +6,19 @@
 	<h1>Administration</h1>
 
 	<h3>Start an import</h3>
-	<div class="row">
-		<div class="col-md-1 col-md-offset-1">
+
+	<div class="btn-toolbar">
+		<div class="btn-group" role="group">
 			<f:link.action action="administration" arguments="{import:'clients'}" class="btn btn-info">Clients</f:link.action>
 		</div>
-		<div clasS="col-md-1">
+		<div class="btn-group" role="group">
 			<f:link.action action="administration" arguments="{import:'core'}" class="btn btn-info">Core versions</f:link.action>
 		</div>
-		<div clasS="col-md-1">
+		<div class="btn-group" role="group">
 			<f:link.action action="administration" arguments="{import:'extensions'}" class="btn btn-info">Extensions</f:link.action>
 		</div>
 	</div>
+
 
 	<div class="row">
 		<f:if condition="{success}">
