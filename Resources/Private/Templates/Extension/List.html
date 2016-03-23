@@ -40,7 +40,9 @@
 				<f:for each="{versions}" as="v" key="versionName" iteration="i2">
 					<tr>
 						<f:if condition="{i2.isFirst}">
-							<td rowspan="{versions -> f:count()}">{name}</td>
+							<td rowspan="{versions -> f:count()}">
+								<f:link.action action="show" controller="Extension" arguments="{extension:name}">{name}</f:link.action>
+							</td>
 						</f:if>
 						<td>{versionName}</td>
 						<td>

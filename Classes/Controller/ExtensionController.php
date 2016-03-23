@@ -29,12 +29,18 @@ class ExtensionController extends BaseController
     /**
      * action show
      *
-     * @param \T3Monitor\T3monitoring\Domain\Model\Extension $extension
-     * @return void
+     * @param string $extension
      */
-    public function showAction(\T3Monitor\T3monitoring\Domain\Model\Extension $extension)
+    public function showAction($extension = '')
     {
-        $this->view->assign('extension', $extension);
+        if (empty($extension)) {
+            $this->redirect('list');
+        }
+        $versions = $this->extensionRepository->findAllVersionsByName($extension);
+        $this->view->assignMultiple([
+            'versions' => $versions,
+            'latest' => $versions->getFirst(),
+        ]);
     }
 
     /**

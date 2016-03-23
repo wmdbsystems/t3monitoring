@@ -16,6 +16,17 @@ class ExtensionRepository extends BaseRepository
         'name' => QueryInterface::ORDER_ASCENDING
     ];
 
+    public function findAllVersionsByName($name)
+    {
+        $query = $this->getQuery();
+        $query->setOrderings(['versionInteger' => QueryInterface::ORDER_DESCENDING]);
+        $query->matching(
+            $query->logicalAnd($query->equals('name', $name))
+        );
+
+        return $query->execute();
+    }
+
     public function findByDemand(ExtensionFilterDemand $demand)
     {
         $rows = $this->getDatabaseConnection()->exec_SELECTgetRows(
