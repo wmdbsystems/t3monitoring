@@ -81,7 +81,7 @@ class BaseController extends ActionController
         $pageRenderer = GeneralUtility::makeInstance(PageRenderer::class);
         $pageRenderer->loadRequireJsModule('TYPO3/CMS/Backend/Tooltip');
 
-//        $this->createMenu();
+        $this->createMenu();
         $this->getButtons();
     }
 
@@ -91,15 +91,20 @@ class BaseController extends ActionController
         $menu->setIdentifier('t3monitoring');
 
         $actions = [
-            ['action' => 'index', 'label' => 'newsListing'],
-            ['action' => 'newsPidListing', 'label' => 'newsPidListing']
+            ['controller' => 'Statistic', 'action' => 'index', 'label' => 'Home'],
+            ['controller' => 'Extension', 'action' => 'list', 'label' => 'Extension list'],
+            ['controller' => 'Statistic', 'action' => 'administration', 'label' => 'Administration'],
         ];
 
         foreach ($actions as $action) {
+            $isActive = $this->request->getControllerActionName() === $action['action']
+//                && $this->request->getControllerName() == $action['controller']
+            ;
+
             $item = $menu->makeMenuItem()
-                ->setTitle($this->getLanguageService()->sL('LLL:EXT:news/Resources/Private/Language/locallang_be.xlf:module.' . $action['label']))
-                ->setHref($this->getUriBuilder()->reset()->uriFor($action['action'], [], 'Administration'))
-                ->setActive($this->request->getControllerActionName() === $action['action']);
+                ->setTitle($action['label'])
+                ->setHref($this->getUriBuilder()->reset()->uriFor($action['action'], [], $action['controller']))
+                ->setActive($isActive);
             $menu->addMenuItem($item);
         }
 
@@ -129,12 +134,6 @@ class BaseController extends ActionController
                 ->setIcon($this->iconFactory->getIcon('actions-view-go-back', Icon::SIZE_SMALL));
             $buttonBar->addButton($viewButton);
         }
-
-        $administrationButton = $buttonBar->makeLinkButton()
-            ->setTitle('Administration')
-            ->setHref($this->getUriBuilder()->reset()->uriFor('administration', [], 'Statistic'))
-            ->setIcon($this->iconFactory->getIcon('actions-system-extension-download', Icon::SIZE_SMALL));
-        $buttonBar->addButton($administrationButton);
     }
 
     /**
