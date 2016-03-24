@@ -16,7 +16,7 @@ call_user_func(
                 'T3Monitor.' . $extKey,
                 'tools',
                 't3monitor',
-                '',
+                'top',
                 [
                     'Statistic' => 'index,administration',
                     'Core' => 'list',

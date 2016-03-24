@@ -271,6 +271,12 @@
 			<trans-unit id="coreFilter.usage.0">
 				<source>All</source>
 			</trans-unit>
+			<trans-unit id="administration.sponsors.headline">
+				<source>Sponsors</source>
+			</trans-unit>
+			<trans-unit id="administration.sponsors.description">
+				<source>This extension has been sponsored by</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
