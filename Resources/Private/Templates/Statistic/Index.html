@@ -182,10 +182,12 @@
 					<f:form.select property="version" id="form-core" options="{coreVersions}" optionValueField="versionInteger" optionLabelField="version" class="form-control" prependOptionLabel="" prependOptionValue="" />
 				</div>
 
-				<div class="form-group">
-					<label for="form-sla">SLA</label>
-					<f:form.select property="sla" id="form-sla" options="{slaVersions}" optionValueField="uid" optionLabelField="title" class="form-control" prependOptionLabel="" prependOptionValue="" />
-				</div>
+				<f:if condition="{slaVersions}">
+					<div class="form-group">
+						<label for="form-sla">SLA</label>
+						<f:form.select property="sla" id="form-sla" options="{slaVersions}" optionValueField="uid" optionLabelField="title" class="form-control" prependOptionLabel="" prependOptionValue="" />
+					</div>
+				</f:if>
 
 				<div class="checkbox">
 					<label>
@@ -313,7 +315,7 @@
 									<td>
 										<f:if condition="{time}">
 											<f:then>
-												<f:format.date date="{time}" format="c" />
+												<f:format.date date="{time}" format="{formats.dateAndTime}" />
 											</f:then>
 											<f:else>
 												<div class="text-danger">No import yet!</div>

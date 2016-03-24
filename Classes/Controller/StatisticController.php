@@ -51,7 +51,6 @@ class StatisticController extends BaseController
         }
 
         $this->view->assignMultiple([
-            'emConfiguration' => $this->emConfiguration,
             'filter' => $filter,
             'clients' => $this->clientRepository->findByDemand($filter),
             'coreVersions' => $this->coreRepository->findAll(CoreRepository::USED_ONLY),
@@ -77,7 +76,6 @@ class StatisticController extends BaseController
      */
     public function administrationAction($import = '')
     {
-
         $success = $error = false;
 
         if (!empty($import)) {

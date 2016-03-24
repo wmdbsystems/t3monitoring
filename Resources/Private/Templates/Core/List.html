@@ -1,45 +1,46 @@
+{namespace core = TYPO3\CMS\Core\ViewHelpers}
 <f:layout name="Simple" />
 
 <f:section name="content">
-<h1>Listing for Core</h1>
+	<h1>Listing for Core</h1>
 
-<f:flashMessages />
+	<f:form name="filter" object="{filter}" class="form-inline">
+		<div class="form-group">
+			<label>Usage </label>
+			<f:form.select property="usage" options="{1:'used',0:'all'}" class="form-control" />
+		</div>
 
-<table  class="tx_t3monitoring" >
-	<tr>
-		<th><f:translate key="tx_t3monitoring_domain_model_core.version" /></th>
-		<th><f:translate key="tx_t3monitoring_domain_model_core.insecure" /></th>
-		<th><f:translate key="tx_t3monitoring_domain_model_core.next_secure_version" /></th>
-		<th><f:translate key="tx_t3monitoring_domain_model_core.type" /></th>
-		<th><f:translate key="tx_t3monitoring_domain_model_core.release_date" /></th>
-		<th><f:translate key="tx_t3monitoring_domain_model_core.latest" /></th>
-		<th><f:translate key="tx_t3monitoring_domain_model_core.stable" /></th>
-		<th><f:translate key="tx_t3monitoring_domain_model_core.is_stable" /></th>
-		<th><f:translate key="tx_t3monitoring_domain_model_core.is_active" /></th>
-		<th><f:translate key="tx_t3monitoring_domain_model_core.is_latest" /></th>
-		<th><f:translate key="tx_t3monitoring_domain_model_core.version_integer" /></th>
-		<th> </th>
-		<th> </th>
-	</tr>
+		<button class="btn btn-default">
+			{core:icon(identifier:'actions-search')} Search
+		</button>
+	</f:form>
 
-	<f:for each="{cores}" as="core">
-		<tr>
-			<td><f:link.action action="show" arguments="{core : core}"> {core.version}</f:link.action></td>
-			<td><f:link.action action="show" arguments="{core : core}"> {core.insecure}</f:link.action></td>
-			<td><f:link.action action="show" arguments="{core : core}"> {core.nextSecureVersion}</f:link.action></td>
-			<td><f:link.action action="show" arguments="{core : core}"> {core.type}</f:link.action></td>
-			<td><f:link.action action="show" arguments="{core : core}"> {core.releaseDate -> f:format.date()}</f:link.action></td>
-			<td><f:link.action action="show" arguments="{core : core}"> {core.latest}</f:link.action></td>
-			<td><f:link.action action="show" arguments="{core : core}"> {core.stable}</f:link.action></td>
-			<td><f:link.action action="show" arguments="{core : core}"> {core.isStable}</f:link.action></td>
-			<td><f:link.action action="show" arguments="{core : core}"> {core.isActive}</f:link.action></td>
-			<td><f:link.action action="show" arguments="{core : core}"> {core.isLatest}</f:link.action></td>
-			<td><f:link.action action="show" arguments="{core : core}"> {core.versionInteger}</f:link.action></td>
-			<td><f:link.action action="edit" arguments="{core : core}">Edit</f:link.action></td>
-			<td><f:link.action action="delete" arguments="{core : core}">Delete</f:link.action></td>
-		</tr>
-	</f:for>
-</table>
-
-<f:link.action action="new">New Core</f:link.action>
+	<f:if condition="{cores}">
+		<f:then>
+			<div class="panel panel-default panel-space">
+				<div class="panel-heading">
+					Core versions ({cores-> f:count()} total)
+				</div>
+				<table class="table table-striped table-hover">
+					<thead>
+					<tr>
+						<th>{f:translate(key:'tx_t3monitoring_domain_model_core.version')}</th>
+						<th>{f:translate(key:'tx_t3monitoring_domain_model_core.release_date')}</th>
+					</tr>
+					</thead>
+					<f:for each="{cores}" as="core">
+						<tr class="{f:if(condition:core.insecure,then:'danger',else:'success')}">
+							<th class="text-nowrap">{core.version}</th>
+							<td>{core.releaseDate -> f:format.date(format:formats.date)}</td>
+						</tr>
+					</f:for>
+				</table>
+			</div>
+		</f:then>
+		<f:else>
+			<div class="alert alert-notice">
+				No cores yet imported
+			</div>
+		</f:else>
+	</f:if>
 </f:section>

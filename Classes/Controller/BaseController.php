@@ -8,6 +8,8 @@ use T3Monitor\T3monitoring\Domain\Repository\ClientRepository;
 use T3Monitor\T3monitoring\Domain\Repository\CoreRepository;
 use T3Monitor\T3monitoring\Domain\Repository\SlaRepository;
 use T3Monitor\T3monitoring\Domain\Repository\StatisticRepository;
+use TYPO3\CMS\Backend\Template\Components\ButtonBar;
+use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Backend\View\BackendTemplateView;
 use TYPO3\CMS\Core\Imaging\Icon;
 use TYPO3\CMS\Core\Imaging\IconFactory;
@@ -65,7 +67,6 @@ class BaseController extends ActionController
     /** @var EmMonitoringConfiguration */
     protected $emConfiguration;
 
-
     /**
      * Set up the doc header properly here
      *
@@ -76,6 +77,14 @@ class BaseController extends ActionController
         /** @var BackendTemplateView $view */
         parent::initializeView($view);
         $view->getModuleTemplate()->getDocHeaderComponent()->setMetaInformation([]);
+        $view->assignMultiple([
+            'emConfiguration' => $this->emConfiguration,
+            'formats' => [
+                'date' => $GLOBALS['TYPO3_CONF_VARS']['SYS']['ddmmyy'],
+                'time' => $GLOBALS['TYPO3_CONF_VARS']['SYS']['hhmm'],
+                'dateAndTime' => $GLOBALS['TYPO3_CONF_VARS']['SYS']['ddmmyy'] . ' ' . $GLOBALS['TYPO3_CONF_VARS']['SYS']['hhmm'],
+            ]
+        ]);
 
         /** @var PageRenderer $pageRenderer */
         $pageRenderer = GeneralUtility::makeInstance(PageRenderer::class);
@@ -99,9 +108,14 @@ class BaseController extends ActionController
         ];
 
         foreach ($actions as $action) {
-            $isActive = $this->request->getControllerActionName() === $action['action']
-//                && $this->request->getControllerName() == $action['controller']
-            ;
+            switch ($action['controller']) {
+                case 'Statistic':
+                    $isActive = $this->request->getControllerName() === $action['controller']
+                        && $this->request->getControllerActionName() === $action['action'];
+                    break;
+                default:
+                    $isActive = $this->request->getControllerName() === $action['controller'];
+            }
 
             $item = $menu->makeMenuItem()
                 ->setTitle($action['label'])
@@ -119,11 +133,6 @@ class BaseController extends ActionController
     protected function getButtons()
     {
         $buttonBar = $this->view->getModuleTemplate()->getDocHeaderComponent()->getButtonBar();
-//        // CSH
-//        $cshButton = $buttonBar->makeHelpButton()
-//            ->setModuleName('_MOD_tools_T3monitoringT3monitor') // todo
-//            ->setFieldName('');
-//        $buttonBar->addButton($cshButton);
 
         // Home
         if (($this->request->getControllerName() !== 'Statistic'
@@ -136,6 +145,33 @@ class BaseController extends ActionController
                 ->setIcon($this->iconFactory->getIcon('actions-view-go-back', Icon::SIZE_SMALL));
             $buttonBar->addButton($viewButton);
         }
+
+        // Buttons for new records
+        $returnUrl = rawurlencode(BackendUtility::getModuleUrl('tools_T3monitoringT3monitor', [
+            'tx_t3monitoring_tools_t3monitoringt3monitor' => [
+                'action' => $this->request->getControllerActionName(),
+                'controller' => $this->request->getControllerName()
+            ]
+        ]));
+        $pid = $this->emConfiguration->getPid();
+
+        // new client
+        $parameters = GeneralUtility::explodeUrl2Array('edit[tx_t3monitoring_domain_model_client][' . $pid . ']=new&returnUrl=' . $returnUrl);
+        $addUserGroupButton = $buttonBar->makeLinkButton()
+            ->setHref(BackendUtility::getModuleUrl('record_edit', $parameters))
+            ->setTitle($this->getLabel('createNew.client'))
+            ->setIcon($this->view->getModuleTemplate()->getIconFactory()->getIcon('actions-document-new',
+                Icon::SIZE_SMALL));
+        $buttonBar->addButton($addUserGroupButton, ButtonBar::BUTTON_POSITION_LEFT);
+    }
+
+    /**
+     * @param string $key
+     * @return string
+     */
+    protected function getLabel($key)
+    {
+        return $this->getLanguageService()->sL('LLL:EXT:t3monitoring/Resources/Private/Language/locallang.xlf:' . $key);
     }
 
     /**

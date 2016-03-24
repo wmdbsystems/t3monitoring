@@ -1,6 +1,9 @@
 <?php
 namespace T3Monitor\T3monitoring\Controller;
 
+use T3Monitor\T3monitoring\Domain\Model\Dto\CoreFilterDemand;
+use T3Monitor\T3monitoring\Domain\Repository\CoreRepository;
+
 /**
  * CoreController
  */
@@ -8,25 +11,20 @@ class CoreController extends BaseController
 {
 
     /**
-     * action list
-     *
-     * @return void
+     * @param CoreFilterDemand|null $filter
      */
-    public function listAction()
+    public function listAction(CoreFilterDemand $filter = null)
     {
-        $cores = $this->coreRepository->findAll();
-        $this->view->assign('cores', $cores);
-    }
+        if (is_null($filter)) {
+            /** @var CoreFilterDemand $filter */
+            $filter = $this->objectManager->get(CoreFilterDemand::class);
+            $filter->setUsage(CoreRepository::USED_ONLY);
+        }
 
-    /**
-     * action show
-     *
-     * @param \T3Monitor\T3monitoring\Domain\Model\Core $core
-     * @return void
-     */
-    public function showAction(\T3Monitor\T3monitoring\Domain\Model\Core $core)
-    {
-        $this->view->assign('core', $core);
+        $this->view->assignMultiple([
+            'filter' => $filter,
+            'cores' => $this->coreRepository->findByDemand($filter)
+        ]);
     }
 
 }

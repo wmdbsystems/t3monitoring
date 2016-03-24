@@ -1,3 +1,4 @@
+{namespace core = TYPO3\CMS\Core\ViewHelpers}
 {namespace monitor = T3Monitor\T3monitoring\ViewHelpers}
 
 <f:layout name="Simple" />
@@ -20,8 +21,9 @@
 				<f:form.checkbox property="exactSearch" value="1" />
 			</div>
 		</div>
-		<f:form.submit class="btn btn-default" value="Filter" />
-
+		<button class="btn btn-default">
+			{core:icon(identifier:'actions-search')} Search
+		</button>
 	</f:form>
 
 	<f:if condition="{extensions}">

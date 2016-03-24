@@ -1,28 +1,41 @@
-
 <f:layout name="Simple" />
 
 <f:section name="content">
-<h1>Listing for Sla</h1>
-
-<f:flashMessages />
-
-<table  class="tx_t3monitoring" >
-	<tr>
-		<th><f:translate key="tx_t3monitoring_domain_model_sla.title" /></th>
-		<th><f:translate key="tx_t3monitoring_domain_model_sla.description" /></th>
-		<th> </th>
-		<th> </th>
-	</tr>
-
-	<f:for each="{slas}" as="sla">
-		<tr>
-			<td><f:link.action action="show" arguments="{sla : sla}"> {sla.title}</f:link.action></td>
-			<td><f:link.action action="show" arguments="{sla : sla}"> {sla.description}</f:link.action></td>
-			<td><f:link.action action="edit" arguments="{sla : sla}">Edit</f:link.action></td>
-			<td><f:link.action action="delete" arguments="{sla : sla}">Delete</f:link.action></td>
-		</tr>
-	</f:for>
-</table>
-
-<f:link.action action="new">New Sla</f:link.action>
+	<h1>Service level agreements</h1>
+	<f:if condition="{slas}">
+		<f:then>
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					SLA ({slas-> f:count()} total)
+				</div>
+				<table class="table table-striped table-hover">
+					<thead>
+					<tr>
+						<th>Title</th>
+						<th>Description</th>
+					</tr>
+					</thead>
+					<f:for each="{slas}" as="sla">
+						<tr>
+							<td class="text-nowrap">
+								<f:link.action action="show" arguments="{sla:sla}">
+									{sla.title}
+								</f:link.action>
+							</td>
+							<td>
+								<f:if condition="{sla.description}">
+									{sla.description -> f:format.nl2br()}
+								</f:if>
+							</td>
+						</tr>
+					</f:for>
+				</table>
+			</div>
+		</f:then>
+		<f:else>
+			<div class="alert alert-notice">
+				No SLA records available
+			</div>
+		</f:else>
+	</f:if>
 </f:section>
