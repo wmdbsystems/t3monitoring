@@ -3,28 +3,34 @@
 <f:layout name="Simple" />
 
 <f:section name="content">
-	<h1>Administration</h1>
+	<h1>{f:translate(key:'view.administration')}</h1>
 
-	<h3>Start an import</h3>
+	<h3>{f:translate(key:'administration.import.headline')}</h3>
+	<p>{f:translate(key:'administration.import.description')}</p>
 
 	<div class="btn-toolbar">
 		<div class="btn-group" role="group">
-			<f:link.action action="administration" arguments="{import:'clients'}" class="btn btn-info">Clients</f:link.action>
+			<f:link.action action="administration" arguments="{import:'clients'}" class="btn btn-info">
+				{f:translate(key:'tx_t3monitoring_domain_model_client')}
+			</f:link.action>
 		</div>
 		<div class="btn-group" role="group">
-			<f:link.action action="administration" arguments="{import:'core'}" class="btn btn-info">Core versions</f:link.action>
+			<f:link.action action="administration" arguments="{import:'core'}" class="btn btn-info">
+				{f:translate(key:'tx_t3monitoring_domain_model_core')}
+			</f:link.action>
 		</div>
 		<div class="btn-group" role="group">
-			<f:link.action action="administration" arguments="{import:'extensions'}" class="btn btn-info">Extensions</f:link.action>
+			<f:link.action action="administration" arguments="{import:'extensions'}" class="btn btn-info">
+				{f:translate(key:'tx_t3monitoring_domain_model_extension')}
+			</f:link.action>
 		</div>
 	</div>
-
 
 	<div class="row">
 		<f:if condition="{success}">
 			<br><br>
 			<div class="alert alert-success">
-				The import was successful!
+				{f:translate(key:'administration.import.success')}
 			</div>
 		</f:if>
 	</div>

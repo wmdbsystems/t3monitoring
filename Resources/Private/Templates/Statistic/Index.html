@@ -8,7 +8,7 @@
 			<div class="col-md-3">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						Clients ({numberOfClients} total)
+						{f:translate(key:'clients.total', arguments:'{0:numberOfClients}')}
 					</div>
 					<table class="table table-striped table-hover">
 						<tr>
@@ -16,11 +16,11 @@
 								<f:if condition="{clientsWithErrorMessages}">
 									<f:then>
 										<f:link.action additionalParams="{tx_t3monitoring_tools_t3monitoringt3monitor:{filter:{withErrorMessage:'1'}}}">
-											Not reachable
+											{f:translate(key:'clients.notReachable')}
 										</f:link.action>
 									</f:then>
 									<f:else>
-										Not reachable
+										{f:translate(key:'clients.notReachable')}
 									</f:else>
 								</f:if>
 							</th>
@@ -33,11 +33,11 @@
 								<f:if condition="{clientsWithInsecureCore}">
 									<f:then>
 										<f:link.action additionalParams="{tx_t3monitoring_tools_t3monitoringt3monitor:{filter:{withInsecureCore: '1'}}}">
-											Insecure core
+											{f:translate(key:'tx_t3monitoring_domain_model_client.insecure_core')}
 										</f:link.action>
 									</f:then>
 									<f:else>
-										Insecure core
+										{f:translate(key:'tx_t3monitoring_domain_model_client.insecure_core')}
 									</f:else>
 								</f:if>
 							</th>
@@ -50,11 +50,11 @@
 								<f:if condition="{clientsWithOutdatedCore}">
 									<f:then>
 										<f:link.action additionalParams="{tx_t3monitoring_tools_t3monitoringt3monitor:{filter:{withOutdatedCore: '1'}}}">
-											Outdated core
+											{f:translate(key:'tx_t3monitoring_domain_model_client.outdated_core')}
 										</f:link.action>
 									</f:then>
 									<f:else>
-										Outdated core
+										{f:translate(key:'tx_t3monitoring_domain_model_client.outdated_core')}
 									</f:else>
 								</f:if>
 							</th>
@@ -67,11 +67,11 @@
 								<f:if condition="{clientsWithInsecureExtensions}">
 									<f:then>
 										<f:link.action additionalParams="{tx_t3monitoring_tools_t3monitoringt3monitor:{filter:{withInsecureExtensions:1}}}">
-											Insecure extensions
+											{f:translate(key:'tx_t3monitoring_domain_model_client.insecure_extensions')}
 										</f:link.action>
 									</f:then>
 									<f:else>
-										Insecure extensions
+										{f:translate(key:'tx_t3monitoring_domain_model_client.insecure_extensions')}
 									</f:else>
 								</f:if>
 							</th>
@@ -84,11 +84,11 @@
 								<f:if condition="{clientsWithOutdatedExtensions}">
 									<f:then>
 										<f:link.action additionalParams="{tx_t3monitoring_tools_t3monitoringt3monitor:{filter:{withOutdatedExtensions:1}}}">
-											Outdated extensions
+											{f:translate(key:'tx_t3monitoring_domain_model_client.outdated_extensions')}
 										</f:link.action>
 									</f:then>
 									<f:else>
-										Outdated extensions
+										{f:translate(key:'tx_t3monitoring_domain_model_client.outdated_extensions')}
 									</f:else>
 								</f:if>
 							</th>
@@ -102,13 +102,13 @@
 			<div class="col-md-3">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						Used core versions ({coreVersionUsage -> f:count()})
+						<f:translate key="core.totalUsed" arguments="{0:'{coreVersionUsage -> f:count()}'}" />
 					</div>
 					<table class="table table-striped table-hover">
 						<thead>
 						<tr>
-							<th>Version</th>
-							<th>Count</th>
+							<th>{f:translate(key:'tx_t3monitoring_domain_model_core.version')}</th>
+							<th>{f:translate(key:'count')}</th>
 						</tr>
 						</thead>
 						<tbody>
@@ -129,7 +129,7 @@
 			<div class="col-md-6">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						Latest security bulletins
+						{f:translate(key:'bulletins.headline')}
 					</div>
 
 					<f:if condition="{emConfiguration.loadBulletins}">
@@ -150,20 +150,22 @@
 									</ul>
 								</f:then>
 								<f:else>
-									<div class="alert alert-warning">Sorry, the bulletins could not be fetched!</div>
+									<div class="alert alert-warning">
+										{f:translate(key:'bulletins.errorFetch')}
+									</div>
 								</f:else>
 							</f:if>
 						</f:then>
 						<f:else>
 							<div class="callout callout-notice" style="margin:0">
-								Loading the bulletins is disabled.
+								{f:translate(key:'bulletins.disabled')}
 							</div>
 						</f:else>
 					</f:if>
 				</div>
 
 				<p>
-					<a href="https://typo3.org/teams/security/security-bulletins/" target="_blank" class="t3-link">All bulletins</a>
+					<a href="https://typo3.org/teams/security/security-bulletins/" target="_blank" class="t3-link">{f:translate(key:'bulletins.all')}</a>
 				</p>
 			</div>
 		</div>
@@ -173,7 +175,7 @@
 		<div class="row">
 			<div class="col-md-2">
 				<div class="form-group">
-					<label for="form-client">Client</label>
+					<label for="form-client">{f:translate(key:'tx_t3monitoring_domain_model_client')}</label>
 					<f:form.textfield property="searchWord" id="form-client" class="form-control" />
 				</div>
 
@@ -184,7 +186,7 @@
 
 				<f:if condition="{slaVersions}">
 					<div class="form-group">
-						<label for="form-sla">SLA</label>
+						<label for="form-sla">{f:translate(key:'tx_t3monitoring_domain_model_sla')}</label>
 						<f:form.select property="sla" id="form-sla" options="{slaVersions}" optionValueField="uid" optionLabelField="title" class="form-control" prependOptionLabel="" prependOptionValue="" />
 					</div>
 				</f:if>
@@ -192,35 +194,35 @@
 				<div class="checkbox">
 					<label>
 						<f:form.checkbox property="withInsecureCore" value="1" />
-						Insecure core </label>
+						{f:translate(key:'tx_t3monitoring_domain_model_client.insecure_core')}</label>
 				</div>
 
 				<div class="checkbox">
 					<label>
 						<f:form.checkbox property="withOutdatedCore" value="1" />
-						Outdated core </label>
+						{f:translate(key:'tx_t3monitoring_domain_model_client.outdated_core')}</label>
 				</div>
 				<div class="checkbox">
 					<label>
 						<f:form.checkbox property="withOutdatedExtensions" value="1" />
-						Outdated extensions </label>
+						{f:translate(key:'tx_t3monitoring_domain_model_client.outdated_extensions')}</label>
 				</div>
 
 				<div class="checkbox">
 					<label>
 						<f:form.checkbox property="withInsecureExtensions" value="1" />
-						Insecure extensions </label>
+						{f:translate(key:'tx_t3monitoring_domain_model_client.insecure_extensions')}</label>
 				</div>
 
 				<div class="checkbox">
 					<label>
 						<f:form.checkbox property="withErrorMessage" value="1" />
-						Connection errors </label>
+						{f:translate(key:'filter.connectionErrors')}</label>
 				</div>
 
 				<div class="form-group">
 					<button class="btn btn-default">
-						{core:icon(identifier:'actions-search')} Search
+						{core:icon(identifier:'actions-search')} {f:translate(key:'search')}
 					</button>
 				</div>
 			</div>
@@ -231,15 +233,15 @@
 							<f:then>
 								<div class="panel panel-default">
 									<div class="panel-heading">
-										Clients ({clients -> f:count()})
+										{f:translate(key:'clients.total', arguments:'{0:\'{clients -> f:count()}\'}')}
 									</div>
 									<table class="table table-striped table-hover">
 										<thead>
 										<tr>
-											<th>Client</th>
-											<th>SLA</th>
-											<th>Core</th>
-											<th colspan="3">Extensions</th>
+											<th>{f:translate(key:'tx_t3monitoring_domain_model_client')}</th>
+											<th>{f:translate(key:'tx_t3monitoring_domain_model_sla')}</th>
+											<th>{f:translate(key:'tx_t3monitoring_domain_model_core')}</th>
+											<th colspan="3">{f:translate(key:'tx_t3monitoring_domain_model_extension')}</th>
 										</tr>
 										</thead>
 										<tbody>
@@ -264,17 +266,17 @@
 												</td>
 												<td class="text-center">
 													<f:if condition="{client.extensions}">
-														<span data-toggle="tooltip" data-title="Number of extensions" data-placement="left" class="badge badge-default">{client.extensions -> f:count()}</span>
+														<span data-toggle="tooltip" data-title="{f:translate(key:'clients.numberOfExtensions')}" data-placement="left" class="badge badge-default">{client.extensions -> f:count()}</span>
 													</f:if>
 												</td>
 												<td class="text-center">
 													<f:if condition="{client.insecureExtensions}">
-														<span data-toggle="tooltip" data-title="Insecure extensions" data-placement="left" class="badge badge-danger">{client.insecureExtensions}</span>
+														<span data-toggle="tooltip" data-title="{f:translate(key:'tx_t3monitoring_domain_model_client.insecure_extensions')}" data-placement="left" class="badge badge-danger">{client.insecureExtensions}</span>
 													</f:if>
 												</td>
 												<td class="text-center">
 													<f:if condition="{client.outdatedExtensions}">
-														<span data-toggle="tooltip" data-title="Outdated extensions" data-placement="left" class="badge badge-info">{client.outdatedExtensions}</span>
+														<span data-toggle="tooltip" data-title="{f:translate(key:'tx_t3monitoring_domain_model_client.outdated_extensions')}" data-placement="left" class="badge badge-info">{client.outdatedExtensions}</span>
 													</f:if>
 												</td>
 											</tr>
@@ -285,7 +287,7 @@
 							</f:then>
 							<f:else>
 								<div class="callout callout-notice">
-									Nothing found
+									{f:translate(key:'clients.notFound')}
 								</div>
 							</f:else>
 						</f:if>
@@ -296,10 +298,10 @@
 								<div class="media-left">
 									<span class="fa-stack fa-lg callout-icon"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-info fa-stack-1x"></i></span>
 								</div>
-								<div class="media-body"><h4 class="callout-title">Search</h4>
+								<div class="media-body"><h4 class="callout-title">{f:translate(key:'search')}</h4>
 									<div class="callout-body">
-										<p>Use the search on the left to filter the clients for specific properties.</p>
-										<f:form.submit value="List all" class="btn btn-info" />
+										<p>{f:translate(key:'search.introHelp')}</p>
+										<f:form.submit value="{f:translate(key:'clients.listAll')}" class="btn btn-info" />
 									</div>
 								</div>
 							</div>
@@ -309,16 +311,14 @@
 						<table class="table table-striped table-hover">
 							<f:for each="{importTimes}" as="time" key="key">
 								<tr>
-									<th>
-										{key}
-									</th>
+									<th>{f:translate(key:'lastImport.{key}')}</th>
 									<td>
 										<f:if condition="{time}">
 											<f:then>
 												<f:format.date date="{time}" format="{formats.dateAndTime}" />
 											</f:then>
 											<f:else>
-												<div class="text-danger">No import yet!</div>
+												<div class="text-danger">{f:translate(key:'lastImport.none')}</div>
 											</f:else>
 										</f:if>
 									</td>

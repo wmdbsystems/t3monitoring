@@ -1,7 +1,7 @@
 <?php
 return [
     'ctrl' => [
-        'title' => 'LLL:EXT:t3monitoring/Resources/Private/Language/locallang_db.xlf:tx_t3monitoring_domain_model_extension',
+        'title' => 'LLL:EXT:t3monitoring/Resources/Private/Language/locallang.xlf:tx_t3monitoring_domain_model_extension',
         'label' => 'name',
         'label_alt' => 'version',
         'label_alt_force' => true,
@@ -27,7 +27,7 @@ return [
 
         'name' => [
             'exclude' => 1,
-            'label' => 'LLL:EXT:t3monitoring/Resources/Private/Language/locallang_db.xlf:tx_t3monitoring_domain_model_extension.name',
+            'label' => 'LLL:EXT:t3monitoring/Resources/Private/Language/locallang.xlf:tx_t3monitoring_domain_model_extension.name',
             'config' => [
                 'type' => 'input',
                 'size' => 30,
@@ -37,7 +37,7 @@ return [
         ],
         'version' => [
             'exclude' => 1,
-            'label' => 'LLL:EXT:t3monitoring/Resources/Private/Language/locallang_db.xlf:tx_t3monitoring_domain_model_extension.version',
+            'label' => 'LLL:EXT:t3monitoring/Resources/Private/Language/locallang.xlf:tx_t3monitoring_domain_model_extension.version',
             'config' => [
                 'type' => 'input',
                 'size' => 30,
@@ -47,7 +47,7 @@ return [
         ],
         'insecure' => [
             'exclude' => 1,
-            'label' => 'LLL:EXT:t3monitoring/Resources/Private/Language/locallang_db.xlf:tx_t3monitoring_domain_model_extension.insecure',
+            'label' => 'LLL:EXT:t3monitoring/Resources/Private/Language/locallang.xlf:tx_t3monitoring_domain_model_extension.insecure',
             'config' => [
                 'type' => 'check',
                 'default' => 0
@@ -56,7 +56,7 @@ return [
         ],
         'next_secure_version' => [
             'exclude' => 1,
-            'label' => 'LLL:EXT:t3monitoring/Resources/Private/Language/locallang_db.xlf:tx_t3monitoring_domain_model_extension.next_secure_version',
+            'label' => 'LLL:EXT:t3monitoring/Resources/Private/Language/locallang.xlf:tx_t3monitoring_domain_model_extension.next_secure_version',
             'config' => [
                 'type' => 'input',
                 'size' => 30,
@@ -66,7 +66,7 @@ return [
         ],
         'title' => [
             'exclude' => 1,
-            'label' => 'LLL:EXT:t3monitoring/Resources/Private/Language/locallang_db.xlf:tx_t3monitoring_domain_model_extension.title',
+            'label' => 'LLL:EXT:t3monitoring/Resources/Private/Language/locallang.xlf:tx_t3monitoring_domain_model_extension.title',
             'config' => [
                 'type' => 'input',
                 'size' => 30,
@@ -76,7 +76,7 @@ return [
         ],
         'description' => [
             'exclude' => 1,
-            'label' => 'LLL:EXT:t3monitoring/Resources/Private/Language/locallang_db.xlf:tx_t3monitoring_domain_model_extension.description',
+            'label' => 'LLL:EXT:t3monitoring/Resources/Private/Language/locallang.xlf:tx_t3monitoring_domain_model_extension.description',
             'config' => [
                 'type' => 'text',
                 'cols' => 40,
@@ -87,7 +87,7 @@ return [
         ],
         'last_updated' => [
             'exclude' => 1,
-            'label' => 'LLL:EXT:t3monitoring/Resources/Private/Language/locallang_db.xlf:tx_t3monitoring_domain_model_extension.last_updated',
+            'label' => 'LLL:EXT:t3monitoring/Resources/Private/Language/locallang.xlf:tx_t3monitoring_domain_model_extension.last_updated',
             'config' => [
                 'dbType' => 'datetime',
                 'type' => 'input',
@@ -100,7 +100,7 @@ return [
         ],
         'author_name' => [
             'exclude' => 1,
-            'label' => 'LLL:EXT:t3monitoring/Resources/Private/Language/locallang_db.xlf:tx_t3monitoring_domain_model_extension.author_name',
+            'label' => 'LLL:EXT:t3monitoring/Resources/Private/Language/locallang.xlf:tx_t3monitoring_domain_model_extension.author_name',
             'config' => [
                 'type' => 'input',
                 'size' => 30,
@@ -110,7 +110,7 @@ return [
         ],
         'update_comment' => [
             'exclude' => 1,
-            'label' => 'LLL:EXT:t3monitoring/Resources/Private/Language/locallang_db.xlf:tx_t3monitoring_domain_model_extension.update_comment',
+            'label' => 'LLL:EXT:t3monitoring/Resources/Private/Language/locallang.xlf:tx_t3monitoring_domain_model_extension.update_comment',
             'config' => [
                 'type' => 'input',
                 'size' => 30,
@@ -120,7 +120,7 @@ return [
         ],
         'state' => [
             'exclude' => 1,
-            'label' => 'LLL:EXT:t3monitoring/Resources/Private/Language/locallang_db.xlf:tx_t3monitoring_domain_model_extension.state',
+            'label' => 'LLL:EXT:t3monitoring/Resources/Private/Language/locallang.xlf:tx_t3monitoring_domain_model_extension.state',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
@@ -135,7 +135,7 @@ return [
         ],
         'category' => [
             'exclude' => 1,
-            'label' => 'LLL:EXT:t3monitoring/Resources/Private/Language/locallang_db.xlf:tx_t3monitoring_domain_model_extension.category',
+            'label' => 'LLL:EXT:t3monitoring/Resources/Private/Language/locallang.xlf:tx_t3monitoring_domain_model_extension.category',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
@@ -150,7 +150,7 @@ return [
         ],
         'version_integer' => [
             'exclude' => 1,
-            'label' => 'LLL:EXT:t3monitoring/Resources/Private/Language/locallang_db.xlf:tx_t3monitoring_domain_model_extension.version_integer',
+            'label' => 'LLL:EXT:t3monitoring/Resources/Private/Language/locallang.xlf:tx_t3monitoring_domain_model_extension.version_integer',
             'config' => [
                 'type' => 'input',
                 'size' => 4,
@@ -160,7 +160,7 @@ return [
         ],
         'is_used' => [
             'exclude' => 1,
-            'label' => 'LLL:EXT:t3monitoring/Resources/Private/Language/locallang_db.xlf:tx_t3monitoring_domain_model_extension.is_used',
+            'label' => 'LLL:EXT:t3monitoring/Resources/Private/Language/locallang.xlf:tx_t3monitoring_domain_model_extension.is_used',
             'config' => [
                 'type' => 'check',
                 'default' => 0
@@ -169,7 +169,7 @@ return [
         ],
         'is_official' => [
             'exclude' => 1,
-            'label' => 'LLL:EXT:t3monitoring/Resources/Private/Language/locallang_db.xlf:tx_t3monitoring_domain_model_extension.is_official',
+            'label' => 'LLL:EXT:t3monitoring/Resources/Private/Language/locallang.xlf:tx_t3monitoring_domain_model_extension.is_official',
             'config' => [
                 'type' => 'check',
                 'default' => 0
@@ -178,7 +178,7 @@ return [
         ],
         'is_modified' => [
             'exclude' => 1,
-            'label' => 'LLL:EXT:t3monitoring/Resources/Private/Language/locallang_db.xlf:tx_t3monitoring_domain_model_extension.is_modified',
+            'label' => 'LLL:EXT:t3monitoring/Resources/Private/Language/locallang.xlf:tx_t3monitoring_domain_model_extension.is_modified',
             'config' => [
                 'type' => 'check',
                 'default' => 0
@@ -187,7 +187,7 @@ return [
         ],
         'is_latest' => [
             'exclude' => 1,
-            'label' => 'LLL:EXT:t3monitoring/Resources/Private/Language/locallang_db.xlf:tx_t3monitoring_domain_model_extension.is_latest',
+            'label' => 'LLL:EXT:t3monitoring/Resources/Private/Language/locallang.xlf:tx_t3monitoring_domain_model_extension.is_latest',
             'config' => [
                 'type' => 'check',
                 'default' => 0
@@ -196,7 +196,7 @@ return [
         ],
         'last_bugfix_release' => [
             'exclude' => 1,
-            'label' => 'LLL:EXT:t3monitoring/Resources/Private/Language/locallang_db.xlf:tx_t3monitoring_domain_model_extension.last_bugfix_release',
+            'label' => 'LLL:EXT:t3monitoring/Resources/Private/Language/locallang.xlf:tx_t3monitoring_domain_model_extension.last_bugfix_release',
             'config' => [
                 'type' => 'input',
                 'size' => 30,
@@ -206,7 +206,7 @@ return [
         ],
         'last_minor_release' => [
             'exclude' => 1,
-            'label' => 'LLL:EXT:t3monitoring/Resources/Private/Language/locallang_db.xlf:tx_t3monitoring_domain_model_extension.last_minor_release',
+            'label' => 'LLL:EXT:t3monitoring/Resources/Private/Language/locallang.xlf:tx_t3monitoring_domain_model_extension.last_minor_release',
             'config' => [
                 'type' => 'input',
                 'size' => 30,
@@ -216,7 +216,7 @@ return [
         ],
         'last_major_release' => [
             'exclude' => 1,
-            'label' => 'LLL:EXT:t3monitoring/Resources/Private/Language/locallang_db.xlf:tx_t3monitoring_domain_model_extension.last_major_release',
+            'label' => 'LLL:EXT:t3monitoring/Resources/Private/Language/locallang.xlf:tx_t3monitoring_domain_model_extension.last_major_release',
             'config' => [
                 'type' => 'input',
                 'size' => 30,

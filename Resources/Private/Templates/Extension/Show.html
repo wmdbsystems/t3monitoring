@@ -3,10 +3,10 @@
 <f:layout name="Simple" />
 
 <f:section name="content">
-	<h1>Extension "{latest.title}" ({latest.name})</h1>
+	<h1>{f:translate(key:'tx_t3monitoring_domain_model_extension')} "{latest.title}" ({latest.name})</h1>
 	<p class="lead">{latest.description -> f:format.nl2br()}
 		<f:if condition="{latest.authorName}">
-			<br>by {latest.authorName}
+			<br>{f:translate(key:'extension.by',arguments:'{0:latest.authorName}')}
 		</f:if>
 	</p>
 
@@ -19,11 +19,11 @@
 				<table class="table table-striped table-hover">
 					<thead>
 					<tr>
-						<th style="width:150px;">version</th>
-						<th>Date</th>
-						<th>State</th>
-						<th>Category</th>
-						<th>Update comment</th>
+						<th style="width:150px;">{f:translate(key:'tx_t3monitoring_domain_model_extension.version')}</th>
+						<th>{f:translate(key:'tx_t3monitoring_domain_model_extension.last_updated')}</th>
+						<th>{f:translate(key:'tx_t3monitoring_domain_model_extension.state')}</th>
+						<th>{f:translate(key:'tx_t3monitoring_domain_model_extension.category')}</th>
+						<th>{f:translate(key:'tx_t3monitoring_domain_model_extension.update_comment')}</th>
 					</tr>
 					</thead>
 					<f:for each="{versions}" as="version">

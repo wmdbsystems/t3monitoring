@@ -2,16 +2,16 @@
 <f:layout name="Simple" />
 
 <f:section name="content">
-	<h1>Listing for Core</h1>
+	<h1>{f:translate(key:'view.core')}</h1>
 
 	<f:form name="filter" object="{filter}" class="form-inline">
 		<div class="form-group">
-			<label>Usage </label>
-			<f:form.select property="usage" options="{1:'used',0:'all'}" class="form-control" />
+			<label>{f:translate(key:'coreFilter.usage')}</label>
+			<f:form.select property="usage" options="{1:'{f:translate(key:\'coreFilter.usage.1\')}',0:'{f:translate(key:\'coreFilter.usage.0\')}'}" class="form-control" />
 		</div>
 
 		<button class="btn btn-default">
-			{core:icon(identifier:'actions-search')} Search
+			{core:icon(identifier:'actions-search')} {f:translate(key:'search')}
 		</button>
 	</f:form>
 
