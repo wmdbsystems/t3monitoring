@@ -73,7 +73,7 @@ class ClientImport extends BaseImport
         try {
             $response = $this->requestClientData($row);
             if (empty($response)) {
-                throw new \RuntimeException('Empty response from client' . $row['title']);
+                throw new \RuntimeException('Empty response from client ' . $row['title']);
             }
             $json = json_decode($response, true);
 
