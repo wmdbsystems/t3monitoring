@@ -32,7 +32,7 @@
 					</f:if>
 					<tr>
 						<th><i class="fa fa-database"></i> Mysql Version</th>
-						<td>{client.mysqlVersion}</td>
+						<td>{client.mysqlVersion -> monitor:format.mysqlVersion()}</td>
 					</tr>
 					<tr>
 						<th><i class="fa fa-code"></i> PHP Version</th>
