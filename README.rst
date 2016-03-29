@@ -9,6 +9,7 @@ This extensions provides the possibility to monitor all of your TYPO3 installati
 **Requirements**
 
 - TYPO3 CMS 7 LTS (monitoring works also for 6.2 installations)
+- The host must have access to every client to be able to fetch the data
 
 Important: This extension is still alpha and things might change!
 
@@ -39,6 +40,8 @@ How to start
 ------------
 Before you can actually monitor any installation, you need to install the extension *t3monitoring_client* on every installation (called "client").
 This extension provides the day which will be fetched by the master installation. You can find this extension on github (https://github.com/georgringer/t3monitoring_client) or later in the TER.
+
+.. important:: Please secure the installation as much as possible, as it contains data of all your clients. Restrict access by running it in your intranet only, or at least use a *Basic HTTP Authentication*.
 
 Create the clients
 """"""""""""""""""
