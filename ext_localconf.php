@@ -9,7 +9,7 @@ call_user_func(
             'className' => \T3Monitor\T3monitoring\Xclass\Typo3DbBackendXclassed::class,
         );
 
-        $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['extbase']['commandControllers'][] = \T3Monitor\Command\MonitoringCommandController::class;
+        $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['extbase']['commandControllers'][] = \T3Monitor\T3monitoring\Command\MonitoringCommandController::class;
     },
     $_EXTKEY
 );

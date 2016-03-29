@@ -1,6 +1,6 @@
 <?php
 
-namespace T3Monitor\Command;
+namespace T3Monitor\T3monitoring\Command;
 
 /*
  * This file is part of the TYPO3 CMS project.
