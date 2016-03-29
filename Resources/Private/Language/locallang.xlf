@@ -229,11 +229,26 @@
 			<trans-unit id="clients.numberOfExtensions">
 				<source>Number of extensions</source>
 			</trans-unit>
-			<trans-unit id="clients.facts">
+			<trans-unit id="client.facts">
 				<source>Facts</source>
+			</trans-unit>
+			<trans-unit id="client.extra">
+				<source>Extra</source>
+			</trans-unit>
+			<trans-unit id="client.extra.warning">
+				<source>Additional warnings</source>
+			</trans-unit>
+			<trans-unit id="client.extra.danger">
+				<source>Additional error messages</source>
 			</trans-unit>
 			<trans-unit id="filter.connectionErrors">
 				<source>Connection errors</source>
+			</trans-unit>
+			<trans-unit id="filter.withExtraWarning">
+				<source>Additional warnings</source>
+			</trans-unit>
+			<trans-unit id="filter.withExtraDanger">
+				<source>Additional errors</source>
 			</trans-unit>
 			<trans-unit id="lastImport.client">
 				<source>Import clients</source>

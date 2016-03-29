@@ -207,10 +207,12 @@ class ClientFilterDemand extends AbstractEntity
 
     /**
      * @param boolean $withExtraInfo
+     * @return $this
      */
     public function setWithExtraInfo($withExtraInfo)
     {
         $this->withExtraInfo = $withExtraInfo;
+        return $this;
     }
 
     /**
@@ -223,10 +225,12 @@ class ClientFilterDemand extends AbstractEntity
 
     /**
      * @param boolean $withExtraWarning
+     * @return $this
      */
     public function setWithExtraWarning($withExtraWarning)
     {
         $this->withExtraWarning = $withExtraWarning;
+        return $this;
     }
 
     /**
@@ -239,10 +243,12 @@ class ClientFilterDemand extends AbstractEntity
 
     /**
      * @param boolean $withExtraDanger
+     * @return $this
      */
     public function setWithExtraDanger($withExtraDanger)
     {
         $this->withExtraDanger = $withExtraDanger;
+        return $this;
     }
 
 }

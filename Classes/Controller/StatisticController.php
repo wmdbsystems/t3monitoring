@@ -41,6 +41,8 @@ class StatisticController extends BaseController
         $insecureCoreDemand = $this->getClientFilterDemand()->setWithInsecureCore(true);
         $outdatedCoreDemand = $this->getClientFilterDemand()->setWithOutdatedCore(true);
         $outdatedExtensionDemand = $this->getClientFilterDemand()->setWithOutdatedExtensions(true);
+        $clientsWithWarningInfo = $this->getClientFilterDemand()->setWithExtraWarning(true);
+        $clientsWithDangerInfo = $this->getClientFilterDemand()->setWithExtraDanger(true);
 
         $feedItems = null;
         if ($this->emConfiguration->getLoadBulletins()) {
@@ -60,6 +62,8 @@ class StatisticController extends BaseController
             'clientsWithOutdatedExtensions' => $this->clientRepository->countByDemand($outdatedExtensionDemand),
             'clientsWithInsecureCore' => $this->clientRepository->countByDemand($insecureCoreDemand),
             'clientsWithOutdatedCore' => $this->clientRepository->countByDemand($outdatedCoreDemand),
+            'clientsWithWarningInfo' => $this->clientRepository->countByDemand($clientsWithWarningInfo),
+            'clientsWithDangerInfo' => $this->clientRepository->countByDemand($clientsWithDangerInfo),
             'numberOfClients' => $this->clientRepository->countAll(),
             'slaVersions' => $this->slaRepository->findAll(),
             'feedItems' => $feedItems,
