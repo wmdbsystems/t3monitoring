@@ -21,7 +21,8 @@ return [
             'showitem' => '
         --div--;General,title;;paletteDomain,email, sla,
         --div--;Readonly information,error_message,core;;paletteVersions,extensions,
-        insecure_core, outdated_core, insecure_extensions, outdated_extensions'
+                insecure_core, outdated_core, insecure_extensions, outdated_extensions,
+        --div--;Extra,extra_info,extra_warning,extra_danger'
         ],
     ],
     'palettes' => [
@@ -167,7 +168,36 @@ return [
                 'size' => 30,
                 'eval' => 'trim'
             ],
-
+        ],
+        'extra_info' => [
+            'exclude' => 1,
+            'label' => 'LLL:EXT:t3monitoring/Resources/Private/Language/locallang_db.xlf:tx_t3monitoring_domain_model_client.extra_info',
+            'config' => [
+                'readOnly' => true,
+                'type' => 'text',
+                'cols' => 40,
+                'rows' => 5,
+            ]
+        ],
+        'extra_warning' => [
+            'exclude' => 1,
+            'label' => 'LLL:EXT:t3monitoring/Resources/Private/Language/locallang_db.xlf:tx_t3monitoring_domain_model_client.extra_warning',
+            'config' => [
+                'readOnly' => true,
+                'type' => 'text',
+                'cols' => 40,
+                'rows' => 5,
+            ]
+        ],
+        'extra_danger' => [
+            'exclude' => 1,
+            'label' => 'LLL:EXT:t3monitoring/Resources/Private/Language/locallang_db.xlf:tx_t3monitoring_domain_model_client.extra_danger',
+            'config' => [
+                'readOnly' => true,
+                'type' => 'text',
+                'cols' => 40,
+                'rows' => 5,
+            ]
         ],
         'extensions' => [
             'exclude' => 1,

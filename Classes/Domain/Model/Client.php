@@ -114,6 +114,27 @@ class Client extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $errorMessage = '';
 
     /**
+     * extraInfo
+     *
+     * @var string
+     */
+    protected $extraInfo = '';
+
+    /**
+     * extraWarning
+     *
+     * @var string
+     */
+    protected $extraWarning = '';
+
+    /**
+     * extraDanger
+     *
+     * @var string
+     */
+    protected $extraDanger = '';
+
+    /**
      * extensions
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\T3Monitor\T3monitoring\Domain\Model\Extension>
@@ -408,6 +429,69 @@ class Client extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setErrorMessage($errorMessage)
     {
         $this->errorMessage = $errorMessage;
+    }
+
+    /**
+     * Returns the extraInfo
+     *
+     * @return string $extraInfo
+     */
+    public function getExtraInfo()
+    {
+        return $this->extraInfo;
+    }
+
+    /**
+     * Sets the extraInfo
+     *
+     * @param string $extraInfo
+     * @return void
+     */
+    public function setExtraInfo($extraInfo)
+    {
+        $this->extraInfo = $extraInfo;
+    }
+
+    /**
+     * Returns the extraWarning
+     *
+     * @return string $extraWarning
+     */
+    public function getExtraWarning()
+    {
+        return $this->extraWarning;
+    }
+
+    /**
+     * Sets the extraWarning
+     *
+     * @param string $extraWarning
+     * @return void
+     */
+    public function setExtraWarning($extraWarning)
+    {
+        $this->extraWarning = $extraWarning;
+    }
+
+    /**
+     * Returns the extraDanger
+     *
+     * @return string $extraDanger
+     */
+    public function getExtraDanger()
+    {
+        return $this->extraDanger;
+    }
+
+    /**
+     * Sets the extraDanger
+     *
+     * @param string $extraDanger
+     * @return void
+     */
+    public function setExtraDanger($extraDanger)
+    {
+        $this->extraDanger = $extraDanger;
     }
 
     /**

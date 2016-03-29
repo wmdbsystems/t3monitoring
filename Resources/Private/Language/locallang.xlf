@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" datatype="plaintext" original="messages" date="2016-03-17T20:23:25Z" product-name="t3monitoring">
+	<file source-language="en" datatype="plaintext" original="messages" date="2016-03-29T07:17:51Z" product-name="t3monitoring">
 		<header/>
 		<body>
 			<trans-unit id="tx_t3monitoring_domain_model_client">
@@ -38,6 +38,15 @@
 			</trans-unit>
 			<trans-unit id="tx_t3monitoring_domain_model_client.error_message">
 				<source>Error Message</source>
+			</trans-unit>
+			<trans-unit id="tx_t3monitoring_domain_model_client.extra_info">
+				<source>Extra Info</source>
+			</trans-unit>
+			<trans-unit id="tx_t3monitoring_domain_model_client.extra_warning">
+				<source>Extra Warning</source>
+			</trans-unit>
+			<trans-unit id="tx_t3monitoring_domain_model_client.extra_danger">
+				<source>Extra Danger</source>
 			</trans-unit>
 			<trans-unit id="tx_t3monitoring_domain_model_client.extensions">
 				<source>Extensions</source>

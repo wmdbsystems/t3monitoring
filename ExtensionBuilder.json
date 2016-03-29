@@ -142,6 +142,36 @@
                             "propertyName": "errorMessage",
                             "propertyType": "String",
                             "uid": "275891682931"
+                        },
+                        {
+                            "allowedFileTypes": "",
+                            "maxItems": "1",
+                            "propertyDescription": "",
+                            "propertyIsExcludeField": true,
+                            "propertyIsRequired": false,
+                            "propertyName": "extraInfo",
+                            "propertyType": "Text",
+                            "uid": "817828423994"
+                        },
+                        {
+                            "allowedFileTypes": "",
+                            "maxItems": "1",
+                            "propertyDescription": "",
+                            "propertyIsExcludeField": true,
+                            "propertyIsRequired": false,
+                            "propertyName": "extraWarning",
+                            "propertyType": "Text",
+                            "uid": "1416408431474"
+                        },
+                        {
+                            "allowedFileTypes": "",
+                            "maxItems": "1",
+                            "propertyDescription": "",
+                            "propertyIsExcludeField": true,
+                            "propertyIsRequired": false,
+                            "propertyName": "extraDanger",
+                            "propertyType": "Text",
+                            "uid": "1180862984540"
                         }
                     ]
                 },
@@ -732,7 +762,7 @@
         }
     ],
     "log": {
-        "last_modified": "2016-03-17 08:23",
+        "last_modified": "2016-03-29 07:17",
         "extension_builder_version": "7.6.0",
         "be_user": " (17)"
     }
