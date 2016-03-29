@@ -579,4 +579,37 @@ class Client extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         $this->sla = $sla;
     }
 
+    /**
+     * @return array
+     */
+    public function getExtraInfoAsArray()
+    {
+        if (!empty($this->extraInfo)) {
+            return json_decode($this->extraInfo, true);
+        }
+        return [];
+    }
+
+    /**
+     * @return array
+     */
+    public function getExtraWarningAsArray()
+    {
+        if (!empty($this->extraWarning)) {
+            return json_decode($this->extraWarning, true);
+        }
+        return [];
+    }
+
+    /**
+     * @return array
+     */
+    public function getExtraDangerAsArray()
+    {
+        if (!empty($this->extraDanger)) {
+            return json_decode($this->extraDanger, true);
+        }
+        return [];
+    }
+
 }

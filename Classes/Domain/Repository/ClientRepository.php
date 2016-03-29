@@ -111,6 +111,21 @@ class ClientRepository extends BaseRepository
             $constraints[] = $query->equals('core.isLatest', 0);
         }
 
+        // extra info
+        if ($demand->isWithExtraInfo()) {
+            $constraints[] = $query->logicalNot($query->equals('extraInfo', ''));
+        }
+
+        // extra warning
+        if ($demand->isWithExtraWarning()) {
+            $constraints[] = $query->logicalNot($query->equals('extraWarning', ''));
+        }
+
+        // extra danger
+        if ($demand->isWithExtraDanger()) {
+            $constraints[] = $query->logicalNot($query->equals('extraDanger', ''));
+        }
+
 
         if (!empty($constraints)) {
             $query->matching(

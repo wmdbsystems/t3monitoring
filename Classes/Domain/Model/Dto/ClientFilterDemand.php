@@ -44,6 +44,15 @@ class ClientFilterDemand extends AbstractEntity
     /** @var bool */
     protected $withOutdatedExtensions;
 
+    /** @var bool */
+    protected $withExtraInfo;
+
+    /** @var bool */
+    protected $withExtraWarning;
+
+    /** @var bool */
+    protected $withExtraDanger;
+
     /**
      * @return int
      */
@@ -186,6 +195,54 @@ class ClientFilterDemand extends AbstractEntity
     {
         $this->withOutdatedExtensions = $withOutdatedExtensions;
         return $this;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isWithExtraInfo()
+    {
+        return $this->withExtraInfo;
+    }
+
+    /**
+     * @param boolean $withExtraInfo
+     */
+    public function setWithExtraInfo($withExtraInfo)
+    {
+        $this->withExtraInfo = $withExtraInfo;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isWithExtraWarning()
+    {
+        return $this->withExtraWarning;
+    }
+
+    /**
+     * @param boolean $withExtraWarning
+     */
+    public function setWithExtraWarning($withExtraWarning)
+    {
+        $this->withExtraWarning = $withExtraWarning;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isWithExtraDanger()
+    {
+        return $this->withExtraDanger;
+    }
+
+    /**
+     * @param boolean $withExtraDanger
+     */
+    public function setWithExtraDanger($withExtraDanger)
+    {
+        $this->withExtraDanger = $withExtraDanger;
     }
 
 }

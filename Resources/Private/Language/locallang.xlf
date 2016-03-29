@@ -229,6 +229,9 @@
 			<trans-unit id="clients.numberOfExtensions">
 				<source>Number of extensions</source>
 			</trans-unit>
+			<trans-unit id="clients.facts">
+				<source>Facts</source>
+			</trans-unit>
 			<trans-unit id="filter.connectionErrors">
 				<source>Connection errors</source>
 			</trans-unit>

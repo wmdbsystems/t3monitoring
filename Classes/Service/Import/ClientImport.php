@@ -85,11 +85,33 @@ class ClientImport extends BaseImport
                 'core' => $this->getUsedCore($json['core']['typo3Version']),
                 'extensions' => $this->handleExtensionRelations($row['uid'], $json['extensions']),
             );
+
+            $this->addExtraData($json, $update, 'info');
+            $this->addExtraData($json, $update, 'warning');
+            $this->addExtraData($json, $update, 'danger');
+
             $this->getDatabaseConnection()->exec_UPDATEquery('tx_t3monitoring_domain_model_client',
                 'uid=' . (int)$row['uid'], $update);
             $this->responseCount['success']++;
         } catch (\Exception $e) {
             $this->handleError($row['uid'], $e);
+        }
+    }
+
+    /**
+     * Add extra information for info, warning, danger
+     *
+     * @param array $json
+     * @param array $update
+     * @param string $field
+     */
+    protected function addExtraData(array $json, array &$update, $field)
+    {
+        $dbField = 'extra_' . $field;
+        if (isset($json['extra']) && isset($json['extra']) && is_array($json['extra'][$field])) {
+            $update[$dbField] = json_encode($json['extra'][$field]);
+        } else {
+            $update[$dbField] = '';
         }
     }
 

@@ -5,34 +5,56 @@
 <f:section name="content">
 	<h1>Client: {client.title}</h1>
 
-	<table class="table table-striped table-hover">
-		<tr>
-			<th>{core:icon(identifier:'mimetypes-x-content-domain')} Domain</th>
-			<td>
-				<f:link.external uri="{client.domain}">{client.domain}</f:link.external>
-			</td>
-		</tr>
-		<tr class="{f:if(condition:client.core.insecure,then:'danger',else:'success')}">
-			<th>{core:icon(identifier:'apps-pagetree-root')} TYPO3 Version</th>
-			<td>{client.core.version}</td>
-		</tr>
-		<f:if condition="{client.sla}">
-			<tr>
-				<th>{core:icon(identifier:'actions-document')} SLA</th>
-				<td>
-					<f:link.action action="show" controller="Sla" arguments="{sla:client.sla}">{client.sla.title}</f:link.action>
-				</td>
-			</tr>
-		</f:if>
-		<tr>
-			<th><i class="fa fa-database"></i> Mysql Version</th>
-			<td>{client.mysqlVersion}</td>
-		</tr>
-		<tr>
-			<th><i class="fa fa-code"></i> PHP Version</th>
-			<td>{client.phpVersion}</td>
-		</tr>
-	</table>
+	<div class="row">
+		<div class="col-md-6">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<f:translate key="clients.facts" />
+				</div>
+				<table class="table table-striped table-hover">
+					<tr>
+						<th>{core:icon(identifier:'mimetypes-x-content-domain')} Domain</th>
+						<td>
+							<f:link.external uri="{client.domain}">{client.domain}</f:link.external>
+						</td>
+					</tr>
+					<tr class="{f:if(condition:client.core.insecure,then:'danger',else:'success')}">
+						<th>{core:icon(identifier:'apps-pagetree-root')} TYPO3 Version</th>
+						<td>{client.core.version}</td>
+					</tr>
+					<f:if condition="{client.sla}">
+						<tr>
+							<th>{core:icon(identifier:'actions-document')} SLA</th>
+							<td>
+								<f:link.action action="show" controller="Sla" arguments="{sla:client.sla}">{client.sla.title}</f:link.action>
+							</td>
+						</tr>
+					</f:if>
+					<tr>
+						<th><i class="fa fa-database"></i> Mysql Version</th>
+						<td>{client.mysqlVersion}</td>
+					</tr>
+					<tr>
+						<th><i class="fa fa-code"></i> PHP Version</th>
+						<td>{client.phpVersion}</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<f:if condition="{client.extraDanger}">
+				<f:render section="extra" arguments="{name:'danger',cssClass:'danger',data:client.extraDangerAsArray}" />
+			</f:if>
+			<f:if condition="{client.extraWarning}">
+				<f:render section="extra" arguments="{name:'warning',cssClass:'warning',data:client.extraWarningAsArray}" />
+			</f:if>
+			<f:if condition="{client.extraInfo}">
+				<f:render section="extra" arguments="{name:'info',cssClass:'info',data:client.extraInfoAsArray}" />
+			</f:if>
+
+		</div>
+	</div>
+
 
 	<f:if condition="{client.errorMessage}">
 		<div class="alert alert-danger">
@@ -133,4 +155,20 @@
 			</table>
 		</div>
 	</f:if>
+</f:section>
+
+<f:section name="extra">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<f:translate key="tx_t3monitoring_domain_model_client.extra_{name}" />
+		</div>
+		<table class="table table-striped table-hover">
+			<f:for each="{data}" as="value" key="key">
+				<tr class="{cssClass}">
+					<th style="width: 20%;">{key}</th>
+					<td>{value}</td>
+				</tr>
+			</f:for>
+		</table>
+	</div>
 </f:section>
