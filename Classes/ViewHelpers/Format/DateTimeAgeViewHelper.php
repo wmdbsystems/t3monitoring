@@ -28,6 +28,9 @@ class DateTimeAgeViewHelper extends AbstractViewHelper
      */
     public function render(DateTime $date)
     {
+        if (is_null($date)) {
+            return '';
+        }
         return BackendUtility::dateTimeAge($date->getTimestamp(), 1, 'date');
     }
 }
