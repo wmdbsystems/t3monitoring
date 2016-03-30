@@ -26,7 +26,7 @@ class DateTimeAgeViewHelper extends AbstractViewHelper
      * @param DateTime $date
      * @return string
      */
-    public function render(DateTime $date)
+    public function render(DateTime $date = null)
     {
         if (is_null($date)) {
             return '';
