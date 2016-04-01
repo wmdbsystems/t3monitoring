@@ -20,7 +20,7 @@ use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 class AvailableUpdatesViewHelper extends AbstractViewHelper
 {
-
+    protected $escapeOutput = false;
 
     /**
      * @param Extension $extension

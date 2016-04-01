@@ -16,7 +16,6 @@ namespace T3Monitor\T3monitoring\Service\Import;
  */
 
 use T3Monitor\T3monitoring\Service\DataIntegrity;
-use TYPO3\CMS\Core\Database\DatabaseConnection;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extensionmanager\Utility\Repository\Helper;
 
