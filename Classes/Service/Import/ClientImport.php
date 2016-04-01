@@ -122,7 +122,7 @@ class ClientImport extends BaseImport
         $url = $domain . '/index.php?eID=t3monitoring&secret=' . $row['secret'];
         $report = [];
         $response = GeneralUtility::getUrl($url, 0, null, $report);
-        if (!empty($report['message'])) {
+        if (!empty($report['message']) && $report['message'] !== 'OK') {
             throw new \RuntimeException($report['message']);
         }
         return $response;
