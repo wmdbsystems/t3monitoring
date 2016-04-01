@@ -16,7 +16,6 @@ namespace T3Monitor\T3monitoring\Service\Import;
  */
 
 use T3Monitor\T3monitoring\Service\DataIntegrity;
-use TYPO3\CMS\Core\Http\HttpRequest;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\StringUtility;
 use TYPO3\CMS\Core\Utility\VersionNumberUtility;
@@ -24,9 +23,6 @@ use TYPO3\CMS\Core\Utility\VersionNumberUtility;
 class ClientImport extends BaseImport
 {
     const TABLE = 'tx_t3monitoring_domain_model_client';
-
-    /** @var  HttpRequest */
-    protected $httpRequest;
 
     /** @var array */
     protected $coreVersions = array();
@@ -36,12 +32,6 @@ class ClientImport extends BaseImport
 
     public function __construct()
     {
-        $config = array(
-            'follow_redirects' => true,
-            'strict_redirects' => true
-        );
-        /** @var $request HttpRequest */
-        $this->httpRequest = GeneralUtility::makeInstance(HttpRequest::class, '', 'GET', $config);
         $this->coreVersions = $this->getAllCoreVersions();
         parent::__construct();
     }
@@ -130,12 +120,12 @@ class ClientImport extends BaseImport
             $domain = 'http://' . $domain;
         }
         $url = $domain . '/index.php?eID=t3monitoring&secret=' . $row['secret'];
-        $request = $this->httpRequest;
-        $request->setUrl($url);
-
-        /** @var $response \HTTP_Request2_Response */
-        $response = $request->send();
-        return $response->getBody();
+        $report = [];
+        $response = GeneralUtility::getUrl($url, 0, null, $report);
+        if (!empty($report['message'])) {
+            throw new \RuntimeException($report['message']);
+        }
+        return $response;
     }
 
     /**
@@ -145,7 +135,6 @@ class ClientImport extends BaseImport
      */
     protected function handleExtensionRelations($client, array $extensions = array())
     {
-        $count = 0;
         $table = 'tx_t3monitoring_domain_model_extension';
 
         $whereClause = array();
