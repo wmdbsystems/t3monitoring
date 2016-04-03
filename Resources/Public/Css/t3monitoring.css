@@ -1,0 +1,13 @@
+.tooltip-inner .dep {
+	text-align: left;
+	padding: 10px;
+}
+
+.tooltip-inner .dep .type {
+	font-size: 14px;
+	margin-top: 10px;
+}
+
+.tooltip-inner .dep span {
+	font-weight: bold;
+}

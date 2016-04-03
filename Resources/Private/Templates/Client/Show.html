@@ -110,7 +110,7 @@
 											<f:if condition="{list}">
 												<f:then>
 													<f:for each="{list}" key="version" as="name">
-														<span class="badge" data-toggle="tooltip" data-title="{name} release">{version}</span>
+														<span class="badge" data-toggle="tooltip" data-title='<div class="dep"><strong>{name} release</strong><br>{extension.serializedDependencies -> monitor:format.dependencies()}</div>' data-html="true">{version}</span>
 													</f:for>
 												</f:then>
 												<f:else>
