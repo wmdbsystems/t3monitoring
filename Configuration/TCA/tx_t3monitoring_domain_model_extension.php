@@ -11,14 +11,14 @@ return [
         'cruser_id' => 'cruser_id',
         'enablecolumns' => [
         ],
-        'searchFields' => 'name,version,insecure,next_secure_version,title,description,last_updated,author_name,update_comment,state,category,version_integer,is_used,is_official,is_modified,is_latest,last_bugfix_release,last_minor_release,last_major_release,',
+        'searchFields' => 'name,version,insecure,next_secure_version,title,description,last_updated,author_name,update_comment,state,category,version_integer,is_used,is_official,is_modified,is_latest,last_bugfix_release,last_minor_release,last_major_release,serialized_dependencies,',
         'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('t3monitoring') . 'Resources/Public/Icons/tx_t3monitoring_domain_model_extension.gif'
     ],
     'interface' => [
-        'showRecordFieldList' => 'name, version, insecure, next_secure_version, title, description, last_updated, author_name, update_comment, state, category, version_integer, is_used, is_official, is_modified, last_bugfix_release, last_minor_release, last_major_release',
+        'showRecordFieldList' => 'name, version, insecure, next_secure_version, title, description, last_updated, author_name, update_comment, state, category, version_integer, is_used, is_official, is_modified, is_latest, last_bugfix_release, last_minor_release, last_major_release, serialized_dependencies',
     ],
     'types' => [
-        '1' => ['showitem' => 'name, version, insecure, next_secure_version, title, description, last_updated, author_name, update_comment, state, category, version_integer, is_used, is_official, is_modified, is_latest,last_bugfix_release, last_minor_release, last_major_release, '],
+        '1' => ['showitem' => 'name, version, insecure, next_secure_version, title, description, last_updated, author_name, update_comment, state, category, version_integer, is_used, is_official, is_modified, is_latest,last_bugfix_release, last_minor_release, last_major_release, serialized_dependencies'],
     ],
     'palettes' => [
         '1' => ['showitem' => ''],
@@ -222,6 +222,17 @@ return [
                 'size' => 30,
                 'eval' => 'trim'
             ],
+
+        ],
+        'serialized_dependencies' => [
+            'exclude' => 1,
+            'label' => 'LLL:EXT:t3monitoring/Resources/Private/Language/locallang.xlf:tx_t3monitoring_domain_model_extension.serialized_dependencies',
+            'config' => [
+                'type' => 'text',
+                'cols' => 40,
+                'rows' => 15,
+                'eval' => 'trim'
+            ]
 
         ],
 

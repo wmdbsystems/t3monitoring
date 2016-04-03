@@ -62,6 +62,7 @@ CREATE TABLE tx_t3monitoring_domain_model_extension (
 	last_bugfix_release varchar(255) DEFAULT '' NOT NULL,
 	last_minor_release varchar(255) DEFAULT '' NOT NULL,
 	last_major_release varchar(255) DEFAULT '' NOT NULL,
+	serialized_dependencies text NOT NULL,
 
 	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
 	crdate int(11) unsigned DEFAULT '0' NOT NULL,

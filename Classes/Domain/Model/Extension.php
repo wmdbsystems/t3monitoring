@@ -168,6 +168,13 @@ class Extension extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $lastMajorRelease = '';
 
     /**
+     * serializedDependencies
+     *
+     * @var string
+     */
+    protected $serializedDependencies = '';
+
+    /**
      * Returns the name
      *
      * @return string $name
@@ -616,66 +623,25 @@ class Extension extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         $this->lastMajorRelease = $lastMajorRelease;
     }
 
-        /**
-     * Get Category String
+    /**
+     * Returns the serializedDependencies
      *
-     * @return string
+     * @return string $serializedDependencies
      */
-    public function getCategoryString()
+    public function getSerializedDependencies()
     {
-        $categoryString = '';
-        if (isset(self::$defaultCategories[$this->getCategory()])) {
-            $categoryString = self::$defaultCategories[$this->getCategory()];
-        }
-        return $categoryString;
+        return $this->serializedDependencies;
     }
 
     /**
-     * Get State string
+     * Sets the serializedDependencies
      *
-     * @return string
+     * @param string $serializedDependencies
+     * @return void
      */
-    public function getStateString()
+    public function setSerializedDependencies($serializedDependencies)
     {
-        $stateString = '';
-        if (isset(self::$defaultStates[$this->getState()])) {
-            $stateString = self::$defaultStates[$this->getState()];
-        }
-        return $stateString;
+        $this->serializedDependencies = $serializedDependencies;
     }
-
-    /**
-     * Contains default categories.
-     *
-     * @var array
-     */
-    protected static $defaultCategories = array(
-        0 => 'be',
-        1 => 'module',
-        2 => 'fe',
-        3 => 'plugin',
-        4 => 'misc',
-        5 => 'services',
-        6 => 'templates',
-        8 => 'doc',
-        9 => 'example',
-        10 => 'distribution'
-    );
-
-    /**
-     * Contains default states.
-     *
-     * @var array
-     */
-    protected static $defaultStates = array(
-        0 => 'alpha',
-        1 => 'beta',
-        2 => 'stable',
-        3 => 'experimental',
-        4 => 'test',
-        5 => 'obsolete',
-        6 => 'excludeFromUpdates',
-        999 => 'n/a'
-    );
 
 }

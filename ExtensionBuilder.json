@@ -433,6 +433,16 @@
                             "propertyName": "lastMajorRelease",
                             "propertyType": "String",
                             "uid": "1309296103525"
+                        },
+                        {
+                            "allowedFileTypes": "",
+                            "maxItems": "1",
+                            "propertyDescription": "",
+                            "propertyIsExcludeField": true,
+                            "propertyIsRequired": false,
+                            "propertyName": "serializedDependencies",
+                            "propertyType": "Text",
+                            "uid": "1198867215480"
                         }
                     ]
                 },
@@ -762,7 +772,7 @@
         }
     ],
     "log": {
-        "last_modified": "2016-03-29 07:17",
+        "last_modified": "2016-04-03 08:21",
         "extension_builder_version": "7.6.0",
         "be_user": " (17)"
     }

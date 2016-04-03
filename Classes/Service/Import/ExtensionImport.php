@@ -41,7 +41,7 @@ class ExtensionImport extends BaseImport
     {
         $table = 'tx_t3monitoring_domain_model_extension';
         $res = $this->getDatabaseConnection()->exec_SELECTquery(
-            'extension_key,state,review_state,version,title,category,description,last_updated,author_name,update_comment,integer_version,state,current_version',
+            'extension_key,state,review_state,version,title,category,description,last_updated,author_name,update_comment,integer_version,state,current_version,serialized_dependencies',
             'tx_extensionmanager_domain_model_extension',
             'last_updated >' . strtotime(self::MIN_DATE)
         );
@@ -71,6 +71,7 @@ class ExtensionImport extends BaseImport
                 'description' => $row['description'],
                 'state' => $row['state'],
                 'category' => $row['category'],
+                'serialized_dependencies' => $row['serialized_dependencies'],
                 'tstamp' => $GLOBALS['EXEC_TIME'],
             ];
 
