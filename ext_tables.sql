@@ -70,8 +70,7 @@ CREATE TABLE tx_t3monitoring_domain_model_extension (
 
 	PRIMARY KEY (uid),
 	KEY parent (pid),
-	KEY major(`name`,`major_version`),
-
+	KEY major (name,major_version),
 );
 
 #
