@@ -108,7 +108,10 @@ class ClientRepository extends BaseRepository
 
         // outdated core
         if ($demand->isWithOutdatedCore()) {
-            $constraints[] = $query->equals('core.isLatest', 0);
+            $constraints[] = $query->logicalOr([
+                $query->equals('core.isLatest', 0),
+                $query->equals('core.isActive', 0)
+            ]);
         }
 
         // extra info
