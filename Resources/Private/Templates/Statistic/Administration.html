@@ -1,4 +1,4 @@
-<html data-namespace-typo3-fluid="true" xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers">
+<html data-namespace-typo3-fluid="true" xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:core="http://typo3.org/ns/TYPO3/CMS/Core/ViewHelpers">
 
 <f:layout name="Simple" />
 
@@ -11,17 +11,17 @@
 	<div class="btn-toolbar">
 		<div class="btn-group" role="group">
 			<f:link.action action="administration" arguments="{import:'clients'}" class="btn btn-info">
-				{f:translate(key:'tx_t3monitoring_domain_model_client')}
+				{core:icon(identifier:'actions-system-extension-download')} {f:translate(key:'tx_t3monitoring_domain_model_client')}
 			</f:link.action>
 		</div>
 		<div class="btn-group" role="group">
 			<f:link.action action="administration" arguments="{import:'core'}" class="btn btn-info">
-				{f:translate(key:'tx_t3monitoring_domain_model_core')}
+				{core:icon(identifier:'actions-system-extension-download')} {f:translate(key:'tx_t3monitoring_domain_model_core')}
 			</f:link.action>
 		</div>
 		<div class="btn-group" role="group">
 			<f:link.action action="administration" arguments="{import:'extensions'}" class="btn btn-info">
-				{f:translate(key:'tx_t3monitoring_domain_model_extension')}
+				{core:icon(identifier:'actions-system-extension-download')} {f:translate(key:'tx_t3monitoring_domain_model_extension')}
 			</f:link.action>
 		</div>
 	</div>
