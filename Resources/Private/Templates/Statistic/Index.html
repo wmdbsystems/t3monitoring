@@ -319,7 +319,9 @@
 								<div class="media-body"><h4 class="callout-title">{f:translate(key:'search')}</h4>
 									<div class="callout-body">
 										<p>{f:translate(key:'search.introHelp')}</p>
-										<f:form.submit value="{f:translate(key:'clients.listAll')}" class="btn btn-info" />
+										<button class="btn btn-info">
+											{core:icon(identifier:'actions-system-list-open')} {f:translate(key:'clients.listAll')}
+										</button>
 									</div>
 								</div>
 							</div>
@@ -329,7 +331,7 @@
 						<table class="table table-striped table-hover">
 							<f:for each="{importTimes}" as="time" key="key">
 								<tr>
-									<th>{f:translate(key:'lastImport.{key}')}</th>
+									<th style="width:15%;">{f:translate(key:'lastImport.{key}')}</th>
 									<td>
 										<f:if condition="{time}">
 											<f:then>
