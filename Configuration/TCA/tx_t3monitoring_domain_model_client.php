@@ -91,8 +91,9 @@ return [
                 'foreign_table' => 'tx_t3monitoring_domain_model_sla',
                 'minitems' => 0,
                 'maxitems' => 1,
+                'default' => 0,
                 'items' => [
-                    ['', '']
+                    ['', 0]
                 ]
             ],
         ],
