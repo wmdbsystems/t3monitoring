@@ -11,3 +11,8 @@
 .tooltip-inner .dep span {
 	font-weight: bold;
 }
+
+.filter legend {
+	margin: 0;
+	font-size: 14px;
+}

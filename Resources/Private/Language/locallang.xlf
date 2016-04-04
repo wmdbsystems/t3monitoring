@@ -253,6 +253,15 @@
 			<trans-unit id="filter.withExtraDanger">
 				<source>Additional errors</source>
 			</trans-unit>
+			<trans-unit id="filter.fieldset.core">
+				<source>Core</source>
+			</trans-unit>
+			<trans-unit id="filter.fieldset.extensions">
+				<source>Extensions</source>
+			</trans-unit>
+			<trans-unit id="filter.fieldset.misc">
+				<source>Misc</source>
+			</trans-unit>
 			<trans-unit id="lastImport.client">
 				<source>Import clients</source>
 			</trans-unit>

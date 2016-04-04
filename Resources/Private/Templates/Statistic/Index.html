@@ -1,6 +1,4 @@
-<html data-namespace-typo3-fluid="true"
-	  xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
-	  xmlns:core="http://typo3.org/ns/TYPO3/CMS/Core/ViewHelpers">
+<html data-namespace-typo3-fluid="true" xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:core="http://typo3.org/ns/TYPO3/CMS/Core/ViewHelpers">
 
 <f:layout name="Simple" />
 
@@ -170,7 +168,7 @@
 		</div>
 	</f:if>
 
-	<f:form action="index" name="filter" object="{filter}" class="xform-horizontal">
+	<f:form action="index" name="filter" object="{filter}" class="filter">
 		<f:form.hidden property="withExtraWarning" />
 		<f:form.hidden property="withExtraDanger" />
 		<div class="row">
@@ -192,34 +190,42 @@
 					</div>
 				</f:if>
 
-				<div class="checkbox">
-					<label>
-						<f:form.checkbox property="withInsecureCore" value="1" />
-						{f:translate(key:'tx_t3monitoring_domain_model_client.insecure_core')}</label>
-				</div>
+				<fieldset>
+					<legend class="legend">{f:translate(key:'filter.fieldset.core')}</legend>
+					<div class="checkbox">
+						<label>
+							<f:form.checkbox property="withInsecureCore" value="1" />
+							{f:translate(key:'tx_t3monitoring_domain_model_client.insecure_core')}</label>
+					</div>
 
-				<div class="checkbox">
-					<label>
-						<f:form.checkbox property="withOutdatedCore" value="1" />
-						{f:translate(key:'tx_t3monitoring_domain_model_client.outdated_core')}</label>
-				</div>
-				<div class="checkbox">
-					<label>
-						<f:form.checkbox property="withOutdatedExtensions" value="1" />
-						{f:translate(key:'tx_t3monitoring_domain_model_client.outdated_extensions')}</label>
-				</div>
+					<div class="checkbox">
+						<label>
+							<f:form.checkbox property="withOutdatedCore" value="1" />
+							{f:translate(key:'tx_t3monitoring_domain_model_client.outdated_core')}</label>
+					</div>
+				</fieldset>
+				<fieldset>
+					<legend class="legend">{f:translate(key:'filter.fieldset.extensions')}</legend>
+					<div class="checkbox">
+						<label>
+							<f:form.checkbox property="withOutdatedExtensions" value="1" />
+							{f:translate(key:'tx_t3monitoring_domain_model_client.outdated_extensions')}</label>
+					</div>
 
-				<div class="checkbox">
-					<label>
-						<f:form.checkbox property="withInsecureExtensions" value="1" />
-						{f:translate(key:'tx_t3monitoring_domain_model_client.insecure_extensions')}</label>
-				</div>
-
-				<div class="checkbox">
-					<label>
-						<f:form.checkbox property="withErrorMessage" value="1" />
-						{f:translate(key:'filter.connectionErrors')}</label>
-				</div>
+					<div class="checkbox">
+						<label>
+							<f:form.checkbox property="withInsecureExtensions" value="1" />
+							{f:translate(key:'tx_t3monitoring_domain_model_client.insecure_extensions')}</label>
+					</div>
+				</fieldset>
+				<fieldset>
+					<legend class="legend">{f:translate(key:'filter.fieldset.misc')}</legend>
+					<div class="checkbox">
+						<label>
+							<f:form.checkbox property="withErrorMessage" value="1" />
+							{f:translate(key:'filter.connectionErrors')}</label>
+					</div>
+				</fieldset>
 
 				<div class="form-group">
 					<button class="btn btn-default">
