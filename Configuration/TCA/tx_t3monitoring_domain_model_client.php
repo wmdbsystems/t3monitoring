@@ -143,7 +143,7 @@ return [
             'exclude' => 1,
             'label' => 'LLL:EXT:t3monitoring/Resources/Private/Language/locallang.xlf:tx_t3monitoring_domain_model_client.insecure_extensions',
             'config' => [
-                'readonly' => true,
+                'readOnly' => true,
                 'type' => 'input',
                 'size' => 4,
                 'eval' => 'int'
@@ -154,7 +154,7 @@ return [
             'exclude' => 1,
             'label' => 'LLL:EXT:t3monitoring/Resources/Private/Language/locallang.xlf:tx_t3monitoring_domain_model_client.outdated_extensions',
             'config' => [
-                'readonly' => true,
+                'readOnly' => true,
                 'type' => 'input',
                 'size' => 4,
                 'eval' => 'int'
