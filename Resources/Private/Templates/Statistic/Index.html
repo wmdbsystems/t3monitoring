@@ -274,7 +274,7 @@
 												</td>
 												<td class="text-center">
 													<f:if condition="{client.extensions}">
-														<span data-toggle="tooltip" data-title="{f:translate(key:'clients.numberOfExtensions')}" data-placement="left" class="badge badge-default">{client.extensions -> f:count()}</span>
+														<span data-toggle="tooltip" data-title="{f:translate(key:'clients.numberOfExtensions')}" data-placement="left" class="badge badge-info">{client.extensions -> f:count()}</span>
 													</f:if>
 												</td>
 												<td class="text-center">
@@ -284,7 +284,7 @@
 												</td>
 												<td class="text-center">
 													<f:if condition="{client.outdatedExtensions}">
-														<span data-toggle="tooltip" data-title="{f:translate(key:'tx_t3monitoring_domain_model_client.outdated_extensions')}" data-placement="left" class="badge badge-info">{client.outdatedExtensions}</span>
+														<span data-toggle="tooltip" data-title="{f:translate(key:'tx_t3monitoring_domain_model_client.outdated_extensions')}" data-placement="left" class="badge badge-default">{client.outdatedExtensions}</span>
 													</f:if>
 												</td>
 												<td class="text-center">
