@@ -88,7 +88,9 @@
 								<span data-toggle="tooltip" data-title="{extension.title}" data-placement="right">{extension.name}</span>
 							</td>
 							<td>{extension.version}</td>
-							<td><span class="label label-{extension.stateString}">{extension.stateString}</span></td>
+							<td>
+								<span class="label label-{extension.state -> monitor:format.extensionState()}">{extension.state -> monitor:format.extensionState()}</span>
+							</td>
 							<td>
 								<f:if condition="{extension.insecure}">
 									<f:then>
@@ -113,7 +115,7 @@
 									</f:else>
 								</f:if>
 							</td>
-							<td>{extension.categoryString}</td>
+							<td>{extension.category -> monitor:format.extensionCategory()}</td>
 							<td class="{f:if(condition:extension.insecure,then:'danger',else:'success')}">
 								<f:if condition="{extension.insecure}">
 									<f:then>
