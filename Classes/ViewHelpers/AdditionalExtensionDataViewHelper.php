@@ -31,7 +31,7 @@ class AdditionalExtensionDataViewHelper extends AbstractViewHelper
     public function render($client, $extension, $as)
     {
         $row = $this->getDatabaseConnection()->exec_SELECTgetSingleRow(
-            'is_loaded',
+            'is_loaded,state,title',
             'tx_t3monitoring_client_extension_mm',
             sprintf('uid_local=%s AND uid_foreign=%s', (int)$client, (int)$extension));
 

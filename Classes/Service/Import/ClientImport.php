@@ -183,7 +183,7 @@ class ClientImport extends BaseImport
                 $client,
                 $relationId,
                 $data['title'],
-                $data['state'],
+                $data['state'], // @todo map back to integer?
                 $data['isLoaded'],
             );
 
