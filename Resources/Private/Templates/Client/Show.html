@@ -116,13 +116,20 @@
 								</f:if>
 							</td>
 							<td>{extension.category -> monitor:format.extensionCategory()}</td>
-							<td class="{f:if(condition:extension.insecure,then:'danger',else:'success')}">
+							<td class="{f:if(condition:extension.insecure,then:'danger',else:'{f:if(condition:extension.isOfficial,then:\'success \',else:\'info\')}')}">
 								<f:if condition="{extension.insecure}">
 									<f:then>
 										<span class="text-danger">no</span>
 									</f:then>
 									<f:else>
-										<span class="text-success">yes</span>
+										<f:if condition="{extension.isOfficial}">
+											<f:then>
+												<span class="text-success">yes</span>
+											</f:then>
+											<f:else>
+												<span class="text-info">unknown</span>
+											</f:else>
+										</f:if>
 									</f:else>
 								</f:if>
 							</td>
