@@ -43,12 +43,12 @@ class DependenciesViewHelper extends AbstractViewHelper
         }
         $output = [];
         foreach ($dependencies as $type => $list) {
-            $output[$type] = '<div class="type">' . htmlspecialchars(ucfirst($type)) . '</div>';
+            $output[] = '<tr><th colspan="2">' . htmlspecialchars(ucfirst($type)) . '</th></tr>';
             foreach ($list as $item => $version) {
-                $output[$type] .= '<br><span>' . htmlspecialchars($item) . '</span>: ' . htmlspecialchars($version);
+                $output[$type] .= sprintf('<tr><td>%s</td><td>%s</td></tr>', htmlspecialchars($item), htmlspecialchars($version));
             }
         }
 
-        return implode('<br>', $output);
+        return '<table class="table table-white table-striped table-hover">' . implode(LF, $output) . '</table>';
     }
 }

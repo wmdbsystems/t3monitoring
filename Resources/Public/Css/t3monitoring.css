@@ -1,11 +1,14 @@
 .tooltip-inner .dep {
 	text-align: left;
-	padding: 10px;
 }
 
-.tooltip-inner .dep .type {
+.tooltip-inner .dep table {
+	color: #000;
+}
+
+.tooltip-inner .dep .title {
 	font-size: 14px;
-	margin-top: 10px;
+	font-weight: bold;
 }
 
 .tooltip-inner .dep span {
