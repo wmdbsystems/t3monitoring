@@ -32,8 +32,8 @@
 						<tr class="{f:if(condition:version.insecure,then:'danger',else:'success')}">
 							<th class="text-nowrap">{version.version}</th>
 							<td class="text-nowrap">{monitor:format.dateTimeAge(date:version.lastUpdated)}</td>
-							<td><span class="label label-{version.stateString}">{version.stateString}</span></td>
-							<td>{version.categoryString}</td>
+							<td><span class="label label-{version.state -> monitor:format.extensionState()}">{version.state -> monitor:format.extensionState()}</span></td>
+							<td>{version.category -> monitor:format.extensionCategory()}</td>
 							<td>{version.updateComment -> f:format.nl2br()}</td>
 						</tr>
 					</f:for>
