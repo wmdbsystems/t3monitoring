@@ -145,6 +145,7 @@ CREATE TABLE tx_t3monitoring_client_extension_mm (
 
 CREATE TABLE tx_t3monitoring_client_extension_mm (
   is_loaded tinyint(4) unsigned DEFAULT '0' NOT NULL,
+  title varchar(255) DEFAULT '' NOT NULL,
   state int(11) DEFAULT '0' NOT NULL,
 );
 

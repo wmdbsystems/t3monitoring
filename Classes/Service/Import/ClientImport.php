@@ -178,10 +178,12 @@ class ClientImport extends BaseImport
                 $relationId = $this->getDatabaseConnection()->sql_insert_id();
             }
 
-            $fields = array('uid_local', 'uid_foreign', 'is_loaded');
+            $fields = array('uid_local', 'uid_foreign', 'title', 'state', 'is_loaded');
             $relationsToBeAdded[] = array(
                 $client,
                 $relationId,
+                $data['title'],
+                $data['state'],
                 $data['isLoaded'],
             );
 
