@@ -24,7 +24,9 @@
 				<tbody>
 				<f:for each="{clients}" as="client">
 					<tr>
-						<td>{client.title}</td>
+						<td>
+							<f:link.action action="show" controller="Client" arguments="{client:client}">{client.title}</f:link.action>
+						</td>
 						<td>{client.domain}</td>
 						<td>todo last update</td>
 					</tr>
