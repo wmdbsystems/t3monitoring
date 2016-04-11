@@ -48,6 +48,9 @@
 			<trans-unit id="tx_t3monitoring_domain_model_client.extra_danger">
 				<source>Extra Danger</source>
 			</trans-unit>
+			<trans-unit id="tx_t3monitoring_domain_model_client.last_successful_import">
+				<source>Last Successful Import</source>
+			</trans-unit>
 			<trans-unit id="tx_t3monitoring_domain_model_client.extensions">
 				<source>Extensions</source>
 			</trans-unit>
@@ -234,6 +237,9 @@
 			</trans-unit>
 			<trans-unit id="client.facts">
 				<source>Facts</source>
+			</trans-unit>
+			<trans-unit id="client.noSuccessfulImport">
+				<source>No successful import until now!</source>
 			</trans-unit>
 			<trans-unit id="client.extra">
 				<source>Extra</source>

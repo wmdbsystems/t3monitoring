@@ -21,6 +21,17 @@
 							<f:link.external uri="{client.domain}">{client.domain}</f:link.external>
 						</td>
 					</tr>
+					<tr class="{f:if(condition:client.lastSuccessfulImport,then:'',else:'warning')}">
+						<th>{core:icon(identifier:'actions-document-history-open')} {f:translate(key:'tx_t3monitoring_domain_model_client.last_successful_import')}</th>
+						<td>
+							<f:if condition="{client.lastSuccessfulImport}">
+								<f:then>
+									{client.lastSuccessfulImport -> f:format.date(format:formats.dateAndTime)}
+								</f:then>
+								<f:else>{f:translate(key:'client.noSuccessfulImport')}</f:else>
+							</f:if>
+						</td>
+					</tr>
 					<tr class="{f:if(condition:client.core.insecure,then:'danger',else:'success')}">
 						<th>{core:icon(identifier:'apps-pagetree-root')} TYPO3 Version</th>
 						<td>{client.core.version}</td>

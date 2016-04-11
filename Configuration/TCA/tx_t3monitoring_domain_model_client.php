@@ -20,7 +20,7 @@ return [
         '1' => [
             'showitem' => '
         --div--;General,title;;paletteDomain,email, sla,
-        --div--;Readonly information,error_message,core;;paletteVersions,extensions,
+        --div--;Readonly information,last_successful_import,error_message,core;;paletteVersions,extensions,
                 insecure_core, outdated_core, insecure_extensions, outdated_extensions,
         --div--;Extra,extra_info,extra_warning,extra_danger'
         ],
@@ -199,6 +199,19 @@ return [
                 'cols' => 40,
                 'rows' => 5,
             ]
+        ],
+        'last_successful_import' => [
+            'exclude' => 1,
+            'label' => 'LLL:EXT:t3monitoring/Resources/Private/Language/locallang.xlf:tx_t3monitoring_domain_model_client.last_successful_import',
+            'config' => [
+                'readOnly' => true,
+                'type' => 'input',
+                'size' => 10,
+                'eval' => 'datetime',
+                'checkbox' => 1,
+                'default' => 0
+            ],
+
         ],
         'extensions' => [
             'exclude' => 1,

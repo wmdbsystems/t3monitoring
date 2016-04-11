@@ -172,6 +172,16 @@
                             "propertyName": "extraDanger",
                             "propertyType": "Text",
                             "uid": "1180862984540"
+                        },
+                        {
+                            "allowedFileTypes": "",
+                            "maxItems": "1",
+                            "propertyDescription": "",
+                            "propertyIsExcludeField": true,
+                            "propertyIsRequired": false,
+                            "propertyName": "lastSuccessfulImport",
+                            "propertyType": "DateTime",
+                            "uid": "1246713791343"
                         }
                     ]
                 },
@@ -772,7 +782,7 @@
         }
     ],
     "log": {
-        "last_modified": "2016-04-03 08:21",
+        "last_modified": "2016-04-11 12:45",
         "extension_builder_version": "7.6.0",
         "be_user": " (17)"
     }

@@ -64,6 +64,7 @@ class ClientImport extends BaseImport
 
             $update = array(
                 'tstamp' => $GLOBALS['EXEC_TIME'],
+                'last_successful_import' => $GLOBALS['EXEC_TIME'],
                 'error_message' => '',
                 'php_version' => $json['core']['phpVersion'],
                 'mysql_version' => $json['core']['mysqlClientVersion'],

@@ -116,6 +116,13 @@ class Client extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $extraDanger = '';
 
     /**
+     * lastSuccessfulImport
+     *
+     * @var \DateTime
+     */
+    protected $lastSuccessfulImport = null;
+
+    /**
      * extensions
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\T3Monitor\T3monitoring\Domain\Model\Extension>
@@ -473,6 +480,27 @@ class Client extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setExtraDanger($extraDanger)
     {
         $this->extraDanger = $extraDanger;
+    }
+
+    /**
+     * Returns the lastSuccessfulImport
+     *
+     * @return \DateTime $lastSuccessfulImport
+     */
+    public function getLastSuccessfulImport()
+    {
+        return $this->lastSuccessfulImport;
+    }
+
+    /**
+     * Sets the lastSuccessfulImport
+     *
+     * @param \DateTime $lastSuccessfulImport
+     * @return void
+     */
+    public function setLastSuccessfulImport(\DateTime $lastSuccessfulImport)
+    {
+        $this->lastSuccessfulImport = $lastSuccessfulImport;
     }
 
     /**

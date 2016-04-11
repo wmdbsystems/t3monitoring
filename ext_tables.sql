@@ -20,6 +20,7 @@ CREATE TABLE tx_t3monitoring_domain_model_client (
 	extra_info text NOT NULL,
 	extra_warning text NOT NULL,
 	extra_danger text NOT NULL,
+	last_successful_import int(11) DEFAULT '0' NOT NULL,
 	extensions int(11) unsigned DEFAULT '0' NOT NULL,
 	core int(11) unsigned DEFAULT '0',
 	sla int(11) unsigned DEFAULT '0',
