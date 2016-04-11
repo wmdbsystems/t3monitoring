@@ -1,31 +1,12 @@
 <?php
 namespace T3Monitor\T3monitoring\Domain\Model;
 
-
-/***************************************************************
+/*
+ * This file is part of the t3monitoring extension for TYPO3 CMS.
  *
- *  Copyright notice
- *
- *  (c) 2016 Georg Ringer, www.sup7.at
- *
- *  All rights reserved
- *
- *  This script is part of the TYPO3 project. The TYPO3 project is
- *  free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  The GNU General Public License can be found at
- *  http://www.gnu.org/copyleft/gpl.html.
- *
- *  This script is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  This copyright notice MUST APPEAR in all copies of the script!
- ***************************************************************/
+ * For the full copyright and license information, please read the
+ * LICENSE.txt file that was distributed with this source code.
+ */
 
 /**
  * Core
@@ -39,91 +20,91 @@ class Core extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @var string
      */
     protected $version = '';
-    
+
     /**
      * insecure
      *
      * @var bool
      */
     protected $insecure = false;
-    
+
     /**
      * nextSecureVersion
      *
      * @var string
      */
     protected $nextSecureVersion = '';
-    
+
     /**
      * type
      *
      * @var int
      */
     protected $type = 0;
-    
+
     /**
      * releaseDate
      *
      * @var \DateTime
      */
     protected $releaseDate = null;
-    
+
     /**
      * latest
      *
      * @var string
      */
     protected $latest = '';
-    
+
     /**
      * stable
      *
      * @var string
      */
     protected $stable = '';
-    
+
     /**
      * isStable
      *
      * @var bool
      */
     protected $isStable = false;
-    
+
     /**
      * isActive
      *
      * @var bool
      */
     protected $isActive = false;
-    
+
     /**
      * isLatest
      *
      * @var bool
      */
     protected $isLatest = false;
-    
+
     /**
      * versionInteger
      *
      * @var int
      */
     protected $versionInteger = 0;
-    
+
     /**
      * isUsed
      *
      * @var bool
      */
     protected $isUsed = false;
-    
+
     /**
      * isOfficial
      *
      * @var bool
      */
     protected $isOfficial = false;
-    
+
     /**
      * Returns the version
      *
@@ -133,7 +114,7 @@ class Core extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->version;
     }
-    
+
     /**
      * Sets the version
      *
@@ -144,7 +125,7 @@ class Core extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->version = $version;
     }
-    
+
     /**
      * Returns the insecure
      *
@@ -154,7 +135,7 @@ class Core extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->insecure;
     }
-    
+
     /**
      * Sets the insecure
      *
@@ -165,7 +146,7 @@ class Core extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->insecure = $insecure;
     }
-    
+
     /**
      * Returns the boolean state of insecure
      *
@@ -175,7 +156,7 @@ class Core extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->insecure;
     }
-    
+
     /**
      * Returns the nextSecureVersion
      *
@@ -185,7 +166,7 @@ class Core extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->nextSecureVersion;
     }
-    
+
     /**
      * Sets the nextSecureVersion
      *
@@ -196,7 +177,7 @@ class Core extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->nextSecureVersion = $nextSecureVersion;
     }
-    
+
     /**
      * Returns the type
      *
@@ -206,7 +187,7 @@ class Core extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->type;
     }
-    
+
     /**
      * Sets the type
      *
@@ -217,7 +198,7 @@ class Core extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->type = $type;
     }
-    
+
     /**
      * Returns the releaseDate
      *
@@ -227,7 +208,7 @@ class Core extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->releaseDate;
     }
-    
+
     /**
      * Sets the releaseDate
      *
@@ -238,7 +219,7 @@ class Core extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->releaseDate = $releaseDate;
     }
-    
+
     /**
      * Returns the latest
      *
@@ -248,7 +229,7 @@ class Core extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->latest;
     }
-    
+
     /**
      * Sets the latest
      *
@@ -259,7 +240,7 @@ class Core extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->latest = $latest;
     }
-    
+
     /**
      * Returns the stable
      *
@@ -269,7 +250,7 @@ class Core extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->stable;
     }
-    
+
     /**
      * Sets the stable
      *
@@ -280,7 +261,7 @@ class Core extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->stable = $stable;
     }
-    
+
     /**
      * Returns the isStable
      *
@@ -290,7 +271,7 @@ class Core extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->isStable;
     }
-    
+
     /**
      * Sets the isStable
      *
@@ -301,7 +282,7 @@ class Core extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->isStable = $isStable;
     }
-    
+
     /**
      * Returns the boolean state of isStable
      *
@@ -311,7 +292,7 @@ class Core extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->isStable;
     }
-    
+
     /**
      * Returns the isActive
      *
@@ -321,7 +302,7 @@ class Core extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->isActive;
     }
-    
+
     /**
      * Sets the isActive
      *
@@ -332,7 +313,7 @@ class Core extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->isActive = $isActive;
     }
-    
+
     /**
      * Returns the boolean state of isActive
      *
@@ -342,7 +323,7 @@ class Core extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->isActive;
     }
-    
+
     /**
      * Returns the isLatest
      *
@@ -352,7 +333,7 @@ class Core extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->isLatest;
     }
-    
+
     /**
      * Sets the isLatest
      *
@@ -363,7 +344,7 @@ class Core extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->isLatest = $isLatest;
     }
-    
+
     /**
      * Returns the boolean state of isLatest
      *
@@ -373,7 +354,7 @@ class Core extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->isLatest;
     }
-    
+
     /**
      * Returns the versionInteger
      *
@@ -383,7 +364,7 @@ class Core extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->versionInteger;
     }
-    
+
     /**
      * Sets the versionInteger
      *
@@ -394,7 +375,7 @@ class Core extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->versionInteger = $versionInteger;
     }
-    
+
     /**
      * Returns the isUsed
      *
@@ -404,7 +385,7 @@ class Core extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->isUsed;
     }
-    
+
     /**
      * Sets the isUsed
      *
@@ -415,7 +396,7 @@ class Core extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->isUsed = $isUsed;
     }
-    
+
     /**
      * Returns the boolean state of isUsed
      *
@@ -425,7 +406,7 @@ class Core extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->isUsed;
     }
-    
+
     /**
      * Returns the isOfficial
      *
@@ -435,7 +416,7 @@ class Core extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->isOfficial;
     }
-    
+
     /**
      * Sets the isOfficial
      *
@@ -446,7 +427,7 @@ class Core extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->isOfficial = $isOfficial;
     }
-    
+
     /**
      * Returns the boolean state of isOfficial
      *
