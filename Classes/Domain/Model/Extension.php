@@ -34,6 +34,22 @@ class Extension extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
 
     /**
+     * Contains default states.
+     *
+     * @var array
+     */
+    public static $defaultStates = array(
+        0 => 'alpha',
+        1 => 'beta',
+        2 => 'stable',
+        3 => 'experimental',
+        4 => 'test',
+        5 => 'obsolete',
+        6 => 'excludeFromUpdates',
+        999 => 'n/a'
+    );
+
+    /**
      * name
      *
      * @var string

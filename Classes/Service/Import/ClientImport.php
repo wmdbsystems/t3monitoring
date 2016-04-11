@@ -15,6 +15,7 @@ namespace T3Monitor\T3monitoring\Service\Import;
  * The TYPO3 project - inspiring people to share!
  */
 
+use T3Monitor\T3monitoring\Domain\Model\Extension;
 use T3Monitor\T3monitoring\Service\DataIntegrity;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\StringUtility;
@@ -170,20 +171,19 @@ class ClientImport extends BaseImport
                     'version_integer' => VersionNumberUtility::convertVersionNumberToInteger($data['version']),
                     'title' => $data['title'],
                     'description' => $data['description'],
-                    'state' => $data['state'],
+                    array_search($data['state'], Extension::$defaultStates),
                     'is_official' => 0,
                     'tstamp' => $GLOBALS['EXEC_TIME'],
                 );
                 $this->getDatabaseConnection()->exec_INSERTquery('tx_t3monitoring_domain_model_extension', $insert);
                 $relationId = $this->getDatabaseConnection()->sql_insert_id();
             }
-
             $fields = array('uid_local', 'uid_foreign', 'title', 'state', 'is_loaded');
             $relationsToBeAdded[] = array(
                 $client,
                 $relationId,
                 $data['title'],
-                $data['state'], // @todo map back to integer?
+                array_search($data['state'], Extension::$defaultStates),
                 $data['isLoaded'],
             );
 

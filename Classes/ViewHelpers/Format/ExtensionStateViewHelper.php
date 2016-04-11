@@ -15,28 +15,11 @@ namespace T3Monitor\T3monitoring\ViewHelpers\Format;
  * The TYPO3 project - inspiring people to share!
  */
 
-use DateTime;
-use TYPO3\CMS\Backend\Utility\BackendUtility;
+use T3Monitor\T3monitoring\Domain\Model\Extension;
 use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 class ExtensionStateViewHelper extends AbstractViewHelper
 {
-
-    /**
-     * Contains default states.
-     *
-     * @var array
-     */
-    protected static $defaultStates = array(
-        0 => 'alpha',
-        1 => 'beta',
-        2 => 'stable',
-        3 => 'experimental',
-        4 => 'test',
-        5 => 'obsolete',
-        6 => 'excludeFromUpdates',
-        999 => 'n/a'
-    );
 
     /**
      * @param int $state
@@ -46,8 +29,8 @@ class ExtensionStateViewHelper extends AbstractViewHelper
     {
         $state = $state ?: $this->renderChildren();
         $stateString = '';
-        if (isset(self::$defaultStates[$state])) {
-            $stateString = self::$defaultStates[$state];
+        if (isset(Extension::$defaultStates[$state])) {
+            $stateString = Extension::$defaultStates[$state];
         }
         return $stateString;
     }

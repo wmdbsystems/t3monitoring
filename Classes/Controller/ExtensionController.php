@@ -38,7 +38,7 @@ class ExtensionController extends BaseController
         }
         $versions = $this->extensionRepository->findAllVersionsByName($extension);
         $this->view->assignMultiple([
-            'versions' => $versions,
+             'versions' => $versions,
             'latest' => $versions->getFirst(),
         ]);
     }
