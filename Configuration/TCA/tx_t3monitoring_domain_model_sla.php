@@ -12,16 +12,13 @@ return [
             'disabled' => 'hidden',
         ],
         'searchFields' => 'title,description,',
-        'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('t3monitoring') . 'Resources/Public/Icons/tx_t3monitoring_domain_model_sla.gif'
+        'iconfile' => 'EXT:t3monitoring/Resources/Public/Icons/tx_t3monitoring_domain_model_sla.gif'
     ],
     'interface' => [
         'showRecordFieldList' => 'hidden, title, description',
     ],
     'types' => [
-        '1' => ['showitem' => 'hidden;;1, title, description, '],
-    ],
-    'palettes' => [
-        '1' => ['showitem' => ''],
+        '1' => ['showitem' => 'title, description, '],
     ],
     'columns' => [
         'hidden' => [

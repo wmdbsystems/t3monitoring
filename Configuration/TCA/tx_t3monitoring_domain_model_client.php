@@ -11,7 +11,7 @@ return [
             'disabled' => 'hidden',
         ],
         'searchFields' => 'title,domain,secret,email,php_version,mysql_version,insecure_core,outdated_core,insecure_extensions,outdated_extensions,error_message,extensions,core,sla,',
-        'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('t3monitoring') . 'Resources/Public/Icons/tx_t3monitoring_domain_model_client.gif'
+        'iconfile' => 'EXT:t3monitoring/Resources/Public/Icons/tx_t3monitoring_domain_model_client.gif'
     ],
     'interface' => [
         'showRecordFieldList' => 'hidden, title, domain, secret, email, php_version, mysql_version, insecure_core, outdated_core, insecure_extensions, outdated_extensions, error_message, extensions, core, sla',
@@ -19,8 +19,8 @@ return [
     'types' => [
         '1' => [
             'showitem' => '
-        --div--;General,title;;paletteDomain,email, sla,
-        --div--;Readonly information,last_successful_import,error_message,core;;paletteVersions,extensions,
+        --div--;General,title, --palette--;;paletteDomain,email, sla,
+        --div--;Readonly information,last_successful_import,error_message,title, --palette--;;paletteDomain,extensions,
                 insecure_core, outdated_core, insecure_extensions, outdated_extensions,
         --div--;Extra,extra_info,extra_warning,extra_danger'
         ],
@@ -231,33 +231,6 @@ return [
                 'autoSizeMax' => 30,
                 'maxitems' => 9999,
                 'multiple' => 0,
-                'wizards' => [
-                    '_PADDING' => 1,
-                    '_VERTICAL' => 1,
-                    'edit' => [
-                        'module' => [
-                            'name' => 'wizard_edit',
-                        ],
-                        'type' => 'popup',
-                        'title' => 'Edit',
-                        'icon' => 'edit2.gif',
-                        'popup_onlyOpenIfSelected' => 1,
-                        'JSopenParams' => 'height=350,width=580,status=0,menubar=0,scrollbars=1',
-                    ],
-                    'add' => [
-                        'module' => [
-                            'name' => 'wizard_add',
-                        ],
-                        'type' => 'script',
-                        'title' => 'Create new',
-                        'icon' => 'add.gif',
-                        'params' => [
-                            'table' => 'tx_t3monitoring_domain_model_extension',
-                            'pid' => '###CURRENT_PID###',
-                            'setValue' => 'prepend'
-                        ],
-                    ],
-                ],
             ],
 
         ],
