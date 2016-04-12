@@ -55,7 +55,7 @@ class StatisticRepository extends BaseRepository
             ,tx_t3monitoring_domain_model_core.is_stable,tx_t3monitoring_domain_model_core.is_active,tx_t3monitoring_domain_model_core.is_latest',
             'tx_t3monitoring_domain_model_client RIGHT JOIN tx_t3monitoring_domain_model_core
                 ON tx_t3monitoring_domain_model_client.core = tx_t3monitoring_domain_model_core.uid',
-            'tx_t3monitoring_domain_model_client.deleted=0', 'tx_t3monitoring_domain_model_core.version',
+            'tx_t3monitoring_domain_model_client.deleted=0', 'tx_t3monitoring_domain_model_core.version,version_integer,insecureCore,is_stable,is_latest,is_active',
             'tx_t3monitoring_domain_model_core.version_integer');
     }
 
