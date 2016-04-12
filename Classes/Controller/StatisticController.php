@@ -49,6 +49,7 @@ class StatisticController extends BaseController
         $outdatedExtensionDemand = $this->getClientFilterDemand()->setWithOutdatedExtensions(true);
         $clientsWithWarningInfo = $this->getClientFilterDemand()->setWithExtraWarning(true);
         $clientsWithDangerInfo = $this->getClientFilterDemand()->setWithExtraDanger(true);
+        $emptyClientDemand = $this->getClientFilterDemand();
 
         $feedItems = null;
         if ($this->emConfiguration->getLoadBulletins()) {
@@ -63,6 +64,7 @@ class StatisticController extends BaseController
             'clients' => $this->clientRepository->findByDemand($filter),
             'coreVersions' => $this->coreRepository->findAll(CoreRepository::USED_ONLY),
             'coreVersionUsage' => $this->statisticRepository->getUsedCoreVersionCount(),
+            'fullClientCount' => $this->clientRepository->countByDemand($emptyClientDemand),
             'clientsWithErrorMessages' => $this->clientRepository->countByDemand($errorMessageDemand),
             'clientsWithInsecureExtensions' => $this->clientRepository->countByDemand($insecureExtensionsDemand),
             'clientsWithOutdatedExtensions' => $this->clientRepository->countByDemand($outdatedExtensionDemand),

@@ -322,6 +322,12 @@
 			<trans-unit id="administration.sponsors.description">
 				<source>This extension has been sponsored by</source>
 			</trans-unit>
+			<trans-unit id="noClients.title">
+                <source>No clients created!</source>
+            </trans-unit>
+            <trans-unit id="noClients.description">
+                <source>Great that you want to try t3monitoring! To start, create a new client by using the + icon above!</source>
+            </trans-unit>
 		</body>
 	</file>
 </xliff>
