@@ -176,6 +176,7 @@ return [
             'config' => [
                 'readOnly' => true,
                 'type' => 'text',
+                'default' => '',
                 'cols' => 40,
                 'rows' => 5,
             ]
@@ -186,6 +187,7 @@ return [
             'config' => [
                 'readOnly' => true,
                 'type' => 'text',
+                'default' => '',
                 'cols' => 40,
                 'rows' => 5,
             ]
@@ -196,6 +198,7 @@ return [
             'config' => [
                 'readOnly' => true,
                 'type' => 'text',
+                'default' => '',
                 'cols' => 40,
                 'rows' => 5,
             ]
