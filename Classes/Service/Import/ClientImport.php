@@ -166,7 +166,7 @@ class ClientImport extends BaseImport
                     'version_integer' => VersionNumberUtility::convertVersionNumberToInteger($data['version']),
                     'title' => $data['title'],
                     'description' => $data['description'],
-                    array_search($data['state'], Extension::$defaultStates),
+                    'state' => array_search($data['state'], Extension::$defaultStates),
                     'is_official' => 0,
                     'tstamp' => $GLOBALS['EXEC_TIME'],
                 );

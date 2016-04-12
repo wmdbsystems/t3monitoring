@@ -65,7 +65,7 @@ class ExtensionImport extends BaseImport
                 'description' => $row['description'],
                 'state' => $row['state'],
                 'category' => $row['category'],
-                'serialized_dependencies' => $row['serialized_dependencies'],
+                'serialized_dependencies' => (string)$row['serialized_dependencies'],
                 'tstamp' => $GLOBALS['EXEC_TIME'],
             ];
 
