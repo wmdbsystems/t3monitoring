@@ -27,9 +27,9 @@ class DataIntegrity
 
     public function invokeAfterExtensionImport()
     {
-        $this->usedExtensions();
-        $this->getNextSecureExtensionVersion();
         $this->getLatestExtensionVersion();
+        $this->getNextSecureExtensionVersion();
+        $this->usedExtensions();
     }
 
     protected function getLatestExtensionVersion()
