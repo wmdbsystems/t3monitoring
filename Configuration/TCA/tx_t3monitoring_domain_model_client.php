@@ -20,7 +20,7 @@ return [
         '1' => [
             'showitem' => '
         --div--;General,title, --palette--;;paletteDomain,email, sla,
-        --div--;Readonly information,last_successful_import,error_message,title, --palette--;;paletteDomain,extensions,
+        --div--;Readonly information,last_successful_import,error_message,core, --palette--;;paletteVersions,extensions,
                 insecure_core, outdated_core, insecure_extensions, outdated_extensions,
         --div--;Extra,extra_info,extra_warning,extra_danger'
         ],
