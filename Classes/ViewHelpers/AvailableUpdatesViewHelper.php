@@ -14,6 +14,11 @@ use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 class AvailableUpdatesViewHelper extends AbstractViewHelper
 {
+    /**
+     * For CMS 8
+     *
+     * @var bool
+     */
     protected $escapeOutput = false;
 
     /**
