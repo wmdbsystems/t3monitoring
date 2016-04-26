@@ -13,8 +13,7 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 class ExtensionFilterDemand extends AbstractEntity
 {
-
-
+    
     /** @var string */
     protected $name;
 
