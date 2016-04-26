@@ -9,15 +9,30 @@ namespace T3Monitor\T3monitoring\ViewHelpers\Format;
  * LICENSE.txt file that was distributed with this source code.
  */
 
-use DateTime;
-use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 class DependenciesViewHelper extends AbstractViewHelper
 {
 
-    /** @var bool */
+    /**
+     * For CMS 7
+     * 
+     * @var bool
+     * */
     protected $escapingInterceptorEnabled = false;
+
+    /**
+     * For CMS 8
+     * 
+     * @var bool
+     */
+    protected $escapeOutput = false;
+
+    /**
+     * For CMS 8
+     * @var bool
+     */
+    protected $escapeChildren = false;
 
     /**
      * @param string $dependencies
