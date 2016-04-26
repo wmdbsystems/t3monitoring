@@ -49,17 +49,15 @@ class EditRecordViewHelper extends AbstractViewHelper implements CompilableInter
         array $arguments,
         \Closure $renderChildrenClosure,
         RenderingContextInterface $renderingContext
-    ) {
+    )
+    {
         $parameters = GeneralUtility::explodeUrl2Array($arguments['parameters']);
 
-        $parameters['returnUrl'] = 'index.php?M=tools_T3monitoringT3monitor&moduleToken=' . FormProtectionFactory::get()->generateToken('moduleCall',
-                'tools_T3monitoringT3monitor');
-
-        $vars = GeneralUtility::_GPmerged('tx_t3monitoring_tools_t3monitoringt3monitor');
-        foreach ($vars as $key => $value) {
-            $parameters['returnUrl'] .= sprintf('&tx_t3monitoring_tools_t3monitoringt3monitor[%s]=%s', $key, $value);
-        }
-
+        $parameters['returnUrl'] = 'index.php?M=tools_T3monitoringT3monitor&moduleToken='
+            . FormProtectionFactory::get()->generateToken('moduleCall', 'tools_T3monitoringT3monitor')
+            . GeneralUtility::implodeArrayForUrl(
+                'tx_t3monitoring_tools_t3monitoringt3monitor',
+                GeneralUtility::_GPmerged('tx_t3monitoring_tools_t3monitoringt3monitor'));
         return BackendUtility::getModuleUrl('record_edit', $parameters);
     }
 }
