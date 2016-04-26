@@ -115,7 +115,7 @@ class ClientImport extends BaseImport
         if (!StringUtility::beginsWith($domain, 'http://') && !StringUtility::beginsWith($domain, 'https://')) {
             $domain = 'http://' . $domain;
         }
-        $url = $domain . '/index.php?eID=t3monitoring&secret=' . $row['secret'];
+        $url = $domain . '/index.php?eID=t3monitoring&secret=' . rawurlencode($row['secret']);
         $report = [];
         $response = GeneralUtility::getUrl($url, 0, null, $report);
         if (!empty($report['message']) && $report['message'] !== 'OK') {
