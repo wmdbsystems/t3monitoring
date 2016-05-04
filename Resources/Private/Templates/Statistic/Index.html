@@ -279,8 +279,16 @@
                                                     <tr>
                                                         <td>
                                                             <f:link.action action="show" controller="Client"
-                                                                           arguments="{client:client}">{client.title} -
-                                                                {client.domain}
+                                                                           arguments="{client:client}">
+
+                                                                <f:if condition="{emConfiguration.presentationMode}">
+                                                                    <f:then>
+                                                                        <f:translate key="presentationMode.client.title" arguments="{0:client.uid}" />
+                                                                    </f:then>
+                                                                    <f:else>
+                                                                         {client.title} - {client.domain}
+                                                                    </f:else>
+                                                                </f:if>
                                                             </f:link.action>
                                                             <f:if condition="{client.errorMessage}">
                                                                 <br><span

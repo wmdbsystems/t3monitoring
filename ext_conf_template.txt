@@ -4,3 +4,6 @@ pid = 1
 
 # cat=records/enable/102; type=boolean; label=Load Bulletins:If set, the security bulletins are fetched and displayed
 loadBulletins = 1
+
+# cat=records/enable/102; type=boolean; label=Presentation mode:If set, sensitive client information is obfuscated
+presentationMode = 0

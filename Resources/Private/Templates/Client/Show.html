@@ -4,7 +4,13 @@
 
 <f:section name="content">
 	<h1>
-		Client: {client.title}
+		Client:
+		<f:if condition="{emConfiguration.presentationMode}">
+			<f:then>
+				<f:translate key="presentationMode.client.title" arguments="{0:client.uid}" />
+			</f:then>
+			<f:else>{client.title}</f:else>
+		</f:if>
 		<a href="{monitor:editRecord(parameters: 'edit[tx_t3monitoring_domain_model_client][{client.uid}]=edit')}">{core:icon(identifier:'actions-document-open')}</a>
 	</h1>
 
@@ -18,7 +24,14 @@
 					<tr>
 						<th>{core:icon(identifier:'mimetypes-x-content-domain')} Domain</th>
 						<td>
-							<f:link.external uri="{client.domain}">{client.domain}</f:link.external>
+							<f:if condition="{emConfiguration.presentationMode}">
+								<f:then>
+									http://*******.***
+								</f:then>
+								<f:else>
+									<f:link.external uri="{client.domain}">{client.domain}</f:link.external>
+								</f:else>
+							</f:if>
 						</td>
 					</tr>
 					<tr class="{f:if(condition:client.lastSuccessfulImport,then:'',else:'warning')}">
