@@ -36,7 +36,7 @@ class CoreRepository extends BaseRepository
         return $query->execute();
     }
 
-    public function findAll($mode = self::USED_ONLY)
+    public function findAllCoreVersions($mode = self::USED_ONLY)
     {
         $query = $this->getQuery();
         if ($mode > 0) {

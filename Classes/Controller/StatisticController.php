@@ -62,7 +62,7 @@ class StatisticController extends BaseController
         $this->view->assignMultiple([
             'filter' => $filter,
             'clients' => $this->clientRepository->findByDemand($filter),
-            'coreVersions' => $this->coreRepository->findAll(CoreRepository::USED_ONLY),
+            'coreVersions' => $this->coreRepository->findAllCoreVersions(CoreRepository::USED_ONLY),
             'coreVersionUsage' => $this->statisticRepository->getUsedCoreVersionCount(),
             'fullClientCount' => $this->clientRepository->countByDemand($emptyClientDemand),
             'clientsWithErrorMessages' => $this->clientRepository->countByDemand($errorMessageDemand),
