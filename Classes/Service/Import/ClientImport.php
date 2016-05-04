@@ -111,10 +111,7 @@ class ClientImport extends BaseImport
 
     protected function requestClientData(array $row)
     {
-        $domain = rtrim($row['domain'], '/');
-        if (!StringUtility::beginsWith($domain, 'http://') && !StringUtility::beginsWith($domain, 'https://')) {
-            $domain = 'http://' . $domain;
-        }
+        $domain = $this->unifyDomain($row['domain']);
         $url = $domain . '/index.php?eID=t3monitoring&secret=' . rawurlencode($row['secret']);
         $report = [];
         $response = GeneralUtility::getUrl($url, 0, null, $report);
@@ -122,6 +119,19 @@ class ClientImport extends BaseImport
             throw new \RuntimeException($report['message']);
         }
         return $response;
+    }
+
+    /**
+     * @param string $domain
+     * @return string
+     */
+    protected function unifyDomain($domain) {
+        $domain = rtrim($domain, '/');
+        if (!StringUtility::beginsWith($domain, 'http://') && !StringUtility::beginsWith($domain, 'https://')) {
+            $domain = 'http://' . $domain;
+        }
+
+        return $domain;
     }
 
     /**
