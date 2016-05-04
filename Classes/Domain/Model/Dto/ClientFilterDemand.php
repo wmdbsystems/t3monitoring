@@ -14,7 +14,7 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 class ClientFilterDemand extends AbstractEntity
 {
 
-    /** @var int */
+    /** @var string */
     protected $version;
 
     /** @var int */
@@ -48,7 +48,7 @@ class ClientFilterDemand extends AbstractEntity
     protected $withExtraDanger;
 
     /**
-     * @return int
+     * @return string
      */
     public function getVersion()
     {
@@ -56,7 +56,7 @@ class ClientFilterDemand extends AbstractEntity
     }
 
     /**
-     * @param int $version
+     * @param string $version
      * @return $this
      */
     public function setVersion($version)

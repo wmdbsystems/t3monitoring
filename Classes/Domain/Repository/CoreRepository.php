@@ -9,6 +9,7 @@ namespace T3Monitor\T3monitoring\Domain\Repository;
  */
 
 use T3Monitor\T3monitoring\Domain\Model\Dto\CoreFilterDemand;
+use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 
 /**
  * The repository for Cores
@@ -17,6 +18,11 @@ class CoreRepository extends BaseRepository
 {
     const USED_ALL = 0;
     const USED_ONLY = 1;
+
+        /** @var array */
+    protected $defaultOrderings = [
+        'versionInteger' => QueryInterface::ORDER_DESCENDING
+    ];
 
     public function findByDemand(CoreFilterDemand $demand)
     {

@@ -65,7 +65,12 @@ class ClientRepository extends BaseRepository
 
         // Version
         if ($demand->getVersion()) {
-            $constraints[] = $query->equals('core.versionInteger', $demand->getVersion());
+            $split = explode('.', $demand->getVersion());
+            if (count($split) === 3) {
+                $constraints[] = $query->equals('core.version', $demand->getVersion());
+            } else {
+                $constraints[] = $query->like('core.version', $demand->getVersion() . '%');
+            }
         }
 
         // error message
