@@ -26,6 +26,9 @@ class EmMonitoringConfiguration implements SingletonInterface
     /** @var bool */
     protected $presentationMode = false;
 
+    /** @var string */
+    protected $ipHint = '';
+
     public function __construct()
     {
         $settings = (array)unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['t3monitoring']);
@@ -58,6 +61,14 @@ class EmMonitoringConfiguration implements SingletonInterface
     public function isPresentationMode()
     {
         return $this->presentationMode;
+    }
+
+    /**
+     * @return string
+     */
+    public function getIpHint()
+    {
+        return $this->ipHint;
     }
 
 }

@@ -322,6 +322,11 @@
 			<trans-unit id="administration.sponsors.description">
 				<source>This extension has been sponsored by</source>
 			</trans-unit>
+			<trans-unit id="administration.ipHint">
+				<source><![CDATA[
+				Set the allowed IP(s) for the client to <code>%s</code>.
+				]]></source>
+			</trans-unit>
 			<trans-unit id="noClients.title">
 				<source>No clients created!</source>
 			</trans-unit>
