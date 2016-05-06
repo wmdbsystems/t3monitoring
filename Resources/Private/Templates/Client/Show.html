@@ -109,8 +109,9 @@
 				</tr>
 				</thead>
 				<f:for each="{client.extensions}" as="extension">
+
 					<monitor:additionalExtensionData as="extra" client="{client.uid}" extension="{extension.uid}">
-						<tr class="{f:if(condition:extra.is_loaded,then:'',else:'t3-page-ce-hidden')}{f:if(condition:extension.insecure,then:'danger',else:'')}">
+							<tr class="{f:if(condition:extra.is_loaded,then:'',else:'t3-page-ce-hidden')}{f:if(condition:extension.insecure,then:'danger',else:'')}">
 							<td>
 								<span data-toggle="tooltip" data-title="{extension.title}" data-placement="right">
 									<f:link.action action="show" controller="Extension" arguments="{extension:'{extension.name}'}">{extension.name}</f:link.action>
@@ -136,8 +137,8 @@
 									<f:else>
 										<monitor:availableUpdates extension="{extension}" as="list">
 											<f:if condition="{list}">
-												<f:for each="{list}" key="version" as="name">
-													<span class="badge" data-toggle="tooltip" data-title='<div class="dep"><div class="panel panel-default"><div class="panel-heading">{name} release</div>{extension.serializedDependencies -> monitor:format.dependencies()}</div></div>' data-html="true">{version}</span>
+												<f:for each="{list}" as="version">
+													<span class="badge" data-toggle="tooltip" data-title='<div class="dep"><div class="panel panel-default"><div class="panel-heading">{version.name} release</div>{version.serializedDependencies -> monitor:format.dependencies()}</div></div>' data-html="true">{version.version}</span>
 												</f:for>
 											</f:if>
 										</monitor:availableUpdates>
