@@ -14,12 +14,12 @@ return [
         'iconfile' => 'EXT:t3monitoring/Resources/Public/Icons/tx_t3monitoring_domain_model_client.gif'
     ],
     'interface' => [
-        'showRecordFieldList' => 'hidden, title, domain, secret, email, php_version, mysql_version, insecure_core, outdated_core, insecure_extensions, outdated_extensions, error_message, extensions, core, sla',
+        'showRecordFieldList' => 'hidden, title, domain, secret, php_version, mysql_version, insecure_core, outdated_core, insecure_extensions, outdated_extensions, error_message, extensions, core, sla',
     ],
     'types' => [
         '1' => [
             'showitem' => '
-        --div--;General,title, --palette--;;paletteDomain,email, sla,
+        --div--;General,title, --palette--;;paletteDomain,sla,
         --div--;Readonly information,last_successful_import,error_message,core, --palette--;;paletteVersions,extensions,
                 insecure_core, outdated_core, insecure_extensions, outdated_extensions,
         --div--;Extra,extra_info,extra_warning,extra_danger'
@@ -56,7 +56,8 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 30,
-                'eval' => 'trim,required'
+                'eval' => 'trim,required',
+                'placeholder' => 'http://yourdomain.com/'
             ],
 
         ],
