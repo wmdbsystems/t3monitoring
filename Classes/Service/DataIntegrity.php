@@ -177,7 +177,7 @@ class DataIntegrity
                 'tx_t3monitoring_client_extension_mm
                     LEFT JOIN tx_t3monitoring_domain_model_extension
                         on tx_t3monitoring_client_extension_mm.uid_foreign=tx_t3monitoring_domain_model_extension.uid',
-                'insecure = 1 AND tx_t3monitoring_client_extension_mm.uid_local=' . $client['uid']
+                'is_official=1 AND insecure = 1 AND tx_t3monitoring_client_extension_mm.uid_local=' . $client['uid']
             );
             // count outdated extensions
             $countOutdated = $this->getDatabaseConnection()->exec_SELECTcountRows(
@@ -185,7 +185,7 @@ class DataIntegrity
                 'tx_t3monitoring_client_extension_mm
                     LEFT JOIN tx_t3monitoring_domain_model_extension
                         on tx_t3monitoring_client_extension_mm.uid_foreign=tx_t3monitoring_domain_model_extension.uid',
-                'insecure = 0 AND is_latest=0 AND tx_t3monitoring_client_extension_mm.uid_local=' . $client['uid']
+                'is_official=1 AND insecure = 0 AND is_latest=0 AND tx_t3monitoring_client_extension_mm.uid_local=' . $client['uid']
             );
             // update client
             $this->getDatabaseConnection()->exec_UPDATEquery(
