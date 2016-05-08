@@ -10,17 +10,26 @@ namespace T3Monitor\T3monitoring\Command;
  */
 
 use T3Monitor\T3monitoring\Domain\Model\Extension;
+use T3Monitor\T3monitoring\Notification\EmailNotification;
 use T3Monitor\T3monitoring\Service\Import\ClientImport;
 use T3Monitor\T3monitoring\Service\Import\CoreImport;
 use T3Monitor\T3monitoring\Service\Import\ExtensionImport;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\CommandController;
 use TYPO3\CMS\Lang\LanguageService;
+use UnexpectedValueException;
 
 /**
  * CLI Tasks
  */
 class MonitoringCommandController extends CommandController
 {
+
+    public function __construct()
+    {
+        $this->emailNotification = GeneralUtility::makeInstance(EmailNotification::class);
+        $this->languageService = $GLOBALS['LANG'];
+    }
 
     /**
      * Import core versions
@@ -69,38 +78,50 @@ class MonitoringCommandController extends CommandController
 
     /**
      * Generate basic report
+     * @param string $email Send email to this email address
      */
-    public function reportCommand()
+    public function reportCommand($email = '')
     {
         $clients = $this->clientRepository->getAllForReport();
-        $data = [];
-        foreach ($clients as $client) {
-            $insecureExtensions = [];
-            if ($client->getInsecureExtensions()) {
-                $extensions = $client->getExtensions();
-                foreach ($extensions as $extension) {
-                    /** @var Extension $extension */
-                    if ($extension->isInsecure()) {
-                        $insecureExtensions[] = sprintf('%s (%s)', $extension->getName(), $extension->getVersion());
+
+        if (count($clients) === 0) {
+            $this->outputLine($this->getLabel('noInsecureClients'));
+            return;
+        }
+
+        if (!empty($email)) {
+            if (GeneralUtility::validEmail($email)) {
+                $this->emailNotification->sendAdminEmail($email, $clients);
+            } else {
+                throw new UnexpectedValueException(sprintf('Email address "%s" is invalid!', $email));
+            }
+        } else {
+            $collectedClientData = [];
+            foreach ($clients as $client) {
+                $insecureExtensions = [];
+                if ($client->getInsecureExtensions()) {
+                    $extensions = $client->getExtensions();
+                    foreach ($extensions as $extension) {
+                        /** @var Extension $extension */
+                        if ($extension->isInsecure()) {
+                            $insecureExtensions[] = sprintf('%s (%s)', $extension->getName(), $extension->getVersion());
+                        }
                     }
                 }
+
+                $collectedClientData[] = [
+                    $client->getTitle(),
+                    $client->getCore()->isInsecure() ? $client->getCore()->getVersion() : '✓',
+                    $insecureExtensions ? implode(', ', $insecureExtensions) : ''
+                ];
             }
 
-            $data[] = [
-                $client->getTitle(),
-                $client->getCore()->isInsecure() ? $client->getCore()->getVersion() : '✓',
-                $insecureExtensions ? implode(', ', $insecureExtensions) : ''
-            ];
-        }
-        if (!empty($data)) {
-            $headers = [
+            $header = [
                 $this->getLabel('tx_t3monitoring_domain_model_client'),
                 $this->getLabel('tx_t3monitoring_domain_model_client.insecure_core'),
                 $this->getLabel('tx_t3monitoring_domain_model_client.insecure_extensions'),
             ];
-            $this->output->outputTable($data, $headers);
-        } else {
-            $this->outputLine($this->getLabel('noInsecureClients'));
+            $this->output->outputTable($collectedClientData, $header);
         }
     }
 
@@ -110,17 +131,7 @@ class MonitoringCommandController extends CommandController
      */
     protected function getLabel($key)
     {
-        return $this->getLanguageService()->sL('LLL:EXT:t3monitoring/Resources/Private/Language/locallang.xlf:' . $key);
-    }
-
-    /**
-     * Returns the LanguageService
-     *
-     * @return LanguageService
-     */
-    protected function getLanguageService()
-    {
-        return $GLOBALS['LANG'];
+        return $this->languageService->sL('LLL:EXT:t3monitoring/Resources/Private/Language/locallang.xlf:' . $key);
     }
 
     /** @var \T3Monitor\T3monitoring\Domain\Repository\ClientRepository */
@@ -131,4 +142,9 @@ class MonitoringCommandController extends CommandController
         $this->clientRepository = $repository;
     }
 
+    /** @var EmailNotification */
+    protected $emailNotification;
+
+    /** @var LanguageService */
+    protected $languageService;
 }
