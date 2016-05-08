@@ -173,6 +173,20 @@ class BaseController extends ActionController
                 Icon::SIZE_SMALL));
         $buttonBar->addButton($addUserGroupButton, ButtonBar::BUTTON_POSITION_LEFT);
 
+        // edit client
+        if ($this->request->getControllerActionName() === 'show'
+            && $this->request->getControllerName() === 'Client'
+        ) {
+            $arguments = $this->request->getArguments();
+            $parameters = GeneralUtility::explodeUrl2Array('edit[tx_t3monitoring_domain_model_client][' . (int)$arguments['client'] . ']=edit&returnUrl=' . $returnUrl);
+            $editClientButton = $buttonBar->makeLinkButton()
+                ->setHref(BackendUtility::getModuleUrl('record_edit', $parameters))
+                ->setTitle($this->getLabel('createNew.client'))
+                ->setIcon($this->view->getModuleTemplate()->getIconFactory()->getIcon('actions-open',
+                    Icon::SIZE_SMALL));
+            $buttonBar->addButton($editClientButton, ButtonBar::BUTTON_POSITION_LEFT);
+        }
+
         // Configuration
         $configurationLink = BackendUtility::getModuleUrl('tools_ExtensionmanagerExtensionmanager', [
             'tx_extensionmanager_tools_extensionmanagerextensionmanager' => [
