@@ -31,9 +31,19 @@ class ClientImport extends BaseImport
         parent::__construct();
     }
 
-    public function run()
+    /**
+     * @param null|int $clientId
+     */
+    public function run($clientId = null)
     {
-        $clientRows = $this->getDatabaseConnection()->exec_SELECTgetRows('*', self::TABLE, 'deleted=0 AND hidden=0');
+        $where = 'deleted=0 AND hidden=0';
+        if (is_null($clientId)) {
+            $clientId = (int)$clientId;
+            if ($clientId > 0) {
+                $where .= ' AND uid=' . $clientId;
+            }
+        }
+        $clientRows = $this->getDatabaseConnection()->exec_SELECTgetRows('*', self::TABLE, $where);
 
         foreach ($clientRows as $client) {
             $this->importSingleClient($client);
@@ -125,7 +135,8 @@ class ClientImport extends BaseImport
      * @param string $domain
      * @return string
      */
-    protected function unifyDomain($domain) {
+    protected function unifyDomain($domain)
+    {
         $domain = rtrim($domain, '/');
         if (!StringUtility::beginsWith($domain, 'http://') && !StringUtility::beginsWith($domain, 'https://')) {
             $domain = 'http://' . $domain;

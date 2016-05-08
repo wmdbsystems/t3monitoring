@@ -253,6 +253,9 @@
 			<trans-unit id="filter.connectionErrors">
 				<source>Connection errors</source>
 			</trans-unit>
+			<trans-unit id="client.domainNotPingAble">
+				<source>The domain "%s" could not not be contacted (maybe invalid or not reachable)!</source>
+			</trans-unit>
 			<trans-unit id="filter.withExtraWarning">
 				<source>Additional warnings</source>
 			</trans-unit>
