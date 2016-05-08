@@ -1,5 +1,8 @@
 TYPO3 CMS Extension "t3monitoring"
 ==================================
+.. image:: https://travis-ci.org/georgringer/t3monitoring.svg?branch=master
+    :target: https://travis-ci.org/georgringer/t3monitoring
+
 This extensions provides the possibility to monitor all of your TYPO3 installations and shows you
 
 - used TYPO3 version and if it is up to date
