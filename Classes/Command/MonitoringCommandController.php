@@ -9,10 +9,12 @@ namespace T3Monitor\T3monitoring\Command;
  * LICENSE.txt file that was distributed with this source code.
  */
 
+use T3Monitor\T3monitoring\Domain\Model\Extension;
 use T3Monitor\T3monitoring\Service\Import\ClientImport;
 use T3Monitor\T3monitoring\Service\Import\CoreImport;
 use T3Monitor\T3monitoring\Service\Import\ExtensionImport;
 use TYPO3\CMS\Extbase\Mvc\Controller\CommandController;
+use TYPO3\CMS\Lang\LanguageService;
 
 /**
  * CLI Tasks
@@ -21,7 +23,7 @@ class MonitoringCommandController extends CommandController
 {
 
     /**
-     * Import all core versions
+     * Import core versions
      */
     public function importCoreCommand()
     {
@@ -31,7 +33,7 @@ class MonitoringCommandController extends CommandController
     }
 
     /**
-     * Import all extensions
+     * Import extensions
      */
     public function importExtensionsCommand()
     {
@@ -41,7 +43,7 @@ class MonitoringCommandController extends CommandController
     }
 
     /**
-     * Import all clients
+     * Import clients
      */
     public function importClientsCommand()
     {
@@ -56,7 +58,7 @@ class MonitoringCommandController extends CommandController
     }
 
     /**
-     * Import all
+     * Import all: core, extensions, clients
      */
     public function importAllCommand()
     {
@@ -64,4 +66,69 @@ class MonitoringCommandController extends CommandController
         $this->importExtensionsCommand();
         $this->importClientsCommand();
     }
+
+    /**
+     * Generate basic report
+     */
+    public function reportCommand()
+    {
+        $clients = $this->clientRepository->getAllForReport();
+        $data = [];
+        foreach ($clients as $client) {
+            $insecureExtensions = [];
+            if ($client->getInsecureExtensions()) {
+                $extensions = $client->getExtensions();
+                foreach ($extensions as $extension) {
+                    /** @var Extension $extension */
+                    if ($extension->isInsecure()) {
+                        $insecureExtensions[] = sprintf('%s (%s)', $extension->getName(), $extension->getVersion());
+                    }
+                }
+            }
+
+            $data[] = [
+                $client->getTitle(),
+                $client->getCore()->isInsecure() ? $client->getCore()->getVersion() : '✓',
+                $insecureExtensions ? implode(', ', $insecureExtensions) : ''
+            ];
+        }
+        if (!empty($data)) {
+            $headers = [
+                $this->getLabel('tx_t3monitoring_domain_model_client'),
+                $this->getLabel('tx_t3monitoring_domain_model_client.insecure_core'),
+                $this->getLabel('tx_t3monitoring_domain_model_client.insecure_extensions'),
+            ];
+            $this->output->outputTable($data, $headers);
+        } else {
+            $this->outputLine($this->getLabel('noInsecureClients'));
+        }
+    }
+
+    /**
+     * @param string $key
+     * @return string
+     */
+    protected function getLabel($key)
+    {
+        return $this->getLanguageService()->sL('LLL:EXT:t3monitoring/Resources/Private/Language/locallang.xlf:' . $key);
+    }
+
+    /**
+     * Returns the LanguageService
+     *
+     * @return LanguageService
+     */
+    protected function getLanguageService()
+    {
+        return $GLOBALS['LANG'];
+    }
+
+    /** @var \T3Monitor\T3monitoring\Domain\Repository\ClientRepository */
+    protected $clientRepository;
+
+    public function injectClientRepository(\T3Monitor\T3monitoring\Domain\Repository\ClientRepository $repository)
+    {
+        $this->clientRepository = $repository;
+    }
+
 }

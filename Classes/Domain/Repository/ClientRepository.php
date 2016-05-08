@@ -8,7 +8,9 @@ namespace T3Monitor\T3monitoring\Domain\Repository;
  * LICENSE.txt file that was distributed with this source code.
  */
 
+use T3Monitor\T3monitoring\Domain\Model\Client;
 use T3Monitor\T3monitoring\Domain\Model\Dto\ClientFilterDemand;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 
 /**
@@ -40,10 +42,25 @@ class ClientRepository extends BaseRepository
     }
 
     /**
+     * @return Client[]
+     */
+    public function getAllForReport()
+    {
+        $query = $this->getQuery();
+        $demand = $this->getFilterDemand();
+        $demand->setWithInsecureCore(true);
+        $demand->setWithInsecureExtensions(true);
+
+        $this->setConstraints($demand, $query, true);
+        return $query->execute();
+    }
+
+    /**
      * @param ClientFilterDemand $demand
      * @param QueryInterface $query
+     * @param bool $useOrInsteadOfAnd
      */
-    protected function setConstraints(ClientFilterDemand $demand, QueryInterface $query)
+    protected function setConstraints(ClientFilterDemand $demand, QueryInterface $query, $useOrInsteadOfAnd = false)
     {
         $constraints = [];
 
@@ -118,10 +135,25 @@ class ClientRepository extends BaseRepository
 
 
         if (!empty($constraints)) {
-            $query->matching(
-                $query->logicalAnd($constraints)
-            );
+            if ($useOrInsteadOfAnd) {
+                $query->matching(
+                    $query->logicalOr($constraints)
+                );
+            } else {
+                $query->matching(
+                    $query->logicalAnd($constraints)
+                );
+            }
         }
+    }
+
+
+    /**
+     * @return ClientFilterDemand
+     */
+    protected function getFilterDemand()
+    {
+        return GeneralUtility::makeInstance(ClientFilterDemand::class);
     }
 
 
