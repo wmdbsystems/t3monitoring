@@ -342,6 +342,9 @@
 			<trans-unit id="presentationMode.client.domain">
 				<source>http://*********.***</source>
 			</trans-unit>
+			<trans-unit id="emConfiguration.link">
+				<source>Configuration</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

@@ -161,7 +161,7 @@ class BaseController extends ActionController
                 'action' => $this->request->getControllerActionName(),
                 'controller' => $this->request->getControllerName()
             ]
-        ]));
+        ], false, true));
         $pid = $this->emConfiguration->getPid();
 
         // new client
@@ -172,6 +172,21 @@ class BaseController extends ActionController
             ->setIcon($this->view->getModuleTemplate()->getIconFactory()->getIcon('actions-document-new',
                 Icon::SIZE_SMALL));
         $buttonBar->addButton($addUserGroupButton, ButtonBar::BUTTON_POSITION_LEFT);
+
+        // Configuration
+        $configurationLink = BackendUtility::getModuleUrl('tools_ExtensionmanagerExtensionmanager', [
+            'tx_extensionmanager_tools_extensionmanagerextensionmanager' => [
+                'action' => 'showConfigurationForm',
+                'controller' => 'Configuration',
+                'extension' => ['key' => 't3monitoring']
+            ]
+        ]);
+        $configurationButton = $buttonBar->makeLinkButton()
+            ->setHref($configurationLink . '&returnUrl=' . $returnUrl)
+            ->setTitle($this->getLabel('createNew.client'))
+            ->setIcon($this->view->getModuleTemplate()->getIconFactory()->getIcon('actions-system-extension-configure',
+                Icon::SIZE_SMALL));
+        $buttonBar->addButton($configurationButton, ButtonBar::BUTTON_POSITION_RIGHT);
     }
 
     /**
