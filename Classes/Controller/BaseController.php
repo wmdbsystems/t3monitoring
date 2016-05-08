@@ -197,7 +197,7 @@ class BaseController extends ActionController
         ]);
         $configurationButton = $buttonBar->makeLinkButton()
             ->setHref($configurationLink . '&returnUrl=' . $returnUrl)
-            ->setTitle($this->getLabel('createNew.client'))
+            ->setTitle($this->getLabel('emConfiguration.link'))
             ->setIcon($this->view->getModuleTemplate()->getIconFactory()->getIcon('actions-system-extension-configure',
                 Icon::SIZE_SMALL));
         $buttonBar->addButton($configurationButton, ButtonBar::BUTTON_POSITION_RIGHT);
