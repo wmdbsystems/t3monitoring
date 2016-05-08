@@ -1,5 +1,4 @@
 <?php
-
 namespace T3Monitor\T3monitoring\Command;
 
 /*
@@ -10,6 +9,7 @@ namespace T3Monitor\T3monitoring\Command;
  */
 
 use T3Monitor\T3monitoring\Domain\Model\Extension;
+use T3Monitor\T3monitoring\Domain\Repository\ClientRepository;
 use T3Monitor\T3monitoring\Notification\EmailNotification;
 use T3Monitor\T3monitoring\Service\Import\ClientImport;
 use T3Monitor\T3monitoring\Service\Import\CoreImport;
@@ -25,6 +25,26 @@ use UnexpectedValueException;
 class MonitoringCommandController extends CommandController
 {
 
+    /** @var EmailNotification */
+    protected $emailNotification;
+
+    /** @var LanguageService */
+    protected $languageService;
+
+    /** @var ClientRepository */
+    protected $clientRepository;
+
+    /**
+     * @param \T3Monitor\T3monitoring\Domain\Repository\ClientRepository $clientRepository
+     */
+    public function injectClientRepository(ClientRepository $clientRepository)
+    {
+        $this->clientRepository = $clientRepository;
+    }
+
+    /**
+     * Constructor
+     */
     public function __construct()
     {
         $this->emailNotification = GeneralUtility::makeInstance(EmailNotification::class);
@@ -78,7 +98,9 @@ class MonitoringCommandController extends CommandController
 
     /**
      * Generate basic report
+     *
      * @param string $email Send email to this email address
+     * @throws \UnexpectedValueException
      */
     public function reportCommand($email = '')
     {
@@ -134,17 +156,4 @@ class MonitoringCommandController extends CommandController
         return $this->languageService->sL('LLL:EXT:t3monitoring/Resources/Private/Language/locallang.xlf:' . $key);
     }
 
-    /** @var \T3Monitor\T3monitoring\Domain\Repository\ClientRepository */
-    protected $clientRepository;
-
-    public function injectClientRepository(\T3Monitor\T3monitoring\Domain\Repository\ClientRepository $repository)
-    {
-        $this->clientRepository = $repository;
-    }
-
-    /** @var EmailNotification */
-    protected $emailNotification;
-
-    /** @var LanguageService */
-    protected $languageService;
 }

@@ -25,7 +25,7 @@ class ClientController extends BaseController
      */
     public function showAction(Client $client = null)
     {
-        if (is_null($client)) {
+        if ($client === null) {
             // @todo flash message
             $this->redirect('index', 'Statistic');
         }
