@@ -1,5 +1,4 @@
 <?php
-
 namespace T3Monitor\T3monitoring\Domain\Model\Dto;
 
 /*
