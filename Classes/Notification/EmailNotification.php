@@ -16,6 +16,9 @@ use UnexpectedValueException;
 class EmailNotification
 {
 
+    const DEFAULT_EMAIL_NAME = 'EXT:t3monitoring';
+    const DEFAULT_EMAIL_ADDRESS = 'no-reply@example.com';
+
     /**
      * @param string $email
      * @param $clients
@@ -28,7 +31,7 @@ class EmailNotification
         }
 
         if (count($clients) === 0) {
-            return;
+             throw new UnexpectedValueException('No clients given');
         }
 
         $arguments = [
@@ -92,13 +95,13 @@ class EmailNotification
     {
         return !empty($GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromName'])
             ? $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromName']
-            : 'EXT:t3monitoring';
+            : self::DEFAULT_EMAIL_NAME;
     }
 
     protected function getSenderEmailAddress()
     {
         return !empty($GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromAddress'])
             ? $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromAddress']
-            : 'no-reply@example.com';
+            : self::DEFAULT_EMAIL_ADDRESS;
     }
 }

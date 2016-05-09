@@ -1,6 +1,6 @@
 <?php
 
-namespace T3Monitor\T3monitoring\Tests\Unit\Service\Impport;
+namespace T3Monitor\T3monitoring\Tests\Unit\Service\Import;
 
 use T3Monitor\T3monitoring\Service\Import\ClientImport;
 use TYPO3\CMS\Core\Tests\UnitTestCase;
