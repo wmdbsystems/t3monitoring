@@ -98,7 +98,7 @@ class BaseController extends ActionController
 
         /** @var PageRenderer $pageRenderer */
         $pageRenderer = GeneralUtility::makeInstance(PageRenderer::class);
-        $pageRenderer->loadRequireJsModule('TYPO3/CMS/Backend/Tooltip');
+        $pageRenderer->loadRequireJsModule('TYPO3/CMS/T3monitoring/Main');
         $pageRenderer->addCssFile(ExtensionManagementUtility::extRelPath('t3monitoring')
             . 'Resources/Public/Css/t3monitoring.css');
 
