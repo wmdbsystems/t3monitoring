@@ -19,8 +19,15 @@ use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 class ClientRepository extends BaseRepository
 {
 
+    /**
+     * @var array
+     */
     protected $searchFields = ['title', 'domain'];
 
+    /**
+     * @param ClientFilterDemand $demand
+     * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+     */
     public function findByDemand(ClientFilterDemand $demand)
     {
         $query = $this->getQuery();
