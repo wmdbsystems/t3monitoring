@@ -12,7 +12,6 @@ use T3Monitor\T3monitoring\Domain\Model\Dto\ClientFilterDemand;
 use T3Monitor\T3monitoring\Domain\Model\Dto\EmMonitoringConfiguration;
 use T3Monitor\T3monitoring\Domain\Repository\ClientRepository;
 use T3Monitor\T3monitoring\Domain\Repository\CoreRepository;
-use T3Monitor\T3monitoring\Domain\Repository\SlaRepository;
 use T3Monitor\T3monitoring\Domain\Repository\StatisticRepository;
 use TYPO3\CMS\Backend\Template\Components\ButtonBar;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
@@ -28,9 +27,42 @@ use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
 use TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder;
 use TYPO3\CMS\Lang\LanguageService;
 
+/**
+ * Class BaseController
+ */
 class BaseController extends ActionController
 {
 
+    /** @var BackendTemplateView */
+    protected $view;
+
+    /** @var StatisticRepository */
+    protected $statisticRepository;
+
+    /** @var ClientRepository */
+    protected $clientRepository;
+
+    /** @var CoreRepository */
+    protected $coreRepository;
+
+    /** @var ClientFilterDemand */
+    protected $filterDemand;
+
+    /** @var BackendTemplateView */
+    protected $defaultViewObjectName = BackendTemplateView::class;
+
+    /** @var IconFactory */
+    protected $iconFactory;
+
+    /** @var Registry */
+    protected $registry;
+
+    /** @var EmMonitoringConfiguration */
+    protected $emConfiguration;
+
+    /**
+     * Initialize action
+     */
     public function initializeAction()
     {
         $this->statisticRepository = $this->objectManager->get(StatisticRepository::class);
@@ -44,40 +76,11 @@ class BaseController extends ActionController
         parent::initializeAction();
     }
 
-    /** @var BackendTemplateView */
-    protected $view;
-
-    /** @var  StatisticRepository */
-    protected $statisticRepository;
-
-    /** @var  ClientRepository */
-    protected $clientRepository;
-
-    /** @var CoreRepository */
-    protected $coreRepository;
-
-    /** @var SlaRepository */
-    protected $slaRepository;
-
-    /** @var  ClientFilterDemand */
-    protected $filterDemand;
-
-    /** @var  BackendTemplateView */
-    protected $defaultViewObjectName = BackendTemplateView::class;
-
-    /** @var IconFactory */
-    protected $iconFactory;
-
-    /** @var  Registry */
-    protected $registry;
-
-    /** @var EmMonitoringConfiguration */
-    protected $emConfiguration;
-
     /**
      * Set up the doc header properly here
      *
      * @param ViewInterface $view
+     * @throws \InvalidArgumentException
      */
     protected function initializeView(ViewInterface $view)
     {
@@ -103,6 +106,10 @@ class BaseController extends ActionController
         $this->getButtons();
     }
 
+    /**
+     * Create menu
+     * @throws \InvalidArgumentException
+     */
     protected function createMenu()
     {
         $menu = $this->view->getModuleTemplate()->getDocHeaderComponent()->getMenuRegistry()->makeMenu();
@@ -138,6 +145,7 @@ class BaseController extends ActionController
 
     /**
      * Create the panel of buttons for submitting the form or otherwise perform operations.
+     * @throws \InvalidArgumentException
      */
     protected function getButtons()
     {

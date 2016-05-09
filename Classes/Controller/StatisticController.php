@@ -20,9 +20,20 @@ use T3Monitor\T3monitoring\Service\Import\ExtensionImport;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\VersionNumberUtility;
 
+/**
+ * Class StatisticController
+ */
 class StatisticController extends BaseController
 {
 
+    /**
+     * @var \T3Monitor\T3monitoring\Domain\Repository\SlaRepository
+     */
+    protected $slaRepository = null;
+
+    /**
+     * Initialize action
+     */
     public function initializeAction()
     {
         $this->statisticRepository = $this->objectManager->get(StatisticRepository::class);
@@ -34,6 +45,11 @@ class StatisticController extends BaseController
         parent::initializeAction();
     }
 
+    /**
+     * Index action
+     *
+     * @param ClientFilterDemand|null $filter
+     */
     public function indexAction(ClientFilterDemand $filter = null)
     {
         if (is_null($filter)) {
@@ -85,6 +101,8 @@ class StatisticController extends BaseController
     }
 
     /**
+     * Administrator action
+     *
      * @param string $import
      */
     public function administrationAction($import = '')
@@ -120,6 +138,11 @@ class StatisticController extends BaseController
         ]);
     }
 
+    /**
+     * Get all core versions
+     *
+     * @return array
+     */
     protected function getAllCoreVersions()
     {
         $result = $used = [];
