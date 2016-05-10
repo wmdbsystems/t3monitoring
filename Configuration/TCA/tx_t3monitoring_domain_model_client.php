@@ -19,7 +19,7 @@ return [
     'types' => [
         '1' => [
             'showitem' => '
-        --div--;General,title, --palette--;;paletteDomain,sla,
+        --div--;General,title, --palette--;;paletteDomain,email,sla,
         --div--;Readonly information,last_successful_import,error_message,core, --palette--;;paletteVersions,extensions,
                 insecure_core, outdated_core, insecure_extensions, outdated_extensions,
         --div--;Extra,extra_info,extra_warning,extra_danger'
@@ -79,6 +79,7 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 30,
+                'placeholder' => 'notification@client.com',
                 'eval' => 'trim'
             ],
 

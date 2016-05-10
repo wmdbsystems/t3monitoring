@@ -99,6 +99,18 @@ class ReportCommandController extends CommandController
         }
     }
 
+    public function clientCommand()
+    {
+        $clients = $this->clientRepository->getAllForReport(true);
+
+        if (count($clients) === 0) {
+            $this->outputLine($this->getLabel('noInsecureClients'));
+            return;
+        }
+
+        $this->emailNotification->sendClientEmail($clients);
+    }
+
     /**
      * @param string $key
      * @return string

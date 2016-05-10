@@ -8,6 +8,7 @@ namespace T3Monitor\T3monitoring\Notification;
  * LICENSE.txt file that was distributed with this source code.
  */
 
+use T3Monitor\T3monitoring\Domain\Model\Client;
 use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Fluid\View\StandaloneView;
@@ -31,7 +32,7 @@ class EmailNotification
         }
 
         if (count($clients) === 0) {
-             throw new UnexpectedValueException('No clients given');
+            throw new UnexpectedValueException('No clients given');
         }
 
         $arguments = [
@@ -40,6 +41,21 @@ class EmailNotification
         ];
         $template = $this->getFluidTemplate($arguments, 'AdminEmail.txt', 'txt');
         $this->sendMail($email, $subject, $template);
+    }
+
+    public function sendClientEmail($clients, $subject = 'Monitoring Report')
+    {
+        foreach ($clients as $client) {
+            /** @var Client $client */
+            if (!GeneralUtility::validEmail($client->getEmail())) {
+                continue;   
+            }
+            $arguments = [
+                'client' => $client
+            ];
+            $template = $this->getFluidTemplate($arguments, 'ClientEmail.txt', 'txt');
+            $this->sendMail($client->getEmail(), $subject, $template);
+        }
     }
 
     /**

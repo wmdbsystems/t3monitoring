@@ -49,6 +49,9 @@ class ClientFilterDemand extends AbstractEntity
     /** @var bool */
     protected $withExtraDanger;
 
+    /** @var bool */
+    protected $withEmailAddress;
+
     /**
      * @return string
      */
@@ -246,4 +249,24 @@ class ClientFilterDemand extends AbstractEntity
         $this->withExtraDanger = $withExtraDanger;
         return $this;
     }
+
+    /**
+     * @return boolean
+     */
+    public function isWithEmailAddress()
+    {
+        return $this->withEmailAddress;
+    }
+
+    /**
+     * @param boolean $withEmailAddress
+     * @return $this
+     */
+    public function setWithEmailAddress($withEmailAddress)
+    {
+        $this->withEmailAddress = $withEmailAddress;
+        return $this;
+    }
+
+
 }

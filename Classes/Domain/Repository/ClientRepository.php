@@ -31,7 +31,13 @@ class ClientRepository extends BaseRepository
     public function findByDemand(ClientFilterDemand $demand)
     {
         $query = $this->getQuery();
-        $this->setConstraints($demand, $query);
+        $constraints = $this->getConstraints($demand, $query);
+
+        if (!empty($constraints)) {
+            $query->matching(
+                $query->logicalAnd($constraints)
+            );
+        }
 
         return $query->execute();
     }
@@ -43,31 +49,49 @@ class ClientRepository extends BaseRepository
     public function countByDemand(ClientFilterDemand $demand)
     {
         $query = $this->getQuery();
-        $this->setConstraints($demand, $query);
-
+        $constraints = $this->getConstraints($demand, $query);
+        if (!empty($constraints)) {
+            $query->matching(
+                $query->logicalAnd($constraints)
+            );
+        }
         return $query->execute()->count();
     }
 
     /**
-     * @return Client[]
+     * @param bool $emailAddressRequired
+     * @return \T3Monitor\T3monitoring\Domain\Model\Client[]
      */
-    public function getAllForReport()
+    public function getAllForReport($emailAddressRequired = false)
     {
         $query = $this->getQuery();
         $demand = $this->getFilterDemand();
         $demand->setWithInsecureCore(true);
         $demand->setWithInsecureExtensions(true);
 
-        $this->setConstraints($demand, $query, true);
+        $constraints[] = $query->logicalOr(
+            $this->getConstraints($demand, $query, true
+            )
+        );
+
+        if ($emailAddressRequired) {
+            $constraints[] = $query->logicalNot(
+              $query->equals('email', '')
+            );
+        }
+
+        $query->matching(
+            $query->logicalAnd($constraints)
+        );
+
         return $query->execute();
     }
 
     /**
      * @param ClientFilterDemand $demand
      * @param QueryInterface $query
-     * @param bool $useOrInsteadOfAnd
      */
-    protected function setConstraints(ClientFilterDemand $demand, QueryInterface $query, $useOrInsteadOfAnd = false)
+    protected function getConstraints(ClientFilterDemand $demand, QueryInterface $query)
     {
         $constraints = [];
 
@@ -140,17 +164,7 @@ class ClientRepository extends BaseRepository
             $constraints[] = $query->logicalNot($query->equals('extraDanger', ''));
         }
 
-        if (!empty($constraints)) {
-            if ($useOrInsteadOfAnd) {
-                $query->matching(
-                    $query->logicalOr($constraints)
-                );
-            } else {
-                $query->matching(
-                    $query->logicalAnd($constraints)
-                );
-            }
-        }
+        return $constraints;
     }
 
     /**
