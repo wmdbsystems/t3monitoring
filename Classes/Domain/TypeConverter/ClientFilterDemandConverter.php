@@ -14,6 +14,9 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Property\PropertyMappingConfigurationInterface;
 use TYPO3\CMS\Extbase\Property\TypeConverter\AbstractTypeConverter;
 
+/**
+ * Class ClientFilterDemandConverter
+ */
 class ClientFilterDemandConverter extends AbstractTypeConverter
 {
     /**
