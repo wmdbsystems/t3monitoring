@@ -14,7 +14,7 @@ use T3Monitor\T3monitoring\Service\Import\ExtensionImport;
 use TYPO3\CMS\Extbase\Mvc\Controller\CommandController;
 
 /**
- * CLI Tasks
+ * Monitoring command controller
  */
 class MonitoringCommandController extends CommandController
 {

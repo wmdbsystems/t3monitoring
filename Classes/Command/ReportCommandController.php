@@ -17,7 +17,7 @@ use TYPO3\CMS\Lang\LanguageService;
 use UnexpectedValueException;
 
 /**
- * CLI Tasks
+ * Report command controller
  */
 class ReportCommandController extends CommandController
 {
@@ -99,6 +99,9 @@ class ReportCommandController extends CommandController
         }
     }
 
+    /**
+     * Client command
+     */
     public function clientCommand()
     {
         $clients = $this->clientRepository->getAllForReport(true);
