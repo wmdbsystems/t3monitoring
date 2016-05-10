@@ -2,12 +2,13 @@
 
 namespace T3Monitor\T3monitoring\Tests\Unit\Command\Controller;
 
-use T3Monitor\T3monitoring\Command\MonitoringCommandController;
+
+use T3Monitor\T3monitoring\Command\ReportCommandController;
 use T3Monitor\T3monitoring\Notification\EmailNotification;
 use TYPO3\CMS\Core\Tests\UnitTestCase;
 use TYPO3\CMS\Lang\LanguageService;
 
-class MonitoringCommandControllerTest extends UnitTestCase
+class ReportCommandControllerTest extends UnitTestCase
 {
 
     /**
@@ -17,7 +18,7 @@ class MonitoringCommandControllerTest extends UnitTestCase
     {
         $dummyClients = ['123', '456'];
         $emailAddress = 'fo@bar.com';
-        $mockedClientImport = $this->getAccessibleMock(MonitoringCommandController::class, ['outputLine'], [], '',
+        $mockedClientImport = $this->getAccessibleMock(ReportCommandController::class, ['outputLine'], [], '',
             false);
 
         $emailNotification = $this->prophesize(EmailNotification::class);
@@ -30,6 +31,6 @@ class MonitoringCommandControllerTest extends UnitTestCase
         $mockedClientImport->_set('emailNotification', $emailNotification->reveal());
         $emailNotification->sendAdminEmail($emailAddress, $dummyClients)->shouldBeCalled();
 
-        $mockedClientImport->_call('reportCommand', 'fo@bar.com');
+        $mockedClientImport->_call('adminCommand', 'fo@bar.com');
     }
 }
