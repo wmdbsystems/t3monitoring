@@ -139,7 +139,7 @@
                             <div class="panel-heading">
                                 {f:translate(key:'bulletins.headline')}
                             </div>
-
+                            <div class="panel-body">
                             <f:if condition="{emConfiguration.loadBulletins}">
                                 <f:then>
                                     <f:if condition="{feedItems}">
@@ -170,12 +170,14 @@
                                     </div>
                                 </f:else>
                             </f:if>
+                            </div>
+                            <div class="panel-footer">
+                                <a href="https://typo3.org/teams/security/security-bulletins/" target="_blank"
+                                    class="t3-link">{f:translate(key:'bulletins.all')}</a>
+                            </div>
                         </div>
 
-                        <p>
-                            <a href="https://typo3.org/teams/security/security-bulletins/" target="_blank"
-                               class="t3-link">{f:translate(key:'bulletins.all')}</a>
-                        </p>
+
                     </div>
                 </div>
             </f:if>
