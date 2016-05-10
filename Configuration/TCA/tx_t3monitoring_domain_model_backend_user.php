@@ -13,16 +13,16 @@ return [
         'enablecolumns' => [
             'disabled' => 'hidden',
         ],
-        'searchFields' => 'user_name,real_name,email_address,last_login,description,avatar,',
+        'searchFields' => 'user_name,real_name,email_address,last_login,description,',
         'iconfile' => 'EXT:t3monitoring/Resources/Public/Icons/tx_t3monitoring_domain_model_backend_user.gif'
     ],
     'interface' => [
-        'showRecordFieldList' => 'hidden, user_name, real_name, email_address, description, last_login, avatar',
+        'showRecordFieldList' => 'hidden, user_name, real_name, email_address, description, last_login',
     ],
     'types' => [
         '1' => [
             'showitem' => '
-        --div--;Readonly information,user_name, real_name, email_address, description, last_login, avatar'
+        --div--;Readonly information,user_name, real_name, email_address, description, last_login'
         ],
     ],
     'palettes' => [
@@ -69,18 +69,6 @@ return [
                 'type' => 'input',
                 'size' => 30,
                 'eval' => 'trim,required',
-                'max' => 255
-            ],
-
-        ],
-        'avatar' => [
-            'exclude' => 1,
-            'label' => 'LLL:EXT:t3monitoring/Resources/Private/Language/locallang.xlf:tx_t3monitoring_domain_model_backend_user.avatar',
-            'config' => [
-                'readOnly' => true,
-                'type' => 'input',
-                'size' => 30,
-                'eval' => 'trim',
                 'max' => 255
             ],
 

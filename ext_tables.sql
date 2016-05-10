@@ -9,7 +9,6 @@ CREATE TABLE tx_t3monitoring_domain_model_backend_user (
 	user_name varchar(255) DEFAULT '' NOT NULL,
 	real_name varchar(255) DEFAULT '' NOT NULL,
 	email_address varchar(255) DEFAULT '' NOT NULL,
-	avatar varchar(255) DEFAULT '' NOT NULL,
 	description text NOT NULL,
 	last_login int(11) DEFAULT '0' NOT NULL,
 

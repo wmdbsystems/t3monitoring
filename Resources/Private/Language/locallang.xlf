@@ -21,9 +21,6 @@
 			<trans-unit id="tx_t3monitoring_domain_model_backend_user.email_address">
 				<source>Email Address</source>
 			</trans-unit>
-			<trans-unit id="tx_t3monitoring_domain_model_backend_user.avatar">
-				<source>Avatar</source>
-			</trans-unit>
 			<trans-unit id="tx_t3monitoring_domain_model_client">
 				<source>Client</source>
 			</trans-unit>

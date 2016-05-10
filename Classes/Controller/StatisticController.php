@@ -60,6 +60,9 @@ class StatisticController extends BaseController
             $feedItems = $bulletinImport->start();
         }
 
+        $monitorIpAddress = null;
+
+
         $this->view->assignMultiple([
             'filter' => $filter,
             'clients' => $this->clientRepository->findByDemand($filter),
@@ -76,6 +79,7 @@ class StatisticController extends BaseController
             'numberOfClients' => $this->clientRepository->countAll(),
             'slaVersions' => $this->slaRepository->findAll(),
             'feedItems' => $feedItems,
+            'monitorIpAddress' => $monitorIpAddress,
             'importTimes' => [
                 'client' => $this->registry->get('t3monitoring', 'importClient'),
                 'core' => $this->registry->get('t3monitoring', 'importCore'),

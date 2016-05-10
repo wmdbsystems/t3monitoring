@@ -226,7 +226,6 @@ class ClientImport extends BaseImport
 
         foreach($users as $user)
         {
-            $userLastLoginDateTime = new \DateTime($user['lastLogin']['date'], new \DateTimeZone($user['lastLogin']['timezone']));
             $found = null;
 
             foreach($existingUsers as $existingUser)
@@ -245,8 +244,7 @@ class ClientImport extends BaseImport
                     'real_name' => (string)$user['realName'],
                     'email_address' => (string)$user['emailAddress'],
                     'description' => (string)$user['description'],
-                    'last_login' => (string)$userLastLoginDateTime->format('U'),
-                    'avatar' => (string)$user['avatar'],
+                    'last_login' => (string)$user['lastLogin'],
                     'tstamp' => $GLOBALS['EXEC_TIME'],
                 );
                 $this->getDatabaseConnection()->exec_UPDATEquery($table, 'uid='.(int)$relationId, $update);
@@ -257,8 +255,7 @@ class ClientImport extends BaseImport
                     'real_name' => (string)$user['realName'],
                     'email_address' => (string)$user['emailAddress'],
                     'description' => (string)$user['description'],
-                    'last_login' => (string)$userLastLoginDateTime->format('U'),
-                    'avatar' => (string)$user['avatar'],
+                    'last_login' => (string)$user['lastLogin'],
                     'tstamp' => $GLOBALS['EXEC_TIME'],
                 );
                 $this->getDatabaseConnection()->exec_INSERTquery($table, $insert);

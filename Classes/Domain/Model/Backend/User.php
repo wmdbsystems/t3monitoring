@@ -38,11 +38,6 @@ class User extends AbstractEntity
     protected $emailAddress;
 
     /**
-     * @var string
-     */
-    protected $avatar;
-
-    /**
      * @return string
      */
     public function getUserName()
@@ -120,21 +115,5 @@ class User extends AbstractEntity
     public function setEmailAddress($emailAddress)
     {
         $this->emailAddress = $emailAddress;
-    }
-
-    /**
-     * @return string
-     */
-    public function getAvatar()
-    {
-        return $this->avatar;
-    }
-
-    /**
-     * @param string $avatar
-     */
-    public function setAvatar($avatar)
-    {
-        $this->avatar = $avatar;
     }
 }
