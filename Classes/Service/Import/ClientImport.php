@@ -37,7 +37,7 @@ class ClientImport extends BaseImport
     public function run($clientId = null)
     {
         $where = 'deleted=0 AND hidden=0';
-        if (is_null($clientId)) {
+        if (!is_null($clientId)) {
             $clientId = (int)$clientId;
             if ($clientId > 0) {
                 $where .= ' AND uid=' . $clientId;
