@@ -183,7 +183,7 @@ class ClientImport extends BaseImport
                 $insert = array(
                     'pid' => $this->emConfiguration->getPid(),
                     'name' => $key,
-                    'version' => $data['version'],
+                    'version' => (string)$data['version'],
                     'version_integer' => VersionNumberUtility::convertVersionNumberToInteger($data['version']),
                     'title' => (string)$data['title'],
                     'description' => (string)$data['description'],
