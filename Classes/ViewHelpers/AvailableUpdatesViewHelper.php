@@ -1,5 +1,4 @@
 <?php
-
 namespace T3Monitor\T3monitoring\ViewHelpers;
 
 /*
@@ -13,6 +12,9 @@ use T3Monitor\T3monitoring\Domain\Model\Extension;
 use TYPO3\CMS\Core\Database\DatabaseConnection;
 use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
 
+/**
+ * Class AvailableUpdatesViewHelper
+ */
 class AvailableUpdatesViewHelper extends AbstractViewHelper
 {
     /**

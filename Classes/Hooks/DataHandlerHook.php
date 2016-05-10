@@ -16,6 +16,9 @@ use TYPO3\CMS\Core\Messaging\FlashMessageService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\StringUtility;
 
+/**
+ * Class DataHandlerHook
+ */
 class DataHandlerHook
 {
 
@@ -25,6 +28,7 @@ class DataHandlerHook
      * @param string $recordUid
      * @param array $fields
      * @param DataHandler $parentObject
+     * @throws \InvalidArgumentException
      */
     public function processDatamap_afterDatabaseOperations(
         $status,
@@ -53,8 +57,10 @@ class DataHandlerHook
     protected function checkDomain($domain)
     {
         return;
-        $message = sprintf($GLOBALS['LANG']->sL('LLL:EXT:t3monitoring/Resources/Private/Language/locallang.xlf:client.domainNotPingAble'),
-            htmlspecialchars($domain));
+        $message = sprintf(
+            $this->getLanguageService()->sL('LLL:EXT:t3monitoring/Resources/Private/Language/locallang.xlf:client.domainNotPingAble'),
+            $domain
+        );
         $this->addFlashMessage($message, FlashMessage::WARNING);
     }
 
@@ -71,6 +77,7 @@ class DataHandlerHook
     /**
      * @param string $message
      * @param int $severity
+     * @throws \InvalidArgumentException
      */
     protected function addFlashMessage($message, $severity = FlashMessage::INFO)
     {
@@ -83,6 +90,15 @@ class DataHandlerHook
         /** @var $flashMessageService FlashMessageService */
         $flashMessageService = GeneralUtility::makeInstance(FlashMessageService::class);
         $flashMessageService->getMessageQueueByIdentifier()->addMessage($flashMessage);
+    }
+
+    /**
+     * Returns LanguageService
+     *
+     * @return \TYPO3\CMS\Lang\LanguageService
+     */
+    protected function getLanguageService() {
+        return $GLOBALS['LANG'];
     }
 
     /**

@@ -14,6 +14,9 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Fluid\View\StandaloneView;
 use UnexpectedValueException;
 
+/**
+ * Class EmailNotification
+ */
 class EmailNotification
 {
 
@@ -22,8 +25,9 @@ class EmailNotification
 
     /**
      * @param string $email
-     * @param $clients
+     * @param \T3Monitor\T3monitoring\Domain\Model\Client[] $clients
      * @param string $subject
+     * @throws \UnexpectedValueException
      */
     public function sendAdminEmail($email, $clients, $subject = 'Monitoring Report')
     {
@@ -43,6 +47,10 @@ class EmailNotification
         $this->sendMail($email, $subject, $template);
     }
 
+    /**
+     * @param \T3Monitor\T3monitoring\Domain\Model\Client[] $clients
+     * @param string $subject
+     */
     public function sendClientEmail($clients, $subject = 'Monitoring Report')
     {
         foreach ($clients as $client) {
@@ -114,6 +122,13 @@ class EmailNotification
             : self::DEFAULT_EMAIL_NAME;
     }
 
+    /**
+     * Gets sender email address from configuration
+     * ['TYPO3_CONF_VARS']['MAIL']['defaultMailFromAddress']
+     * If this setting is empty, it falls back to a default string.
+     *
+     * @return string
+     */
     protected function getSenderEmailAddress()
     {
         return !empty($GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromAddress'])

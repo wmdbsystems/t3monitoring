@@ -1,5 +1,4 @@
 <?php
-
 namespace T3Monitor\T3monitoring\ViewHelpers;
 
 /*
@@ -44,6 +43,7 @@ class EditRecordViewHelper extends AbstractViewHelper implements CompilableInter
      * @param callable|\Closure $renderChildrenClosure
      * @param RenderingContextInterface $renderingContext
      * @return string
+     * @throws \InvalidArgumentException
      */
     public static function renderStatic(
         array $arguments,
