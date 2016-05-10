@@ -181,18 +181,29 @@ class BaseController extends ActionController
                 Icon::SIZE_SMALL));
         $buttonBar->addButton($addUserGroupButton, ButtonBar::BUTTON_POSITION_LEFT);
 
-        // edit client
+        // client single view
         if ($this->request->getControllerActionName() === 'show'
             && $this->request->getControllerName() === 'Client'
         ) {
+            // edit client
             $arguments = $this->request->getArguments();
-            $parameters = GeneralUtility::explodeUrl2Array('edit[tx_t3monitoring_domain_model_client][' . (int)$arguments['client'] . ']=edit&returnUrl=' . $returnUrl);
+            $clientId = (int)$arguments['client'];
+            $parameters = GeneralUtility::explodeUrl2Array('edit[tx_t3monitoring_domain_model_client][' . $clientId . ']=edit&returnUrl=' . $returnUrl);
             $editClientButton = $buttonBar->makeLinkButton()
                 ->setHref(BackendUtility::getModuleUrl('record_edit', $parameters))
                 ->setTitle($this->getLabel('createNew.client'))
                 ->setIcon($this->view->getModuleTemplate()->getIconFactory()->getIcon('actions-open',
                     Icon::SIZE_SMALL));
             $buttonBar->addButton($editClientButton, ButtonBar::BUTTON_POSITION_LEFT);
+
+            // fetch client data
+            $arguments = $this->request->getArguments();
+            $downloadClientDataButton = $buttonBar->makeLinkButton()
+                ->setHref($this->getUriBuilder()->reset()->uriFor('fetch', ['client' => $clientId], 'Client'))
+                ->setTitle($this->getLabel('fetchClient.link'))
+                ->setIcon($this->view->getModuleTemplate()->getIconFactory()->getIcon('actions-system-extension-download',
+                    Icon::SIZE_SMALL));
+            $buttonBar->addButton($downloadClientDataButton, ButtonBar::BUTTON_POSITION_LEFT);
         }
 
         // Configuration

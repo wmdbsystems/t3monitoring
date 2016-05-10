@@ -348,6 +348,12 @@
 			<trans-unit id="noInsecureClients">
 				<source>No insecure clients found!</source>
 			</trans-unit>
+			<trans-unit id="fetchClient.link">
+				<source>Fetch single client</source>
+			</trans-unit>
+			<trans-unit id="fetchClient.success">
+				<source>The data of the client has been successfully fetched!</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

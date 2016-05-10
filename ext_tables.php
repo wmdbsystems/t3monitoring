@@ -19,7 +19,7 @@ call_user_func(
                 [
                     'Statistic' => 'index,administration',
                     'Core' => 'list',
-                    'Client' => 'show',
+                    'Client' => 'show,fetch',
                     'Extension' => 'list, show',
                     'Sla' => 'list, show',
                 ],
