@@ -264,13 +264,13 @@
                                                     <th>{f:translate(key:'tx_t3monitoring_domain_model_client')}</th>
                                                     <th>{f:translate(key:'tx_t3monitoring_domain_model_sla')}</th>
                                                     <th>{f:translate(key:'tx_t3monitoring_domain_model_core')}</th>
-                                                    <th class="text-center" colspan="3">
-                                                        {f:translate(key:'tx_t3monitoring_domain_model_extension')}
-                                                    </th>
-                                                    <th class="text-center" colspan="2">
+                                                    <th class="text-center"><span data-toggle="tooltip" data-title="{f:translate(key:'clients.numberOfExtensions')}" class="badge badge-info">-</span></th>
+                                                    <th class="text-center"><span data-toggle="tooltip" data-title="{f:translate(key:'tx_t3monitoring_domain_model_client.insecure_extensions')}" class="badge badge-danger">-</span></th>
+                                                    <th class="text-center"><span data-toggle="tooltip" data-title="{f:translate(key:'tx_t3monitoring_domain_model_client.outdated_extensions')}" class="badge badge-default">-</span></th>
+                                                    <th class="no-sorting text-center" colspan="2">
                                                         {f:translate(key:'client.extra')}
                                                     </th>
-                                                    <th></th>
+                                                    <th class="no-sorting"></th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
@@ -308,21 +308,21 @@
                                                         <td data-order={client.core.versionInteger}" data-type="num" class="text-nowrap {f:if(condition:client.core.insecure,then:'danger',else:'success')}">
                                                             {client.core.version}
                                                         </td>
-                                                        <td class="text-center">
+                                                        <td class="text-center" data-type="num">
                                                             <f:if condition="{client.extensions}">
                                                                 <span data-toggle="tooltip"
                                                                       data-title="{f:translate(key:'clients.numberOfExtensions')}"
                                                                       data-placement="left" class="badge badge-info">{client.extensions -> f:count()}</span>
                                                             </f:if>
                                                         </td>
-                                                        <td class="text-center">
+                                                        <td class="text-center" data-type="num">
                                                             <f:if condition="{client.insecureExtensions}">
                                                                 <span data-toggle="tooltip"
                                                                       data-title="{f:translate(key:'tx_t3monitoring_domain_model_client.insecure_extensions')}"
                                                                       data-placement="left" class="badge badge-danger">{client.insecureExtensions}</span>
                                                             </f:if>
                                                         </td>
-                                                        <td class="text-center">
+                                                        <td class="text-center" data-type="num">
                                                             <f:if condition="{client.outdatedExtensions}">
                                                                 <span data-toggle="tooltip"
                                                                       data-title="{f:translate(key:'tx_t3monitoring_domain_model_client.outdated_extensions')}"
