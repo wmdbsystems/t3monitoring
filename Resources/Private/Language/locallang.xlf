@@ -196,6 +196,9 @@
 			<trans-unit id="createNew.client">
 				<source>Create new client</source>
 			</trans-unit>
+			<trans-unit id="edit.client">
+				<source>Edit client</source>
+			</trans-unit>
 			<trans-unit id="count">
 				<source>Count</source>
 			</trans-unit>

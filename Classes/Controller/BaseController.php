@@ -191,7 +191,7 @@ class BaseController extends ActionController
             $parameters = GeneralUtility::explodeUrl2Array('edit[tx_t3monitoring_domain_model_client][' . $clientId . ']=edit&returnUrl=' . $returnUrl);
             $editClientButton = $buttonBar->makeLinkButton()
                 ->setHref(BackendUtility::getModuleUrl('record_edit', $parameters))
-                ->setTitle($this->getLabel('createNew.client'))
+                ->setTitle($this->getLabel('edit.client'))
                 ->setIcon($this->view->getModuleTemplate()->getIconFactory()->getIcon('actions-open',
                     Icon::SIZE_SMALL));
             $buttonBar->addButton($editClientButton, ButtonBar::BUTTON_POSITION_LEFT);
