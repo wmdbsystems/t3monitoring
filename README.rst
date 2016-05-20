@@ -16,6 +16,16 @@ This extensions provides the possibility to monitor all of your TYPO3 installati
 
 Important: This extension is still beta and things might change!
 
+**Pricing**
+This extension is completly free to use! However maintaining an extension takes an enormous amount of time. Therefore I am using a concept which is based on your trust!
+If you use this extension to monitor your clients, please consider to pay (once) per supervised client:
+
+- less than 20 clients: €150
+- less than 100 clients: €350
+- more than 100 clients: €500
+
+Please contact me via email (mail@ringer.it) or slack for questions and to receive an invoice!
+
 Screenshots
 ^^^^^^^^^^^
 
