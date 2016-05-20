@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2016-05-03T18:34:29Z" product-name="t3monitoring">
+	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2016-05-20T17:08:29Z" product-name="t3monitoring">
 		<header/>
 		<body>
 			<trans-unit id="tx_t3monitoring_domain_model_client">
@@ -65,7 +65,7 @@
 			</trans-unit>
 			<trans-unit id="tx_t3monitoring_domain_model_client.last_successful_import">
 				<source>Last Successful Import</source>
-				<target>Letzter Erfolgreicher Import</target>
+				<target>Letzter erfolgreicher Import</target>
 			</trans-unit>
 			<trans-unit id="tx_t3monitoring_domain_model_client.extensions">
 				<source>Extensions</source>
@@ -231,7 +231,50 @@
 				<source>Description</source>
 				<target>Beschreibung</target>
 			</trans-unit>
-
+			<trans-unit id="update.available">
+				<source>Update available</source>
+				<target>Update verfügbar</target>
+			</trans-unit>
+			<trans-unit id="secure">
+				<source>Secure</source>
+				<target>Sicher</target>
+			</trans-unit>
+			<trans-unit id="loaded">
+				<source>Loaded</source>
+				<target>Geladen</target>
+			</trans-unit>
+			<trans-unit id="found.in.ter">
+				<source>Found in TER</source>
+				<target>Im TER gefunden</target>
+			</trans-unit>
+			<trans-unit id="next.secure.version">
+				<source>Next secure version:</source>
+				<target>Nächste sichere Version:</target>
+			</trans-unit>
+			<trans-unit id="no.official.update">
+				<source>No official update available</source>
+				<target>Kein offizielle Update verfügbar</target>
+			</trans-unit>
+			<trans-unit id="yes">
+				<source>yes</source>
+				<target>ja</target>
+			</trans-unit>
+			<trans-unit id="no">
+				<source>no</source>
+				<target>nein</target>
+			</trans-unit>
+			<trans-unit id="unknown">
+				<source>unknown</source>
+				<target>unbekannt</target>
+			</trans-unit>
+			<trans-unit id="no.cores.imported">
+				<source>No cores yet imported</source>
+				<target>Noch keine Core-Versionen importiert</target>
+			</trans-unit>
+			<trans-unit id="no.versions.available">
+				<source>No versions available</source>
+				<target>Keine Versionen verfügbar</target>
+			</trans-unit>
 			<trans-unit id="view.administration">
 				<source>Administration</source>
 				<target>Administration</target>
@@ -264,6 +307,30 @@
 				<source>Edit client</source>
 				<target>Client bearbeiten</target>
 			</trans-unit>
+			<trans-unit id="home">
+				<source>Home</source>
+				<target>Home</target>
+			</trans-unit>
+			<trans-unit id="extensionList">
+				<source>Extension List</source>
+				<target>Liste der Extensions</target>
+			</trans-unit>
+			<trans-unit id="coreVersions">
+				<source>Core Versions</source>
+				<target>Core-Versionen</target>
+			</trans-unit>
+			<trans-unit id="sla">
+				<source>SLA</source>
+				<target>SLA</target>
+			</trans-unit>
+			<trans-unit id="administration">
+				<source>Administration</source>
+				<target>Administration</target>
+			</trans-unit>
+			<trans-unit id="available.extensions">
+				<source>Available extensions</source>
+				<target>Vorhandene Extensions</target>
+			</trans-unit>
 			<trans-unit id="count">
 				<source>Count</source>
 				<target>Anzahl</target>
@@ -274,7 +341,7 @@
 			</trans-unit>
 			<trans-unit id="search.introHelp">
 				<source>Use the search on the left to filter the clients for specific properties.</source>
-				<target>Die Suche Links benutzen um die Clients nach spezifischen Eigenschaften zu filtern.</target>
+				<target>Die Suche auf der linken Seite benutzen um die Clients nach spezifischen Eigenschaften zu filtern.</target>
 			</trans-unit>
 			<trans-unit id="bulletins.headline">
 				<source>Latest security bulletins</source>
@@ -303,6 +370,18 @@
 			<trans-unit id="clients.notFound">
 				<source>No clients found</source>
 				<target>Keine Clients gefunden</target>
+			</trans-unit>
+			<trans-unit id="coreVersions.header">
+				<source>Core versions</source>
+				<target>Core-Versionen</target>
+			</trans-unit>
+			<trans-unit id="sla.header">
+				<source>Service level agreements</source>
+				<target>Service Level Agreements</target>
+			</trans-unit>
+			<trans-unit id="total">
+				<source>total</source>
+				<target>insgesamt</target>
 			</trans-unit>
 			<trans-unit id="core.totalUsed">
 				<source>Used core versions (%s)</source>
@@ -362,7 +441,7 @@
 			</trans-unit>
 			<trans-unit id="filter.fieldset.misc">
 				<source>Misc</source>
-				<target>Div</target>
+				<target>Diverses</target>
 			</trans-unit>
 			<trans-unit id="lastImport.header">
 				<source>Last imports</source>
@@ -414,7 +493,7 @@
 			</trans-unit>
 			<trans-unit id="extensionFilter.exactSearch">
 				<source>Exact search</source>
-				<target>Genaue Suche</target>
+				<target>Exakte Suche</target>
 			</trans-unit>
 			<trans-unit id="extension.by">
 				<source>by %s</source>

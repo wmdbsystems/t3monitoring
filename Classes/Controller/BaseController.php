@@ -116,11 +116,11 @@ class BaseController extends ActionController
         $menu->setIdentifier('t3monitoring');
 
         $actions = [
-            ['controller' => 'Statistic', 'action' => 'index', 'label' => 'Home'],
-            ['controller' => 'Extension', 'action' => 'list', 'label' => 'Extension list'],
-            ['controller' => 'Core', 'action' => 'list', 'label' => 'Core versions'],
-            ['controller' => 'Sla', 'action' => 'list', 'label' => 'SLA'],
-            ['controller' => 'Statistic', 'action' => 'administration', 'label' => 'Administration'],
+            ['controller' => 'Statistic', 'action' => 'index', 'label' => $this->getLabel('home')],
+            ['controller' => 'Extension', 'action' => 'list', 'label' => $this->getLabel('extensionList')],
+            ['controller' => 'Core', 'action' => 'list', 'label' => $this->getLabel('coreVersions')],
+            ['controller' => 'Sla', 'action' => 'list', 'label' => $this->getLabel('sla')],
+            ['controller' => 'Statistic', 'action' => 'administration', 'label' => $this->getLabel('administration')],
         ];
 
         foreach ($actions as $action) {
@@ -157,7 +157,7 @@ class BaseController extends ActionController
             || $this->request->hasArgument('filter')
         ) {
             $viewButton = $buttonBar->makeLinkButton()
-                ->setTitle('Home')
+                ->setTitle($this->getLabel('home'))
                 ->setHref($this->getUriBuilder()->reset()->uriFor('index', [], 'Statistic'))
                 ->setIcon($this->iconFactory->getIcon('actions-view-go-back', Icon::SIZE_SMALL));
             $buttonBar->addButton($viewButton);
