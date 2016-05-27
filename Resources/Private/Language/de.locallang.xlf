@@ -253,7 +253,7 @@
 			</trans-unit>
 			<trans-unit id="no.official.update">
 				<source>No official update available</source>
-				<target>Kein offizielle Update verfügbar</target>
+				<target>Kein offizielles Update verfügbar</target>
 			</trans-unit>
 			<trans-unit id="yes">
 				<source>yes</source>
