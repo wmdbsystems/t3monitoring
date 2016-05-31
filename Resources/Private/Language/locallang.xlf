@@ -138,6 +138,18 @@
 			<trans-unit id="tx_t3monitoring_domain_model_core.type">
 				<source>Type</source>
 			</trans-unit>
+			<trans-unit id="tx_t3monitoring_domain_model_core.type.0">
+				<source>Regular</source>
+			</trans-unit>
+			<trans-unit id="tx_t3monitoring_domain_model_core.type.1">
+				<source>Release</source>
+			</trans-unit>
+			<trans-unit id="tx_t3monitoring_domain_model_core.type.2">
+				<source>Security</source>
+			</trans-unit>
+			<trans-unit id="tx_t3monitoring_domain_model_core.type.4">
+				<source>Development</source>
+			</trans-unit>
 			<trans-unit id="tx_t3monitoring_domain_model_core.release_date">
 				<source>Release Date</source>
 			</trans-unit>
