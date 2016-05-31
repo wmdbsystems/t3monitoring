@@ -3,13 +3,6 @@ defined('TYPO3_MODE') || die('Access denied.');
 
 call_user_func(
     function ($extKey) {
-
-        \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
-            'T3Monitor.' . $extKey,
-            'T3monitor',
-            'T3 Monitor'
-        );
-
         if (TYPO3_MODE === 'BE') {
             \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerModule(
                 'T3Monitor.' . $extKey,
