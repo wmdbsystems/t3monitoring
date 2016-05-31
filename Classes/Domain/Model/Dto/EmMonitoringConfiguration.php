@@ -28,6 +28,9 @@ class EmMonitoringConfiguration implements SingletonInterface
     /** @var string */
     protected $ipHint = '';
 
+    /** @var string */
+    protected $emailForFailedClient;
+
     public function __construct()
     {
         $settings = (array)unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['t3monitoring']);
@@ -69,4 +72,13 @@ class EmMonitoringConfiguration implements SingletonInterface
     {
         return $this->ipHint;
     }
+
+    /**
+     * @return string
+     */
+    public function getEmailForFailedClient()
+    {
+        return $this->emailForFailedClient;
+    }
+    
 }

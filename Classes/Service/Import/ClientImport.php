@@ -8,7 +8,9 @@ namespace T3Monitor\T3monitoring\Service\Import;
  * LICENSE.txt file that was distributed with this source code.
  */
 
+use Exception;
 use T3Monitor\T3monitoring\Domain\Model\Extension;
+use T3Monitor\T3monitoring\Notification\EmailNotification;
 use T3Monitor\T3monitoring\Service\DataIntegrity;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\StringUtility;
@@ -27,12 +29,19 @@ class ClientImport extends BaseImport
     /** @var array */
     protected $responseCount = array('error' => 0, 'success' => 0);
 
+    /** @var array */
+    protected $failedClients = [];
+
+    /** @var  EmailNotification */
+    protected $emailNotification;
+
     /**
      * Constructor
      */
     public function __construct()
     {
         $this->coreVersions = $this->getAllCoreVersions();
+        $this->emailNotification = GeneralUtility::makeInstance(EmailNotification::class);
         parent::__construct();
     }
 
@@ -54,6 +63,10 @@ class ClientImport extends BaseImport
 
         foreach ($clientRows as $client) {
             $this->importSingleClient($client);
+        }
+
+        if ($this->responseCount['error'] > 0) {
+            $this->emailNotification->sendClientFailedEmail($this->failedClients);
         }
 
         /** @var DataIntegrity $dataIntegrity */
@@ -100,8 +113,8 @@ class ClientImport extends BaseImport
             $this->getDatabaseConnection()->exec_UPDATEquery('tx_t3monitoring_domain_model_client',
                 'uid=' . (int)$row['uid'], $update);
             $this->responseCount['success']++;
-        } catch (\Exception $e) {
-            $this->handleError($row['uid'], $e);
+        } catch (Exception $e) {
+            $this->handleError($row, $e);
         }
     }
 
@@ -123,13 +136,14 @@ class ClientImport extends BaseImport
     }
 
     /**
-     * @param int $client
-     * @param \Exception $error
+     * @param array $client
+     * @param Exception $error
      */
-    protected function handleError($client, \Exception $error)
+    protected function handleError(array $client, Exception $error)
     {
         $this->responseCount['error']++;
-        $this->getDatabaseConnection()->exec_UPDATEquery(self::TABLE, 'uid=' . (int)$client, array(
+        $this->failedClients[] = $client;
+        $this->getDatabaseConnection()->exec_UPDATEquery(self::TABLE, 'uid=' . (int)$client['uid'], array(
             'error_message' => $error->getMessage()
         ));
     }
