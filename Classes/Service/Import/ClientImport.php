@@ -15,6 +15,7 @@ use T3Monitor\T3monitoring\Service\DataIntegrity;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\StringUtility;
 use TYPO3\CMS\Core\Utility\VersionNumberUtility;
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 
 /**
  * Class ClientImport
@@ -158,7 +159,10 @@ class ClientImport extends BaseImport
         $domain = $this->unifyDomain($row['domain']);
         $url = $domain . '/index.php?eID=t3monitoring&secret=' . rawurlencode($row['secret']);
         $report = [];
-        $response = GeneralUtility::getUrl($url, 0, null, $report);
+        $response = GeneralUtility::getUrl($url, 0, array(
+            'User-Agent: TYPO3-Monitoring/' . ExtensionManagementUtility::getExtensionVersion('t3monitoring'),
+            'Accept: application/json'
+        ), $report);
         if (!empty($report['message']) && $report['message'] !== 'OK') {
             throw new \RuntimeException($report['message']);
         }
