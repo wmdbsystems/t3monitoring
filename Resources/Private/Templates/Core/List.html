@@ -42,7 +42,7 @@
                             <td>{core.releaseDate -> f:format.date(format:formats.date)}</td>
                             <td>{f:translate(key:'tx_t3monitoring_domain_model_core.type.{core.type}')}</td>
                             <td>
-                                <a href="{monitor:editRecord(parameters: 'edit[tx_t3monitoring_domain_model_core][{core.uid}]=edit')}">
+                                <a href="{monitor:editRecord(parameters: 'edit[tx_t3monitoring_domain_model_core][{core.uid}]=edit')}" class="btn btn-sm btn-default">
                                     {core:icon(identifier:'actions-document-open')}
                                 </a>
                             </td>
