@@ -165,9 +165,9 @@
                                     </f:if>
                                 </f:then>
                                 <f:else>
-                                    <div class="callout callout-notice" style="margin:0">
-                                        {f:translate(key:'bulletins.disabled')}
-                                    </div>
+                                    <f:be.infobox>
+                                        <p>{f:translate(key:'bulletins.disabled')}</p>
+                                    </f:be.infobox>
                                 </f:else>
                             </f:if>
                             </div>
@@ -356,32 +356,20 @@
                                         </div>
                                     </f:then>
                                     <f:else>
-                                        <div class="callout callout-notice">
-                                            {f:translate(key:'clients.notFound')}
-                                        </div>
+                                        <f:be.infobox>
+                                            <p>{f:translate(key:'clients.notFound')}</p>
+                                        </f:be.infobox>
                                     </f:else>
                                 </f:if>
                             </f:then>
                             <f:else>
-                                <div class="callout callout-info">
-                                    <div class="media">
-                                        <div class="media-left">
-                                            <span class="fa-stack fa-lg callout-icon"><i
-                                                    class="fa fa-circle fa-stack-2x"></i><i
-                                                    class="fa fa-info fa-stack-1x"></i></span>
-                                        </div>
-                                        <div class="media-body"><h4 class="callout-title">
-                                            {f:translate(key:'search')}</h4>
-                                            <div class="callout-body">
-                                                <p>{f:translate(key:'search.introHelp')}</p>
-                                                <button class="btn btn-info">
-                                                    {core:icon(identifier:'actions-system-list-open', alternativeMarkupIdentifier: 'inline')}
-                                                    {f:translate(key:'clients.listAll')}
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                <f:be.infobox state="-1" title="{f:translate(key:'search')}">
+                                    <p>{f:translate(key:'search.introHelp')}</p>
+                                    <button class="btn btn-info">
+                                        {core:icon(identifier:'actions-system-list-open', alternativeMarkupIdentifier: 'inline')}
+                                        {f:translate(key:'clients.listAll')}
+                                    </button>
+                                </f:be.infobox>
 
                                 <h3>{f:translate(key:'lastImport.header')}</h3>
                                 <table class="table table-striped table-hover">
@@ -409,21 +397,9 @@
             </f:form>
         </f:then>
         <f:else>
-            <div class="callout callout-info">
-                <div class="media">
-                    <div class="media-left">
-                                            <span class="fa-stack fa-lg callout-icon"><i
-                                                    class="fa fa-circle fa-stack-2x"></i><i
-                                                    class="fa fa-info fa-stack-1x"></i></span>
-                    </div>
-                    <div class="media-body"><h4 class="callout-title">
-                        {f:translate(key:'noClients.title')}</h4>
-                        <div class="callout-body">
-                            <p>{f:translate(key:'noClients.description')}</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <f:be.infobox state="-1" title="{f:translate(key:'noClients.title')}">
+                <p>{f:translate(key:'noClients.description')}</p>
+            </f:be.infobox>
         </f:else>
     </f:if>
 </f:section>
