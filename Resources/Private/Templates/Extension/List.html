@@ -74,9 +74,9 @@
 				</table>
 		</f:then>
 		<f:else>
-			<div class="callout callout-notice">
-				{f:translate(key:'extension.notFound')}
-			</div>
+			<f:be.infobox>
+				<p>{f:translate(key:'extension.notFound')}</p>
+			</f:be.infobox>
 		</f:else>
 	</f:if>
 </f:section>
