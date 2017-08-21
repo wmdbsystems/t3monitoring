@@ -104,7 +104,7 @@ class ClientImport extends BaseImport
                 'php_version' => $json['core']['phpVersion'],
                 'mysql_version' => $json['core']['mysqlClientVersion'],
                 'core' => $this->getUsedCore($json['core']['typo3Version']),
-                'extensions' => $this->handleExtensionRelations($row['uid'], $json['extensions']),
+                'extensions' => $this->handleExtensionRelations($row['uid'], (array)$json['extensions']),
             );
 
             $this->addExtraData($json, $update, 'info');
