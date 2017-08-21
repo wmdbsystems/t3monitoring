@@ -96,6 +96,9 @@ class ClientImport extends BaseImport
                 throw new \RuntimeException('Empty response from client ' . $row['title']);
             }
             $json = json_decode($response, true);
+            if (!array($response)) {
+                throw new \RuntimeException('Invalid response from client ' . $row['title']);
+            }
 
             $update = array(
                 'tstamp' => $GLOBALS['EXEC_TIME'],
