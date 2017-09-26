@@ -121,7 +121,7 @@
                                 <tbody>
                                 <f:for each="{coreVersionUsage}" as="line">
                                     <tr>
-                                        <td class="{f:if(condition:line.insecureCore,then:'danger',else:'success')}">
+                                        <td class="{f:if(condition:line.insecureCore,then:'danger',else:'')} {f:if(condition:line.is_latest,then:'success',else:'warning')}">
                                             <f:link.action
                                                     additionalParams="{tx_t3monitoring_tools_t3monitoringt3monitor:{filter:{version:line.version}}}">
                                                 {line.version}
@@ -307,7 +307,7 @@
                                                                 <f:else>-</f:else>
                                                             </f:if>
                                                         </td>
-                                                        <td data-order={client.core.versionInteger}" data-type="num" class="text-nowrap {f:if(condition:client.core.insecure,then:'danger',else:'success')}">
+                                                        <td data-order={client.core.versionInteger}" data-type="num" class="text-nowrap {f:if(condition:client.core.insecure,then:'danger',else:'')} {f:if(condition:client.core.islatest,then:'success',else:'warning')}">
                                                             {client.core.version}
                                                         </td>
                                                         <td class="text-center" data-type="num">
