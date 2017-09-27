@@ -18,17 +18,21 @@ class DiskSpaceViewHelper extends AbstractViewHelper
 {
 
     /**
-     * @param string $space
+     * @param int $bytes
      * @return string
      */
-    public function render($bytes = '')
+    public function render($bytes = 0)
     {
         $bytes = $bytes ?: $this->renderChildren();
 
-        $si_prefix = ['B', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
-        $base = 1024;
-        $class = min((int)log($bytes, $base), count($si_prefix) - 1);
+        if ($bytes != 0) {
+            $si_prefix = ['B', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+            $base = 1024;
+            $class = min((int)log($bytes, $base), count($si_prefix) - 1);
 
-        return sprintf('%1.2f', $bytes / pow($base, $class)) . ' ' . $si_prefix[$class];
+            return sprintf('%1.2f', $bytes / pow($base, $class)) . ' ' . $si_prefix[$class];
+        }
+
+        return 0;
     }
 }
