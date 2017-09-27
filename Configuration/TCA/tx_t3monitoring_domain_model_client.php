@@ -10,17 +10,17 @@ return [
         'enablecolumns' => [
             'disabled' => 'hidden',
         ],
-        'searchFields' => 'title,domain,secret,email,php_version,mysql_version,insecure_core,outdated_core,insecure_extensions,outdated_extensions,error_message,extensions,core,sla,',
+        'searchFields' => 'title,domain,secret,email,php_version,mysql_version,disk_total_space,disk_free_space,insecure_core,outdated_core,insecure_extensions,outdated_extensions,error_message,extensions,core,sla,',
         'iconfile' => 'EXT:t3monitoring/Resources/Public/Icons/tx_t3monitoring_domain_model_client.gif'
     ],
     'interface' => [
-        'showRecordFieldList' => 'hidden, title, domain, secret, php_version, mysql_version, insecure_core, outdated_core, insecure_extensions, outdated_extensions, error_message, extensions, core, sla',
+        'showRecordFieldList' => 'hidden, title, domain, secret, php_version, mysql_version, disk_total_space, disk_free_space, insecure_core, outdated_core, insecure_extensions, outdated_extensions, error_message, extensions, core, sla',
     ],
     'types' => [
         '1' => [
             'showitem' => '
         --div--;General,title, --palette--;;paletteDomain,email,sla,
-        --div--;Readonly information,last_successful_import,error_message,core, --palette--;;paletteVersions,extensions,
+        --div--;Readonly information,last_successful_import,error_message,core, --palette--;;paletteVersions, --palette--;;paletteDiskSpace,extensions,
                 insecure_core, outdated_core, insecure_extensions, outdated_extensions,
         --div--;Extra,extra_info,extra_warning,extra_danger'
         ],
@@ -28,6 +28,7 @@ return [
     'palettes' => [
         'paletteDomain' => ['showitem' => 'domain, secret,hidden'],
         'paletteVersions' => ['showitem' => 'php_version, mysql_version'],
+        'paletteDiskSpace' => ['showitem' => 'disk_total_space, disk_free_space'],
     ],
     'columns' => [
         'hidden' => [
@@ -106,6 +107,26 @@ return [
         'mysql_version' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:t3monitoring/Resources/Private/Language/locallang.xlf:tx_t3monitoring_domain_model_client.mysql_version',
+            'config' => [
+                'readOnly' => true,
+                'type' => 'input',
+                'size' => 5,
+                'eval' => 'trim'
+            ],
+        ],
+        'disk_total_space' => [
+            'exclude' => 1,
+            'label' => 'LLL:EXT:t3monitoring/Resources/Private/Language/locallang.xlf:tx_t3monitoring_domain_model_client.disk_total_space',
+            'config' => [
+                'readOnly' => true,
+                'type' => 'input',
+                'size' => 5,
+                'eval' => 'trim'
+            ],
+        ],
+        'disk_free_space' => [
+            'exclude' => 1,
+            'label' => 'LLL:EXT:t3monitoring/Resources/Private/Language/locallang.xlf:tx_t3monitoring_domain_model_client.disk_free_space',
             'config' => [
                 'readOnly' => true,
                 'type' => 'input',
