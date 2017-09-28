@@ -51,14 +51,14 @@ class Client extends AbstractEntity
     protected $mysqlVersion = '';
 
     /**
-     * @var string
+     * @var int
      */
-    protected $diskTotalSpace = '';
+    protected $diskTotalSpace = 0;
 
     /**
-     * @var string
+     * @var int
      */
-    protected $diskFreeSpace = '';
+    protected $diskFreeSpace = 0;
 
     /**
      * @var bool
@@ -274,7 +274,7 @@ class Client extends AbstractEntity
     /**
      * Returns the diskFreeSpace
      *
-     * @return string
+     * @return int
      */
     public function getDiskFreeSpace()
     {
@@ -284,7 +284,7 @@ class Client extends AbstractEntity
     /**
      * Sets the diskFreeSpace
      *
-     * @param string $diskFreeSpace
+     * @param int $diskFreeSpace
      * @return void
      */
     public function setDiskFreeSpace($diskFreeSpace)
@@ -295,7 +295,7 @@ class Client extends AbstractEntity
     /**
      * Returns the diskTotalSpace
      *
-     * @return mixed
+     * @return int
      */
     public function getDiskTotalSpace()
     {
@@ -305,7 +305,7 @@ class Client extends AbstractEntity
     /**
      * Sets the diskTotalSpace
      *
-     * @param mixed $diskTotalSpace
+     * @param int $diskTotalSpace
      * @return void
      */
     public function setDiskTotalSpace($diskTotalSpace)
