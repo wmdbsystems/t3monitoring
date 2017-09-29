@@ -118,7 +118,7 @@
 				<f:for each="{client.extensions}" as="extension">
 
 					<monitor:additionalExtensionData as="extra" client="{client.uid}" extension="{extension.uid}">
-							<tr class="{f:if(condition:extra.is_loaded,then:'',else:'t3-page-ce-hidden')}{f:if(condition:extension.insecure,then:'danger',else:'')}">
+							<tr class="{f:if(condition:extra.is_loaded,then:'',else:'t3-page-ce-hidden')} {f:if(condition:extension.insecure,then:'danger',else:'')}">
 							<td>
 								<span data-toggle="tooltip" data-title="{extension.title}" data-placement="right">
 									<f:link.action action="show" controller="Extension" arguments="{extension:'{extension.name}'}">{extension.name}</f:link.action>
