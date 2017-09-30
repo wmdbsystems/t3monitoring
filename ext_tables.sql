@@ -8,6 +8,8 @@ CREATE TABLE tx_t3monitoring_domain_model_client (
 
 	title varchar(255) DEFAULT '' NOT NULL,
 	domain varchar(255) DEFAULT '' NOT NULL,
+	basic_auth_username varchar(255) DEFAULT '' NOT NULL,
+	basic_auth_password varchar(255) DEFAULT '' NOT NULL,
 	secret varchar(255) DEFAULT '' NOT NULL,
 	email varchar(255) DEFAULT '' NOT NULL,
 	php_version varchar(255) DEFAULT '' NOT NULL,
