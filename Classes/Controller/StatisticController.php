@@ -81,6 +81,7 @@ class StatisticController extends BaseController
             'clients' => $this->clientRepository->findByDemand($filter),
             'coreVersions' => $this->getAllCoreVersions(),
             'coreVersionUsage' => $this->statisticRepository->getUsedCoreVersionCount(),
+            'coreVersionUsageJson' => $this->statisticRepository->getUsedCoreVersionCountJson(),
             'fullClientCount' => $this->clientRepository->countByDemand($emptyClientDemand),
             'clientsWithErrorMessages' => $this->clientRepository->countByDemand($errorMessageDemand),
             'clientsWithInsecureExtensions' => $this->clientRepository->countByDemand($insecureExtensionsDemand),

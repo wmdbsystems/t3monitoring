@@ -72,4 +72,17 @@ class StatisticRepository extends BaseRepository
             'tx_t3monitoring_domain_model_client.deleted=0 AND tx_t3monitoring_domain_model_client.hidden=0', 'tx_t3monitoring_domain_model_core.version,version_integer,insecureCore,is_stable,is_latest,is_active',
             'tx_t3monitoring_domain_model_core.version_integer');
     }
+
+    /**
+     * @return string
+     */
+    public function getUsedCoreVersionCountJson()
+    {
+        $data = $this->getUsedCoreVersionCount();
+        $result = [];
+        foreach ($data as $row) {
+            $result[] = [$row['version'], (int)$row['count']];
+        }
+        return json_encode($result);
+    }
 }
