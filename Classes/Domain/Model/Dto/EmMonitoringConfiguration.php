@@ -23,6 +23,9 @@ class EmMonitoringConfiguration implements SingletonInterface
     protected $loadBulletins = true;
 
     /** @var bool */
+    protected $useGoogleCharts = true;
+
+    /** @var bool */
     protected $presentationMode = false;
 
     /** @var string */
@@ -55,6 +58,14 @@ class EmMonitoringConfiguration implements SingletonInterface
     public function getLoadBulletins()
     {
         return (bool)$this->loadBulletins;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getUseGoogleCharts()
+    {
+        return (bool)$this->useGoogleCharts;
     }
 
     /**
