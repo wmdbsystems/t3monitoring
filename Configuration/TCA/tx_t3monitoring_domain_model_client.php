@@ -124,7 +124,7 @@ return [
         ],
         'outdated_core' => [
             'exclude' => 1,
-            'label' => 'LLL:EXT:t3monitoring/Resources/Private/Language/locallang.xlf:tx_t3monitoring_domain_model_client.insecure_extensions',
+            'label' => 'LLL:EXT:t3monitoring/Resources/Private/Language/locallang.xlf:tx_t3monitoring_domain_model_client.outdated_core',
             'config' => [
                 'readOnly' => true,
                 'type' => 'check',
