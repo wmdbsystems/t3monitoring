@@ -96,6 +96,9 @@ class ClientImport extends BaseImport
                 throw new \RuntimeException('Empty response from client ' . $row['title']);
             }
             $json = json_decode($response, true);
+            if (!is_array($json)) {
+                throw new \RuntimeException('Invalid response from client ' . $row['title']);
+            }
 
             $update = array(
                 'tstamp' => $GLOBALS['EXEC_TIME'],
@@ -106,7 +109,7 @@ class ClientImport extends BaseImport
                 'disk_total_space' => $json['core']['diskTotalSpace'],
                 'disk_free_space' => $json['core']['diskFreeSpace'],
                 'core' => $this->getUsedCore($json['core']['typo3Version']),
-                'extensions' => $this->handleExtensionRelations($row['uid'], $json['extensions']),
+                'extensions' => $this->handleExtensionRelations($row['uid'], (array)$json['extensions']),
             );
 
             $this->addExtraData($json, $update, 'info');
