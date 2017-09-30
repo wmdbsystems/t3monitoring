@@ -44,7 +44,7 @@
 							</f:if>
 						</td>
 					</tr>
-					<tr class="{f:if(condition:client.core.insecure,then:'danger',else:'success')}">
+					<tr class="{f:if(condition:client.core.insecure,then:'danger',else:'')} {f:if(condition:client.core.islatest,then:'success',else:'warning')}">
 						<th>{core:icon(identifier:'apps-pagetree-root')} TYPO3 Version</th>
 						<td>{client.core.version}</td>
 					</tr>

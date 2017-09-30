@@ -37,7 +37,7 @@
                     </tr>
                     </thead>
                     <f:for each="{cores}" as="core">
-                        <tr class="{f:if(condition:core.insecure,then:'danger',else:'success')}">
+                        <tr class="{f:if(condition:core.insecure,then:'danger',else:'')} {f:if(condition:core.isLatest,then:'success',else:'warning')}">
                             <th class="text-nowrap">{core.version}</th>
                             <td>{core.releaseDate -> f:format.date(format:formats.date)}</td>
                             <td>{f:translate(key:'tx_t3monitoring_domain_model_core.type.{core.type}')}</td>
