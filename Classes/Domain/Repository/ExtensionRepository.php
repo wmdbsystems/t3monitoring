@@ -20,7 +20,8 @@ class ExtensionRepository extends BaseRepository
     /**
      * Initialize object
      */
-    public function initializeObject() {
+    public function initializeObject()
+    {
         $this->setDefaultOrderings(['name' => QueryInterface::ORDER_ASCENDING]);
     }
 
@@ -50,7 +51,7 @@ class ExtensionRepository extends BaseRepository
             'tx_t3monitoring_domain_model_extension ext
                 RIGHT JOIN tx_t3monitoring_client_extension_mm mm on mm.uid_foreign = ext.uid
                 RIGHT JOIN tx_t3monitoring_domain_model_client client on mm.uid_local=client.uid',
-            'ext.name is not null' . $this->extendWhereClause($demand),
+            'ext.name is not null AND client.deleted=0 AND client.hidden=0' . $this->extendWhereClause($demand),
             '',
             'ext.name,ext.version_integer DESC,client.title'
         );
