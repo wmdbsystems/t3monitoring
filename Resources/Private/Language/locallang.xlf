@@ -186,6 +186,9 @@
 			<trans-unit id="tx_t3monitoring_domain_model_sla.description">
 				<source>Description</source>
 			</trans-unit>
+			<trans-unit id="update.available">
+				<source>Update available</source>
+			</trans-unit>
 			<trans-unit id="secure">
 				<source>Secure</source>
 			</trans-unit>
