@@ -12,6 +12,12 @@
 			<trans-unit id="tx_t3monitoring_domain_model_client.domain">
 				<source>Domain</source>
 			</trans-unit>
+			<trans-unit id="tx_t3monitoring_domain_model_client.basic_auth_username">
+				<source>BasicAuth username</source>
+			</trans-unit>
+			<trans-unit id="tx_t3monitoring_domain_model_client.basic_auth_password">
+				<source>BasicAuth password</source>
+			</trans-unit>
 			<trans-unit id="tx_t3monitoring_domain_model_client.secret">
 				<source>Secret</source>
 			</trans-unit>

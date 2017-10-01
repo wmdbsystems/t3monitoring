@@ -156,7 +156,9 @@ class ClientImport extends BaseImport
 
     /**
      * @param array $row
+     *
      * @return mixed
+     * @throws \InvalidArgumentException
      * @throws \RuntimeException
      */
     protected function requestClientData(array $row)
@@ -164,10 +166,14 @@ class ClientImport extends BaseImport
         $domain = $this->unifyDomain($row['domain']);
         $url = $domain . '/index.php?eID=t3monitoring&secret=' . rawurlencode($row['secret']);
         $report = [];
-        $response = GeneralUtility::getUrl($url, 0, array(
+        $headers = [
             'User-Agent: TYPO3-Monitoring/' . ExtensionManagementUtility::getExtensionVersion('t3monitoring'),
             'Accept: application/json'
-        ), $report);
+        ];
+        if (!empty($row['basic_auth_username']) && !empty($row['basic_auth_password'])) {
+            $headers[] = 'Authorization: Basic ' . base64_encode($row['basic_auth_username'] . ':' . $row['basic_auth_password']);
+        }
+        $response = GeneralUtility::getUrl($url, 0, $headers, $report);
         if (!empty($report['message']) && $report['message'] !== 'OK') {
             throw new \RuntimeException($report['message']);
         }
