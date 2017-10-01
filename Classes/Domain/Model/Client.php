@@ -31,6 +31,16 @@ class Client extends AbstractEntity
 
     /**
      * @var string
+     */
+    protected $basicAuthUsername = '';
+
+    /**
+     * @var string
+     */
+    protected $basicAuthPassword = '';
+
+    /**
+     * @var string
      * @validate NotEmpty
      */
     protected $secret = '';
@@ -185,6 +195,38 @@ class Client extends AbstractEntity
     public function setDomain($domain)
     {
         $this->domain = $domain;
+    }
+
+    /**
+     * @return string
+     */
+    public function getBasicAuthUsername()
+    {
+        return $this->basicAuthUsername;
+    }
+
+    /**
+     * @param string $basicAuthUsername
+     */
+    public function setBasicAuthUsername($basicAuthUsername)
+    {
+        $this->basicAuthUsername = $basicAuthUsername;
+    }
+
+    /**
+     * @return string
+     */
+    public function getBasicAuthPassword()
+    {
+        return $this->basicAuthPassword;
+    }
+
+    /**
+     * @param string $basicAuthPassword
+     */
+    public function setBasicAuthPassword($basicAuthPassword)
+    {
+        $this->basicAuthPassword = $basicAuthPassword;
     }
 
     /**
