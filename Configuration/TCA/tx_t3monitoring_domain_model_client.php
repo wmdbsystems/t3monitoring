@@ -139,7 +139,7 @@ return [
                 'readOnly' => true,
                 'type' => 'input',
                 'size' => 5,
-                'eval' => 'trim'
+                'eval' => 'int'
             ],
         ],
         'disk_free_space' => [
@@ -149,7 +149,7 @@ return [
                 'readOnly' => true,
                 'type' => 'input',
                 'size' => 5,
-                'eval' => 'trim'
+                'eval' => 'int'
             ],
         ],
         'insecure_core' => [
