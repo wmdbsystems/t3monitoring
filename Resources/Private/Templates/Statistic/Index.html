@@ -298,8 +298,8 @@
                                                 <thead>
                                                 <tr>
                                                     <th>{f:translate(key:'tx_t3monitoring_domain_model_client')}</th>
-                                                    <th>Domain</th>
-                                                    <th>Status</th>
+                                                    <th>{f:translate(key:'tx_t3monitoring_domain_model_client.domain')}</th>
+                                                    <th>{f:translate(key:'tx_t3monitoring_domain_model_client.status')}</th>
                                                     <th>{f:translate(key:'tx_t3monitoring_domain_model_sla')}</th>
                                                     <th>{f:translate(key:'tx_t3monitoring_domain_model_core')}</th>
                                                     <th class="text-center"><span data-toggle="tooltip" data-title="{f:translate(key:'clients.numberOfExtensions')}" class="badge badge-info">-</span></th>
@@ -347,10 +347,10 @@
                                                                 <f:then>
                                                                     <span data-toggle="tooltip"
                                                                           data-title="{client.errorMessage}"
-                                                                          data-placement="right" class="label label-danger">Error</span>
+                                                                          data-placement="left" class="label label-danger">{f:translate(key:'tx_t3monitoring_domain_model_client.error')}</span>
                                                                 </f:then>
                                                                 <f:else>
-                                                                    <span class="label label-success">OK</span>
+                                                                    <span class="label label-success">{f:translate(key:'tx_t3monitoring_domain_model_client.ok')}</span>
                                                                 </f:else>
                                                             </f:if>
                                                         </td>
