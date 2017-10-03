@@ -10,16 +10,16 @@ return [
         'enablecolumns' => [
             'disabled' => 'hidden',
         ],
-        'searchFields' => 'title,domain,secret,email,php_version,mysql_version,disk_total_space,disk_free_space,insecure_core,outdated_core,insecure_extensions,outdated_extensions,error_message,extensions,core,sla,',
+        'searchFields' => 'title,domain,secret,email,php_version,mysql_version,disk_total_space,disk_free_space,insecure_core,outdated_core,insecure_extensions,outdated_extensions,error_message,extensions,core,sla,tag,',
         'iconfile' => 'EXT:t3monitoring/Resources/Public/Icons/tx_t3monitoring_domain_model_client.gif'
     ],
     'interface' => [
-        'showRecordFieldList' => 'hidden, title, domain, secret, basic_auth_username, basic_auth_password, php_version, mysql_version, disk_total_space, disk_free_space, insecure_core, outdated_core, insecure_extensions, outdated_extensions, error_message, extensions, core, sla',
+        'showRecordFieldList' => 'hidden, title, domain, secret, basic_auth_username, basic_auth_password, php_version, mysql_version, disk_total_space, disk_free_space, insecure_core, outdated_core, insecure_extensions, outdated_extensions, error_message, extensions, core, sla, tag',
     ],
     'types' => [
         '1' => [
             'showitem' => '
-        --div--;General,title, --palette--;;paletteDomain,email,sla,
+        --div--;General,title, --palette--;;paletteDomain,email,sla,tag,
         --div--;Readonly information,last_successful_import,error_message,core, --palette--;;paletteVersions, --palette--;;paletteDiskSpace,extensions,
                 insecure_core, outdated_core, insecure_extensions, outdated_extensions,
         --div--;Extra,extra_info,extra_warning,extra_danger'
@@ -104,6 +104,21 @@ return [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'foreign_table' => 'tx_t3monitoring_domain_model_sla',
+                'minitems' => 0,
+                'maxitems' => 1,
+                'default' => 0,
+                'items' => [
+                    ['', 0]
+                ]
+            ],
+        ],
+        'tag' => [
+            'exclude' => 1,
+            'label' => 'LLL:EXT:t3monitoring/Resources/Private/Language/locallang.xlf:tx_t3monitoring_domain_model_client.tag',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectSingle',
+                'foreign_table' => 'tx_t3monitoring_domain_model_tag',
                 'minitems' => 0,
                 'maxitems' => 1,
                 'default' => 0,

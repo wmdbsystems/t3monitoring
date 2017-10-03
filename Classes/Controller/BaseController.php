@@ -120,6 +120,7 @@ class BaseController extends ActionController
             ['controller' => 'Extension', 'action' => 'list', 'label' => $this->getLabel('extensionList')],
             ['controller' => 'Core', 'action' => 'list', 'label' => $this->getLabel('coreVersions')],
             ['controller' => 'Sla', 'action' => 'list', 'label' => $this->getLabel('sla')],
+            ['controller' => 'Tag', 'action' => 'list', 'label' => $this->getLabel('tag')],
             ['controller' => 'Statistic', 'action' => 'administration', 'label' => $this->getLabel('administration')],
         ];
 

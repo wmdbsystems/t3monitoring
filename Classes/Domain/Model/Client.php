@@ -134,6 +134,12 @@ class Client extends AbstractEntity
     protected $sla = null;
 
     /**
+     * @var \T3Monitor\T3monitoring\Domain\Model\Tag
+     * @lazy
+     */
+    protected $tag = null;
+
+    /**
      * __construct
      */
     public function __construct()
@@ -647,6 +653,27 @@ class Client extends AbstractEntity
     public function setSla(Sla $sla)
     {
         $this->sla = $sla;
+    }
+
+    /**
+     * Returns the tag
+     *
+     * @return \T3Monitor\T3monitoring\Domain\Model\Tag
+     */
+    public function getTag()
+    {
+        return $this->tag;
+    }
+
+    /**
+     * Sets the tag
+     *
+     * @param \T3Monitor\T3monitoring\Domain\Model\Tag $tag
+     * @return void
+     */
+    public function setTag(Tag $tag)
+    {
+        $this->tag = $tag;
     }
 
     /**

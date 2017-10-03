@@ -101,6 +101,11 @@ class ClientRepository extends BaseRepository
             $constraints[] = $query->equals('sla', $demand->getSla());
         }
 
+        // Tag
+        if ($demand->getTag()) {
+            $constraints[] = $query->equals('tag', $demand->getTag());
+        }
+
         // Search
         if ($demand->getSearchWord()) {
             $searchConstraints = [];

@@ -15,6 +15,7 @@ call_user_func(
                     'Client' => 'show,fetch',
                     'Extension' => 'list, show',
                     'Sla' => 'list, show',
+                    'Tag' => 'list, show',
                 ],
                 [
                     'access' => 'user,group',

@@ -12,6 +12,7 @@ use T3Monitor\T3monitoring\Domain\Model\Dto\ClientFilterDemand;
 use T3Monitor\T3monitoring\Domain\Repository\ClientRepository;
 use T3Monitor\T3monitoring\Domain\Repository\CoreRepository;
 use T3Monitor\T3monitoring\Domain\Repository\SlaRepository;
+use T3Monitor\T3monitoring\Domain\Repository\TagRepository;
 use T3Monitor\T3monitoring\Domain\Repository\StatisticRepository;
 use T3Monitor\T3monitoring\Service\BulletinImport;
 use T3Monitor\T3monitoring\Service\Import\ClientImport;
@@ -32,6 +33,11 @@ class StatisticController extends BaseController
     protected $slaRepository = null;
 
     /**
+     * @var \T3Monitor\T3monitoring\Domain\Repository\TagRepository
+     */
+    protected $tagRepository = null;
+
+    /**
      * Initialize action
      */
     public function initializeAction()
@@ -41,6 +47,7 @@ class StatisticController extends BaseController
         $this->clientRepository = $this->objectManager->get(ClientRepository::class);
         $this->coreRepository = $this->objectManager->get(CoreRepository::class);
         $this->slaRepository = $this->objectManager->get(SlaRepository::class);
+        $this->tagRepository = $this->objectManager->get(TagRepository::class);
 
         parent::initializeAction();
     }
@@ -92,6 +99,7 @@ class StatisticController extends BaseController
             'clientsWithDangerInfo' => $this->clientRepository->countByDemand($clientsWithDangerInfo),
             'numberOfClients' => $this->clientRepository->countAll(),
             'slaVersions' => $this->slaRepository->findAll(),
+            'tagVersions' => $this->tagRepository->findAll(),
             'feedItems' => $feedItems,
             'importTimes' => [
                 'client' => $this->registry->get('t3monitoring', 'importClient'),
