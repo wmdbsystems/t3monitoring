@@ -241,6 +241,15 @@
                             </div>
                         </f:if>
 
+                        <f:if condition="{tagVersions}">
+                            <div class="form-group">
+                                <label for="form-tag">{f:translate(key:'tag')}</label>
+                                <f:form.select property="tag" id="form-tag" options="{tagVersions}"
+                                               optionValueField="uid" optionLabelField="title" class="form-control"
+                                               prependOptionLabel="" prependOptionValue=""/>
+                            </div>
+                        </f:if>
+
                         <fieldset>
                             <legend class="legend">{f:translate(key:'filter.fieldset.core')}</legend>
                             <div class="checkbox">
@@ -299,6 +308,7 @@
                                                 <tr>
                                                     <th>{f:translate(key:'tx_t3monitoring_domain_model_client')}</th>
                                                     <th>{f:translate(key:'tx_t3monitoring_domain_model_sla')}</th>
+                                                    <th>{f:translate(key:'tx_t3monitoring_domain_model_tag')}</th>
                                                     <th>{f:translate(key:'tx_t3monitoring_domain_model_core')}</th>
                                                     <th class="text-center"><span data-toggle="tooltip" data-title="{f:translate(key:'clients.numberOfExtensions')}" class="badge badge-info">-</span></th>
                                                     <th class="text-center"><span data-toggle="tooltip" data-title="{f:translate(key:'tx_t3monitoring_domain_model_client.insecure_extensions')}" class="badge badge-danger">-</span></th>
@@ -336,6 +346,17 @@
                                                                     <f:link.action action="show" controller="Sla"
                                                                                    arguments="{sla:client.sla}">
                                                                         {client.sla.title}
+                                                                    </f:link.action>
+                                                                </f:then>
+                                                                <f:else>-</f:else>
+                                                            </f:if>
+                                                        </td>
+                                                        <td class="text-nowrap">
+                                                            <f:if condition="{client.tag}">
+                                                                <f:then>
+                                                                    <f:link.action action="show" controller="Tag"
+                                                                                   arguments="{tag:client.tag}">
+                                                                        {client.tag.title}
                                                                     </f:link.action>
                                                                 </f:then>
                                                                 <f:else>-</f:else>

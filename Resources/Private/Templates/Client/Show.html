@@ -56,6 +56,14 @@
 							</td>
 						</tr>
 					</f:if>
+					<f:if condition="{client.tag}">
+						<tr>
+							<th><i class="fa fa-tags fa-fw"></i> {f:translate(key:'tx_t3monitoring_domain_model_tag')}</th>
+							<td>
+								<f:link.action action="show" controller="Tag" arguments="{tag:client.tag}">{client.tag.title}</f:link.action>
+							</td>
+						</tr>
+					</f:if>
 					<tr>
 						<th><i class="fa fa-database fa-fw"></i> Mysql Version</th>
 						<td>{client.mysqlVersion -> monitor:format.mysqlVersion()}</td>

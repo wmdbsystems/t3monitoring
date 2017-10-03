@@ -66,6 +66,9 @@
 			<trans-unit id="tx_t3monitoring_domain_model_client.sla">
 				<source>Sla</source>
 			</trans-unit>
+			<trans-unit id="tx_t3monitoring_domain_model_client.tag">
+				<source>Tag</source>
+			</trans-unit>
 			<trans-unit id="tx_t3monitoring_domain_model_extension">
 				<source>Extension</source>
 			</trans-unit>
@@ -192,6 +195,15 @@
 			<trans-unit id="tx_t3monitoring_domain_model_sla.description">
 				<source>Description</source>
 			</trans-unit>
+			<trans-unit id="tx_t3monitoring_domain_model_tag">
+				<source>Tag</source>
+			</trans-unit>
+			<trans-unit id="tx_t3monitoring_domain_model_tag.title">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="tx_t3monitoring_domain_model_tag.description">
+				<source>Description</source>
+			</trans-unit>
 			<trans-unit id="update.available">
 				<source>Update available</source>
 			</trans-unit>
@@ -261,6 +273,9 @@
 			<trans-unit id="sla">
 				<source>SLA</source>
 			</trans-unit>
+			<trans-unit id="tag">
+				<source>Tag</source>
+			</trans-unit>
 			<trans-unit id="administration">
 				<source>Administration</source>
 			</trans-unit>
@@ -302,6 +317,9 @@
 			</trans-unit>
 			<trans-unit id="sla.header">
 				<source>Service level agreements</source>
+			</trans-unit>
+			<trans-unit id="tag.header">
+				<source>Tags</source>
 			</trans-unit>
 			<trans-unit id="total">
 				<source>total</source>
@@ -377,6 +395,18 @@
 			</trans-unit>
 			<trans-unit id="sla.noClients">
 				<source>This SLA is not used by any client!</source>
+			</trans-unit>
+			<trans-unit id="tag.total">
+				<source>Tags (%s)</source>
+			</trans-unit>
+			<trans-unit id="sla.notFound">
+				<source>No Tag records found!</source>
+			</trans-unit>
+			<trans-unit id="tag.clients">
+				<source>List all clients with this tag</source>
+			</trans-unit>
+			<trans-unit id="tag.noClients">
+				<source>This Tag is not used by any client!</source>
 			</trans-unit>
 			<trans-unit id="extension.total">
 				<source>Extensions (%s)</source>
