@@ -14,7 +14,7 @@ return [
         'iconfile' => 'EXT:t3monitoring/Resources/Public/Icons/tx_t3monitoring_domain_model_client.gif'
     ],
     'interface' => [
-        'showRecordFieldList' => 'hidden, title, domain, secret, php_version, mysql_version, insecure_core, outdated_core, insecure_extensions, outdated_extensions, error_message, extensions, core, sla',
+        'showRecordFieldList' => 'hidden, title, domain, secret, basic_auth_username, basic_auth_password, php_version, mysql_version, insecure_core, outdated_core, insecure_extensions, outdated_extensions, error_message, extensions, core, sla',
     ],
     'types' => [
         '1' => [
@@ -26,7 +26,7 @@ return [
         ],
     ],
     'palettes' => [
-        'paletteDomain' => ['showitem' => 'domain, secret,hidden'],
+        'paletteDomain' => ['showitem' => 'domain, secret, --linebreak--, basic_auth_username, basic_auth_password, hidden'],
         'paletteVersions' => ['showitem' => 'php_version, mysql_version'],
     ],
     'columns' => [
@@ -66,6 +66,24 @@ return [
                 'eval' => 'trim,required',
                 'min' => 5,
                 'max' => 255
+            ],
+        ],
+        'basic_auth_username' => [
+            'exclude' => 1,
+            'label' => 'LLL:EXT:t3monitoring/Resources/Private/Language/locallang.xlf:tx_t3monitoring_domain_model_client.basic_auth_username',
+            'config' => [
+                'type' => 'input',
+                'size' => 30,
+                'eval' => 'trim'
+            ],
+        ],
+        'basic_auth_password' => [
+            'exclude' => 1,
+            'label' => 'LLL:EXT:t3monitoring/Resources/Private/Language/locallang.xlf:tx_t3monitoring_domain_model_client.basic_auth_password',
+            'config' => [
+                'type' => 'input',
+                'size' => 30,
+                'eval' => 'trim,password'
             ],
         ],
         'email' => [
