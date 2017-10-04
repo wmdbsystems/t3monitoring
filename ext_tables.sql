@@ -28,6 +28,7 @@ CREATE TABLE tx_t3monitoring_domain_model_client (
 	extensions int(11) unsigned DEFAULT '0' NOT NULL,
 	core int(11) unsigned DEFAULT '0',
 	sla int(11) unsigned DEFAULT '0',
+	tag int(11) unsigned DEFAULT '0',
 
 	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
 	crdate int(11) unsigned DEFAULT '0' NOT NULL,
@@ -113,6 +114,30 @@ CREATE TABLE tx_t3monitoring_domain_model_core (
 # Table structure for table 'tx_t3monitoring_domain_model_sla'
 #
 CREATE TABLE tx_t3monitoring_domain_model_sla (
+
+	uid int(11) NOT NULL auto_increment,
+	pid int(11) DEFAULT '0' NOT NULL,
+
+	title varchar(255) DEFAULT '' NOT NULL,
+	description text NOT NULL,
+
+	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
+	crdate int(11) unsigned DEFAULT '0' NOT NULL,
+	cruser_id int(11) unsigned DEFAULT '0' NOT NULL,
+	deleted tinyint(4) unsigned DEFAULT '0' NOT NULL,
+	hidden tinyint(4) unsigned DEFAULT '0' NOT NULL,
+
+	sorting int(11) DEFAULT '0' NOT NULL,
+
+	PRIMARY KEY (uid),
+	KEY parent (pid),
+
+);
+
+#
+# Table structure for table 'tx_t3monitoring_domain_model_tag'
+#
+CREATE TABLE tx_t3monitoring_domain_model_tag (
 
 	uid int(11) NOT NULL auto_increment,
 	pid int(11) DEFAULT '0' NOT NULL,

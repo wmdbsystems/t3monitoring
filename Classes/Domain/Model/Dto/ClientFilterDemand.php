@@ -22,6 +22,9 @@ class ClientFilterDemand extends AbstractEntity
     /** @var int */
     protected $sla;
 
+    /** @var int */
+    protected $tag;
+
     /** @var string */
     protected $searchWord;
 
@@ -85,6 +88,24 @@ class ClientFilterDemand extends AbstractEntity
     public function setSla($sla)
     {
         $this->sla = $sla;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getTag()
+    {
+        return $this->tag;
+    }
+
+    /**
+     * @param int $tag
+     * @return $this
+     */
+    public function setTag($tag)
+    {
+        $this->tag = $tag;
         return $this;
     }
 
