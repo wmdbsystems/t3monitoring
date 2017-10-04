@@ -298,6 +298,8 @@
                                                 <thead>
                                                 <tr>
                                                     <th>{f:translate(key:'tx_t3monitoring_domain_model_client')}</th>
+                                                    <th>{f:translate(key:'tx_t3monitoring_domain_model_client.domain')}</th>
+                                                    <th>{f:translate(key:'tx_t3monitoring_domain_model_client.status')}</th>
                                                     <th>{f:translate(key:'tx_t3monitoring_domain_model_sla')}</th>
                                                     <th>{f:translate(key:'tx_t3monitoring_domain_model_core')}</th>
                                                     <th class="text-center"><span data-toggle="tooltip" data-title="{f:translate(key:'clients.numberOfExtensions')}" class="badge badge-info">-</span></th>
@@ -321,13 +323,35 @@
                                                                         <f:translate key="presentationMode.client.title" arguments="{0:client.uid}" />
                                                                     </f:then>
                                                                     <f:else>
-                                                                         {client.title} - {client.domain}
+                                                                         {client.title}
                                                                     </f:else>
                                                                 </f:if>
                                                             </f:link.action>
+                                                        </td>
+                                                        <td data-order="{client.domain -> f:format.htmlspecialchars()}">
+                                                            <f:link.action action="show" controller="Client"
+                                                                           arguments="{client:client}">
+
+                                                                <f:if condition="{emConfiguration.presentationMode}">
+                                                                    <f:then>
+                                                                        <f:translate key="presentationMode.client.domain" arguments="{0:client.uid}" />
+                                                                    </f:then>
+                                                                    <f:else>
+                                                                        {client.domain}
+                                                                    </f:else>
+                                                                </f:if>
+                                                            </f:link.action>
+                                                        </td>
+                                                        <td class="text-nowrap">
                                                             <f:if condition="{client.errorMessage}">
-                                                                <br><span
-                                                                    class="text-danger">{client.errorMessage}</span>
+                                                                <f:then>
+                                                                    <span data-toggle="tooltip"
+                                                                          data-title="{client.errorMessage}"
+                                                                          data-placement="left" class="label label-danger">{f:translate(key:'tx_t3monitoring_domain_model_client.error')}</span>
+                                                                </f:then>
+                                                                <f:else>
+                                                                    <span class="label label-success">{f:translate(key:'tx_t3monitoring_domain_model_client.ok')}</span>
+                                                                </f:else>
                                                             </f:if>
                                                         </td>
                                                         <td class="text-nowrap">
