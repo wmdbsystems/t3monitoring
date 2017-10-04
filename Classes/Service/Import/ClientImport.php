@@ -106,6 +106,8 @@ class ClientImport extends BaseImport
                 'error_message' => '',
                 'php_version' => $json['core']['phpVersion'],
                 'mysql_version' => $json['core']['mysqlClientVersion'],
+                'disk_total_space' => $json['core']['diskTotalSpace'],
+                'disk_free_space' => $json['core']['diskFreeSpace'],
                 'core' => $this->getUsedCore($json['core']['typo3Version']),
                 'extensions' => $this->handleExtensionRelations($row['uid'], (array)$json['extensions']),
             );
