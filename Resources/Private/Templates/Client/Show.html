@@ -72,6 +72,14 @@
 						<th><i class="fa fa-code fa-fw"></i> PHP Version</th>
 						<td>{client.phpVersion}</td>
 					</tr>
+					<tr>
+						<th><i class="fa fa-hdd-o fa-fw"></i> {f:translate(key:'tx_t3monitoring_domain_model_client.disk_total_space')}</th>
+						<td>{client.diskTotalSpace -> f:format.bytes(decimals: 1)}</td>
+					</tr>
+					<tr>
+						<th><i class="fa fa-hdd-o fa-fw"></i> {f:translate(key:'tx_t3monitoring_domain_model_client.disk_free_space')}</th>
+						<td>{client.diskFreeSpace -> f:format.bytes(decimals: 1)}</td>
+					</tr>
 				</table>
 			</div>
 		</div>

@@ -31,6 +31,14 @@
 				<source>Mysql Version</source>
 				<target>Mysql Version</target>
 			</trans-unit>
+			<trans-unit id="tx_t3monitoring_domain_model_client.disk_total_space">
+				<source>Disk Total Space</source>
+				<target>Disk Total Space</target>
+			</trans-unit>
+			<trans-unit id="tx_t3monitoring_domain_model_client.disk_free_space">
+				<source>Disk Free Space</source>
+				<target>Disk Free Space</target>
+			</trans-unit>
 			<trans-unit id="tx_t3monitoring_domain_model_client.insecure_core">
 				<source>Insecure Core</source>
 				<target>Unsicherer Core</target>

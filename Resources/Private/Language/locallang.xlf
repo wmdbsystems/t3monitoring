@@ -12,6 +12,15 @@
 			<trans-unit id="tx_t3monitoring_domain_model_client.domain">
 				<source>Domain</source>
 			</trans-unit>
+			<trans-unit id="tx_t3monitoring_domain_model_client.status">
+				<source>Status</source>
+			</trans-unit>
+			<trans-unit id="tx_t3monitoring_domain_model_client.error">
+				<source>Error</source>
+			</trans-unit>
+			<trans-unit id="tx_t3monitoring_domain_model_client.ok">
+				<source>OK</source>
+			</trans-unit>
 			<trans-unit id="tx_t3monitoring_domain_model_client.basic_auth_username">
 				<source>BasicAuth username</source>
 			</trans-unit>
@@ -29,6 +38,12 @@
 			</trans-unit>
 			<trans-unit id="tx_t3monitoring_domain_model_client.mysql_version">
 				<source>Mysql Version</source>
+			</trans-unit>
+			<trans-unit id="tx_t3monitoring_domain_model_client.disk_total_space">
+				<source>Disk Total Space</source>
+			</trans-unit>
+			<trans-unit id="tx_t3monitoring_domain_model_client.disk_free_space">
+				<source>Disk Free Space</source>
 			</trans-unit>
 			<trans-unit id="tx_t3monitoring_domain_model_client.insecure_core">
 				<source>Insecure Core</source>
