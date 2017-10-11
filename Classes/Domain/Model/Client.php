@@ -8,14 +8,17 @@ namespace T3Monitor\T3monitoring\Domain\Model;
  * LICENSE.txt file that was distributed with this source code.
  */
 
+use T3Monitor\T3monitoring\Domain\Model\Backend\User;
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+
 /**
  * Client
  */
-class Client extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+class Client extends AbstractEntity
 {
 
     /**
-     * title
      *
      * @var string
      * @validate NotEmpty
@@ -23,143 +26,133 @@ class Client extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $title = '';
 
     /**
-     * domain
-     *
      * @var string
      * @validate NotEmpty
      */
     protected $domain = '';
 
     /**
-     * secret
-     *
+     * @var string
+     */
+    protected $basicAuthUsername = '';
+
+    /**
+     * @var string
+     */
+    protected $basicAuthPassword = '';
+
+    /**
      * @var string
      * @validate NotEmpty
      */
     protected $secret = '';
 
     /**
-     * email
-     *
      * @var string
      */
     protected $email = '';
 
     /**
-     * phpVersion
-     *
      * @var string
      */
     protected $phpVersion = '';
 
     /**
-     * mysqlVersion
-     *
      * @var string
      */
     protected $mysqlVersion = '';
 
     /**
-     * insecureCore
-     *
+     * @var int
+     */
+    protected $diskTotalSpace = 0;
+
+    /**
+     * @var int
+     */
+    protected $diskFreeSpace = 0;
+
+    /**
      * @var bool
      */
     protected $insecureCore = false;
 
     /**
-     * outdatedCore
-     *
      * @var bool
      */
     protected $outdatedCore = false;
 
     /**
-     * insecureExtensions
-     *
      * @var int
      */
     protected $insecureExtensions = 0;
 
     /**
-     * outdatedExtensions
-     *
      * @var int
      */
     protected $outdatedExtensions = 0;
 
     /**
-     * errorMessage
-     *
      * @var string
      */
     protected $errorMessage = '';
 
     /**
-     * extraInfo
-     *
      * @var string
      */
     protected $extraInfo = '';
 
     /**
-     * extraWarning
-     *
      * @var string
      */
     protected $extraWarning = '';
 
     /**
-     * extraDanger
-     *
      * @var string
      */
     protected $extraDanger = '';
 
     /**
-     * lastSuccessfulImport
-     *
      * @var \DateTime
      */
     protected $lastSuccessfulImport = null;
 
     /**
-     * extensions
-     *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\T3Monitor\T3monitoring\Domain\Model\Extension>
-     * @lazy
-     */
-    protected $extensions = null;
-
-    /**
-     * backendUsers
-     *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\T3Monitor\T3monitoring\Domain\Model\Backend\User>
      * @lazy
      */
     protected $backendUsers = null;
 
     /**
-     * core
-     *
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\T3Monitor\T3monitoring\Domain\Model\Extension>
+     * @lazy
+     */
+    protected $extensions = null;
+
+    /**
      * @var \T3Monitor\T3monitoring\Domain\Model\Core
      * @lazy
      */
     protected $core = null;
 
     /**
-     * sla
-     *
      * @var \T3Monitor\T3monitoring\Domain\Model\Sla
      * @lazy
      */
     protected $sla = null;
 
     /**
+     * @var \T3Monitor\T3monitoring\Domain\Model\Tag
+     * @lazy
+     */
+    protected $tag = null;
+
+    /**
      * __construct
      */
     public function __construct()
     {
-        //Do not remove the next line: It would break the functionality
+        // Do not remove the next line: It would break the functionality
         $this->initStorageObjects();
     }
 
@@ -173,14 +166,14 @@ class Client extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     protected function initStorageObjects()
     {
-        $this->extensions = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-        $this->backendUsers = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $this->extensions = new ObjectStorage();
+        $this->backendUsers = new ObjectStorage();
     }
 
     /**
      * Returns the title
      *
-     * @return string $title
+     * @return string
      */
     public function getTitle()
     {
@@ -201,7 +194,7 @@ class Client extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the domain
      *
-     * @return string $domain
+     * @return string
      */
     public function getDomain()
     {
@@ -220,9 +213,41 @@ class Client extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
+     * @return string
+     */
+    public function getBasicAuthUsername()
+    {
+        return $this->basicAuthUsername;
+    }
+
+    /**
+     * @param string $basicAuthUsername
+     */
+    public function setBasicAuthUsername($basicAuthUsername)
+    {
+        $this->basicAuthUsername = $basicAuthUsername;
+    }
+
+    /**
+     * @return string
+     */
+    public function getBasicAuthPassword()
+    {
+        return $this->basicAuthPassword;
+    }
+
+    /**
+     * @param string $basicAuthPassword
+     */
+    public function setBasicAuthPassword($basicAuthPassword)
+    {
+        $this->basicAuthPassword = $basicAuthPassword;
+    }
+
+    /**
      * Returns the secret
      *
-     * @return string $secret
+     * @return string
      */
     public function getSecret()
     {
@@ -243,7 +268,7 @@ class Client extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the email
      *
-     * @return string $email
+     * @return string
      */
     public function getEmail()
     {
@@ -264,7 +289,7 @@ class Client extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the phpVersion
      *
-     * @return string $phpVersion
+     * @return string
      */
     public function getPhpVersion()
     {
@@ -285,7 +310,7 @@ class Client extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the mysqlVersion
      *
-     * @return string $mysqlVersion
+     * @return string
      */
     public function getMysqlVersion()
     {
@@ -304,9 +329,51 @@ class Client extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
+     * Returns the diskFreeSpace
+     *
+     * @return int
+     */
+    public function getDiskFreeSpace()
+    {
+        return $this->diskFreeSpace;
+    }
+
+    /**
+     * Sets the diskFreeSpace
+     *
+     * @param int $diskFreeSpace
+     * @return void
+     */
+    public function setDiskFreeSpace($diskFreeSpace)
+    {
+        $this->diskFreeSpace = $diskFreeSpace;
+    }
+
+    /**
+     * Returns the diskTotalSpace
+     *
+     * @return int
+     */
+    public function getDiskTotalSpace()
+    {
+        return $this->diskTotalSpace;
+    }
+
+    /**
+     * Sets the diskTotalSpace
+     *
+     * @param int $diskTotalSpace
+     * @return void
+     */
+    public function setDiskTotalSpace($diskTotalSpace)
+    {
+        $this->diskTotalSpace = $diskTotalSpace;
+    }
+
+    /**
      * Returns the insecureCore
      *
-     * @return bool $insecureCore
+     * @return bool
      */
     public function getInsecureCore()
     {
@@ -558,10 +625,10 @@ class Client extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Adds a backend user
      *
-     * @param \T3Monitor\T3monitoring\Domain\Model\Backend\User $backendUser
+     * @param User $backendUser
      * @return void
      */
-    public function addBackendUser(\T3Monitor\T3monitoring\Domain\Model\Backend\User $backendUser)
+    public function addBackendUser(User $backendUser)
     {
         $this->backendUsers->attach($backendUser);
     }
@@ -569,10 +636,10 @@ class Client extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Removes a backend user
      *
-     * @param \T3Monitor\T3monitoring\Domain\Model\Backend\User $backendUserToRemove The backend user to be removed
+     * @param User $backendUserToRemove The backend user to be removed
      * @return void
      */
-    public function removeBackendUser(\T3Monitor\T3monitoring\Domain\Model\Backend\User $backendUserToRemove)
+    public function removeBackendUser(User $backendUserToRemove)
     {
         $this->backendUsers->detach($backendUserToRemove);
     }
@@ -593,7 +660,7 @@ class Client extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\T3Monitor\T3monitoring\Domain\Model\Backend\User> $backendUsers
      * @return void
      */
-    public function setBackendUsers(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $backendUsers)
+    public function setBackendUsers(ObjectStorage $backendUsers)
     {
         $this->backendUsers = $backendUsers;
     }
