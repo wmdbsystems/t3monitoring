@@ -1,5 +1,4 @@
 <?php
-
 namespace T3Monitor\T3monitoring\Service\Import;
 
 /*
@@ -9,12 +8,18 @@ namespace T3Monitor\T3monitoring\Service\Import;
  * LICENSE.txt file that was distributed with this source code.
  */
 
+use Exception;
 use T3Monitor\T3monitoring\Domain\Model\Extension;
+use T3Monitor\T3monitoring\Notification\EmailNotification;
 use T3Monitor\T3monitoring\Service\DataIntegrity;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\StringUtility;
 use TYPO3\CMS\Core\Utility\VersionNumberUtility;
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 
+/**
+ * Class ClientImport
+ */
 class ClientImport extends BaseImport
 {
     const TABLE = 'tx_t3monitoring_domain_model_client';
@@ -25,19 +30,31 @@ class ClientImport extends BaseImport
     /** @var array */
     protected $responseCount = array('error' => 0, 'success' => 0);
 
+    /** @var array */
+    protected $failedClients = [];
+
+    /** @var  EmailNotification */
+    protected $emailNotification;
+
+    /**
+     * Constructor
+     */
     public function __construct()
     {
         $this->coreVersions = $this->getAllCoreVersions();
+        $this->emailNotification = GeneralUtility::makeInstance(EmailNotification::class);
         parent::__construct();
     }
 
     /**
      * @param null|int $clientId
+     * @throws \InvalidArgumentException
+     * @throws \RuntimeException
      */
     public function run($clientId = null)
     {
         $where = 'deleted=0 AND hidden=0';
-        if (is_null($clientId)) {
+        if ($clientId !== null) {
             $clientId = (int)$clientId;
             if ($clientId > 0) {
                 $where .= ' AND uid=' . $clientId;
@@ -47,6 +64,10 @@ class ClientImport extends BaseImport
 
         foreach ($clientRows as $client) {
             $this->importSingleClient($client);
+        }
+
+        if ($this->responseCount['error'] > 0) {
+            $this->emailNotification->sendClientFailedEmail($this->failedClients);
         }
 
         /** @var DataIntegrity $dataIntegrity */
@@ -63,6 +84,10 @@ class ClientImport extends BaseImport
         return $this->responseCount;
     }
 
+    /**
+     * @param array $row
+     * @throws \RuntimeException
+     */
     protected function importSingleClient(array $row)
     {
         try {
@@ -71,6 +96,9 @@ class ClientImport extends BaseImport
                 throw new \RuntimeException('Empty response from client ' . $row['title']);
             }
             $json = json_decode($response, true);
+            if (!is_array($json)) {
+                throw new \RuntimeException('Invalid response from client ' . $row['title']);
+            }
 
             $update = array(
                 'tstamp' => $GLOBALS['EXEC_TIME'],
@@ -78,9 +106,11 @@ class ClientImport extends BaseImport
                 'error_message' => '',
                 'php_version' => $json['core']['phpVersion'],
                 'mysql_version' => $json['core']['mysqlClientVersion'],
+                'disk_total_space' => $json['core']['diskTotalSpace'],
+                'disk_free_space' => $json['core']['diskFreeSpace'],
                 'core' => $this->getUsedCore($json['core']['typo3Version']),
-                'extensions' => $this->handleExtensionRelations($row['uid'], $json['extensions']),
-                'backend_users' => $this->handleBackendUserRelations($row['uid'], $json['users']['backend']),
+                'extensions' => $this->handleExtensionRelations($row['uid'], (array)$json['extensions']),
+                'backend_users' => $this->handleBackendUserRelations($row['uid'], (array)$json['users']['backend']),
             );
 
             $this->addExtraData($json, $update, 'info');
@@ -90,8 +120,8 @@ class ClientImport extends BaseImport
             $this->getDatabaseConnection()->exec_UPDATEquery('tx_t3monitoring_domain_model_client',
                 'uid=' . (int)$row['uid'], $update);
             $this->responseCount['success']++;
-        } catch (\Exception $e) {
-            $this->handleError($row['uid'], $e);
+        } catch (Exception $e) {
+            $this->handleError($row, $e);
         }
     }
 
@@ -105,27 +135,46 @@ class ClientImport extends BaseImport
     protected function addExtraData(array $json, array &$update, $field)
     {
         $dbField = 'extra_' . $field;
-        if (isset($json['extra']) && isset($json['extra']) && is_array($json['extra'][$field])) {
+        if (isset($json['extra']) && is_array($json['extra'][$field])) {
             $update[$dbField] = json_encode($json['extra'][$field]);
         } else {
             $update[$dbField] = '';
         }
     }
 
-    protected function handleError($client, \Exception $error)
+    /**
+     * @param array $client
+     * @param Exception $error
+     */
+    protected function handleError(array $client, Exception $error)
     {
         $this->responseCount['error']++;
-        $this->getDatabaseConnection()->exec_UPDATEquery(self::TABLE, 'uid=' . (int)$client, array(
+        $this->failedClients[] = $client;
+        $this->getDatabaseConnection()->exec_UPDATEquery(self::TABLE, 'uid=' . (int)$client['uid'], array(
             'error_message' => $error->getMessage()
         ));
     }
 
+    /**
+     * @param array $row
+     *
+     * @return mixed
+     * @throws \InvalidArgumentException
+     * @throws \RuntimeException
+     */
     protected function requestClientData(array $row)
     {
         $domain = $this->unifyDomain($row['domain']);
         $url = $domain . '/index.php?eID=t3monitoring&secret=' . rawurlencode($row['secret']);
         $report = [];
-        $response = GeneralUtility::getUrl($url, 0, null, $report);
+        $headers = [
+            'User-Agent: TYPO3-Monitoring/' . ExtensionManagementUtility::getExtensionVersion('t3monitoring'),
+            'Accept: application/json'
+        ];
+        if (!empty($row['basic_auth_username']) && !empty($row['basic_auth_password'])) {
+            $headers[] = 'Authorization: Basic ' . base64_encode($row['basic_auth_username'] . ':' . $row['basic_auth_password']);
+        }
+        $response = GeneralUtility::getUrl($url, 0, $headers, $report);
         if (!empty($report['message']) && $report['message'] !== 'OK') {
             throw new \RuntimeException($report['message']);
         }
@@ -135,6 +184,7 @@ class ClientImport extends BaseImport
     /**
      * @param string $domain
      * @return string
+     * @throws \InvalidArgumentException
      */
     protected function unifyDomain($domain)
     {
@@ -164,15 +214,18 @@ class ClientImport extends BaseImport
             );
         }
 
-        $existingExtensions = $this->getDatabaseConnection()->exec_SELECTgetRows('uid,version,name', $table,
-            implode(' OR ', $whereClause));
+        $existingExtensions = $this->getDatabaseConnection()->exec_SELECTgetRows(
+            'uid,version,name',
+            $table,
+            implode(' OR ', $whereClause)
+        );
 
         $relationsToBeAdded = array();
         foreach ($extensions as $key => $data) {
             // search if exists
             $found = null;
             foreach ($existingExtensions as $existingExtension) {
-                if ($existingExtension['version'] === $data['version'] && $existingExtension['name'] === $key) {
+                if ($existingExtension['name'] === $key && $existingExtension['version'] === $data['version']) {
                     $found = $existingExtension;
                     continue;
                 }
@@ -184,11 +237,11 @@ class ClientImport extends BaseImport
                 $insert = array(
                     'pid' => $this->emConfiguration->getPid(),
                     'name' => $key,
-                    'version' => $data['version'],
+                    'version' => (string)$data['version'],
                     'version_integer' => VersionNumberUtility::convertVersionNumberToInteger($data['version']),
                     'title' => (string)$data['title'],
                     'description' => (string)$data['description'],
-                    'state' => array_search($data['state'], Extension::$defaultStates),
+                    'state' => array_search($data['state'], Extension::$defaultStates, true),
                     'is_official' => 0,
                     'tstamp' => $GLOBALS['EXEC_TIME'],
                 );
@@ -200,7 +253,7 @@ class ClientImport extends BaseImport
                 $client,
                 $relationId,
                 $data['title'],
-                array_search($data['state'], Extension::$defaultStates),
+                array_search($data['state'], Extension::$defaultStates, true),
                 $data['isLoaded'],
             );
 
@@ -224,21 +277,17 @@ class ClientImport extends BaseImport
 
         $existingUsers = $this->getDatabaseConnection()->exec_SELECTgetRows('A.*', $table.' A LEFT OUTER JOIN '.$mmTable.' B ON A.uid=B.uid_foreign', 'B.uid_local='.(int)$client);
 
-        foreach($users as $user)
-        {
+        foreach ($users as $user) {
             $found = null;
 
-            foreach($existingUsers as $existingUser)
-            {
-                if($existingUser['user_name'] == $user['userName'])
-                {
+            foreach ($existingUsers as $existingUser) {
+                if($existingUser['user_name'] == $user['userName']) {
                     $found = $existingUser;
                     break;
                 }
             }
 
-            if($found)
-            {
+            if ($found) {
                 $relationId = $found['uid'];
                 $update = array(
                     'real_name' => (string)$user['realName'],
@@ -274,6 +323,10 @@ class ClientImport extends BaseImport
         return count($users);
     }
 
+    /**
+     * @param string $version
+     * @return int
+     */
     protected function getUsedCore($version)
     {
         if (isset($this->coreVersions[$version])) {
@@ -295,6 +348,9 @@ class ClientImport extends BaseImport
         }
     }
 
+    /**
+     * @return array|NULL
+     */
     protected function getAllCoreVersions()
     {
         return $this->getDatabaseConnection()->exec_SELECTgetRows(
@@ -304,7 +360,7 @@ class ClientImport extends BaseImport
             '',
             '',
             '',
-            'version');
+            'version'
+        );
     }
-
 }

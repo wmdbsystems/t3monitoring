@@ -12,6 +12,7 @@ use T3Monitor\T3monitoring\Domain\Model\Dto\ClientFilterDemand;
 use T3Monitor\T3monitoring\Domain\Repository\ClientRepository;
 use T3Monitor\T3monitoring\Domain\Repository\CoreRepository;
 use T3Monitor\T3monitoring\Domain\Repository\SlaRepository;
+use T3Monitor\T3monitoring\Domain\Repository\TagRepository;
 use T3Monitor\T3monitoring\Domain\Repository\StatisticRepository;
 use T3Monitor\T3monitoring\Service\BulletinImport;
 use T3Monitor\T3monitoring\Service\Import\ClientImport;
@@ -20,9 +21,25 @@ use T3Monitor\T3monitoring\Service\Import\ExtensionImport;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\VersionNumberUtility;
 
+/**
+ * Class StatisticController
+ */
 class StatisticController extends BaseController
 {
 
+    /**
+     * @var \T3Monitor\T3monitoring\Domain\Repository\SlaRepository
+     */
+    protected $slaRepository = null;
+
+    /**
+     * @var \T3Monitor\T3monitoring\Domain\Repository\TagRepository
+     */
+    protected $tagRepository = null;
+
+    /**
+     * Initialize action
+     */
     public function initializeAction()
     {
         $this->statisticRepository = $this->objectManager->get(StatisticRepository::class);
@@ -30,10 +47,16 @@ class StatisticController extends BaseController
         $this->clientRepository = $this->objectManager->get(ClientRepository::class);
         $this->coreRepository = $this->objectManager->get(CoreRepository::class);
         $this->slaRepository = $this->objectManager->get(SlaRepository::class);
+        $this->tagRepository = $this->objectManager->get(TagRepository::class);
 
         parent::initializeAction();
     }
 
+    /**
+     * Index action
+     *
+     * @param ClientFilterDemand|null $filter
+     */
     public function indexAction(ClientFilterDemand $filter = null)
     {
         if (is_null($filter)) {
@@ -68,6 +91,7 @@ class StatisticController extends BaseController
             'clients' => $this->clientRepository->findByDemand($filter),
             'coreVersions' => $this->getAllCoreVersions(),
             'coreVersionUsage' => $this->statisticRepository->getUsedCoreVersionCount(),
+            'coreVersionUsageJson' => $this->statisticRepository->getUsedCoreVersionCountJson(),
             'fullClientCount' => $this->clientRepository->countByDemand($emptyClientDemand),
             'clientsWithErrorMessages' => $this->clientRepository->countByDemand($errorMessageDemand),
             'clientsWithInsecureExtensions' => $this->clientRepository->countByDemand($insecureExtensionsDemand),
@@ -78,6 +102,7 @@ class StatisticController extends BaseController
             'clientsWithDangerInfo' => $this->clientRepository->countByDemand($clientsWithDangerInfo),
             'numberOfClients' => $this->clientRepository->countAll(),
             'slaVersions' => $this->slaRepository->findAll(),
+            'tagVersions' => $this->tagRepository->findAll(),
             'feedItems' => $feedItems,
             'monitorIpAddress' => $monitorIpAddress,
             'importTimes' => [
@@ -89,6 +114,8 @@ class StatisticController extends BaseController
     }
 
     /**
+     * Administrator action
+     *
      * @param string $import
      */
     public function administrationAction($import = '')
@@ -124,6 +151,11 @@ class StatisticController extends BaseController
         ]);
     }
 
+    /**
+     * Get all core versions
+     *
+     * @return array
+     */
     protected function getAllCoreVersions()
     {
         $result = $used = [];

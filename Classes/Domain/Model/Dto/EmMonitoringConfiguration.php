@@ -1,5 +1,4 @@
 <?php
-
 namespace T3Monitor\T3monitoring\Domain\Model\Dto;
 
 /*
@@ -24,10 +23,16 @@ class EmMonitoringConfiguration implements SingletonInterface
     protected $loadBulletins = true;
 
     /** @var bool */
+    protected $useGoogleCharts = true;
+
+    /** @var bool */
     protected $presentationMode = false;
 
     /** @var string */
     protected $ipHint = '';
+
+    /** @var string */
+    protected $emailForFailedClient;
 
     public function __construct()
     {
@@ -48,7 +53,7 @@ class EmMonitoringConfiguration implements SingletonInterface
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function getLoadBulletins()
     {
@@ -56,7 +61,15 @@ class EmMonitoringConfiguration implements SingletonInterface
     }
 
     /**
-     * @return boolean
+     * @return bool
+     */
+    public function getUseGoogleCharts()
+    {
+        return (bool)$this->useGoogleCharts;
+    }
+
+    /**
+     * @return bool
      */
     public function isPresentationMode()
     {
@@ -71,4 +84,12 @@ class EmMonitoringConfiguration implements SingletonInterface
         return $this->ipHint;
     }
 
+    /**
+     * @return string
+     */
+    public function getEmailForFailedClient()
+    {
+        return $this->emailForFailedClient;
+    }
+    
 }

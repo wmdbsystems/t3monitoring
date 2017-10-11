@@ -8,7 +8,9 @@ namespace T3Monitor\T3monitoring\Domain\Repository;
  * LICENSE.txt file that was distributed with this source code.
  */
 
+use T3Monitor\T3monitoring\Domain\Model\Client;
 use T3Monitor\T3monitoring\Domain\Model\Dto\ClientFilterDemand;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 
 /**
@@ -17,12 +19,26 @@ use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 class ClientRepository extends BaseRepository
 {
 
+    /** @var array */
     protected $searchFields = ['title', 'domain'];
 
+    /** @var array */
+    protected $defaultOrderings = ['title' => QueryInterface::ORDER_ASCENDING];
+
+    /**
+     * @param ClientFilterDemand $demand
+     * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+     */
     public function findByDemand(ClientFilterDemand $demand)
     {
         $query = $this->getQuery();
-        $this->setConstraints($demand, $query);
+        $constraints = $this->getConstraints($demand, $query);
+
+        if (!empty($constraints)) {
+            $query->matching(
+                $query->logicalAnd($constraints)
+            );
+        }
 
         return $query->execute();
     }
@@ -34,22 +50,60 @@ class ClientRepository extends BaseRepository
     public function countByDemand(ClientFilterDemand $demand)
     {
         $query = $this->getQuery();
-        $this->setConstraints($demand, $query);
-
+        $constraints = $this->getConstraints($demand, $query);
+        if (!empty($constraints)) {
+            $query->matching(
+                $query->logicalAnd($constraints)
+            );
+        }
         return $query->execute()->count();
+    }
+
+    /**
+     * @param bool $emailAddressRequired
+     * @return \T3Monitor\T3monitoring\Domain\Model\Client[]
+     */
+    public function getAllForReport($emailAddressRequired = false)
+    {
+        $query = $this->getQuery();
+        $demand = $this->getFilterDemand();
+        $demand->setWithInsecureCore(true);
+        $demand->setWithInsecureExtensions(true);
+
+        $constraints[] = $query->logicalOr(
+            $this->getConstraints($demand, $query, true
+            )
+        );
+
+        if ($emailAddressRequired) {
+            $constraints[] = $query->logicalNot(
+              $query->equals('email', '')
+            );
+        }
+
+        $query->matching(
+            $query->logicalAnd($constraints)
+        );
+
+        return $query->execute();
     }
 
     /**
      * @param ClientFilterDemand $demand
      * @param QueryInterface $query
      */
-    protected function setConstraints(ClientFilterDemand $demand, QueryInterface $query)
+    protected function getConstraints(ClientFilterDemand $demand, QueryInterface $query)
     {
         $constraints = [];
 
         // SLA
         if ($demand->getSla()) {
             $constraints[] = $query->equals('sla', $demand->getSla());
+        }
+
+        // Tag
+        if ($demand->getTag()) {
+            $constraints[] = $query->equals('tag', $demand->getTag());
         }
 
         // Search
@@ -116,13 +170,14 @@ class ClientRepository extends BaseRepository
             $constraints[] = $query->logicalNot($query->equals('extraDanger', ''));
         }
 
-
-        if (!empty($constraints)) {
-            $query->matching(
-                $query->logicalAnd($constraints)
-            );
-        }
+        return $constraints;
     }
 
-
+    /**
+     * @return ClientFilterDemand
+     */
+    protected function getFilterDemand()
+    {
+        return GeneralUtility::makeInstance(ClientFilterDemand::class);
+    }
 }

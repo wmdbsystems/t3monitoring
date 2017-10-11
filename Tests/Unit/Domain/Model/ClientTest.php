@@ -1,12 +1,20 @@
 <?php
-
 namespace T3Monitor\T3monitoring\Tests\Unit\Domain\Model\Dto;
 
-use Sup7\Mailchimp\Domain\Model\Dto\FormDto;
+/*
+ * This file is part of the t3monitoring extension for TYPO3 CMS.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE.txt file that was distributed with this source code.
+ */
+
 use T3Monitor\T3monitoring\Domain\Model\Client;
 use T3Monitor\T3monitoring\Domain\Model\Sla;
 use TYPO3\CMS\Core\Tests\UnitTestCase;
 
+/**
+ * Class ClientTest
+ */
 class ClientTest extends UnitTestCase
 {
 
@@ -15,6 +23,9 @@ class ClientTest extends UnitTestCase
      */
     protected $instance;
 
+    /**
+     * Set up
+     */
     protected function setUp()
     {
         $this->instance = new Client();

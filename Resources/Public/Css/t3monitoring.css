@@ -1,21 +1,40 @@
 .tooltip-inner .dep {
-	text-align: left;
+    text-align: left;
 }
 
 .tooltip-inner .dep table {
-	color: #000;
+    color: #000;
 }
 
 .tooltip-inner .dep .title {
-	font-size: 14px;
-	font-weight: bold;
+    font-size: 14px;
+    font-weight: bold;
 }
 
 .tooltip-inner .dep span {
-	font-weight: bold;
+    font-weight: bold;
 }
 
 .filter legend {
-	margin: 0;
-	font-size: 14px;
+    margin: 0;
+    font-size: 14px;
+}
+
+.client-list th,
+.extension-list th,
+.user-list th {
+    cursor: pointer;
+}
+.client-list th.no-sorting,
+.extension-list th.no-sorting,
+.user-list th.no-sorting {
+    cursor: default;
+}
+
+.panel .table,
+.panel-collapse .table,
+.panel .table-fit,
+.panel-collapse .table-fit {
+    border: 0;
+    margin: 0;
 }

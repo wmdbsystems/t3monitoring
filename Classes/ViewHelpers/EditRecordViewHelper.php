@@ -1,5 +1,4 @@
 <?php
-
 namespace T3Monitor\T3monitoring\ViewHelpers;
 
 /*
@@ -44,13 +43,13 @@ class EditRecordViewHelper extends AbstractViewHelper implements CompilableInter
      * @param callable|\Closure $renderChildrenClosure
      * @param RenderingContextInterface $renderingContext
      * @return string
+     * @throws \InvalidArgumentException
      */
     public static function renderStatic(
         array $arguments,
         \Closure $renderChildrenClosure,
         RenderingContextInterface $renderingContext
-    )
-    {
+    ) {
         $parameters = GeneralUtility::explodeUrl2Array($arguments['parameters']);
 
         $parameters['returnUrl'] = 'index.php?M=tools_T3monitoringT3monitor&moduleToken='

@@ -10,16 +10,20 @@ namespace T3Monitor\T3monitoring\Domain\Repository;
 
 use T3Monitor\T3monitoring\Domain\Model\Dto\ClientFilterDemand;
 
-
 /**
- * The repository for Clients
+ * The repository for statistics
  */
 class StatisticRepository extends BaseRepository
 {
 
+    /**
+     * @param ClientFilterDemand $demand
+     * @param bool $returnFirst
+     * @return array|NULL
+     */
     public function getClientsByDemand(ClientFilterDemand $demand, $returnFirst = false)
     {
-        $where = 'tx_t3monitoring_domain_model_client.deleted=0';
+        $where = 'tx_t3monitoring_domain_model_client.deleted=0 AND tx_t3monitoring_domain_model_client.hidden=0';
 
         // version
         $version = $demand->getVersion();
@@ -42,12 +46,22 @@ class StatisticRepository extends BaseRepository
         return $rows;
     }
 
+    /**
+     * @param string $version
+     * @return array|FALSE|NULL
+     */
     public function getCoreVersion($version)
     {
-        return $this->getDatabaseConnection()->exec_SELECTgetSingleRow('*', 'tx_t3monitoring_domain_model_core',
-            'version_integer=' . (int)$version);
+        return $this->getDatabaseConnection()->exec_SELECTgetSingleRow(
+            '*',
+            'tx_t3monitoring_domain_model_core',
+            'version_integer=' . (int)$version
+        );
     }
 
+    /**
+     * @return array|NULL
+     */
     public function getUsedCoreVersionCount()
     {
         return $this->getDatabaseConnection()->exec_SELECTgetRows(
@@ -55,8 +69,20 @@ class StatisticRepository extends BaseRepository
             ,tx_t3monitoring_domain_model_core.is_stable,tx_t3monitoring_domain_model_core.is_active,tx_t3monitoring_domain_model_core.is_latest',
             'tx_t3monitoring_domain_model_client RIGHT JOIN tx_t3monitoring_domain_model_core
                 ON tx_t3monitoring_domain_model_client.core = tx_t3monitoring_domain_model_core.uid',
-            'tx_t3monitoring_domain_model_client.deleted=0', 'tx_t3monitoring_domain_model_core.version,version_integer,insecureCore,is_stable,is_latest,is_active',
+            'tx_t3monitoring_domain_model_client.deleted=0 AND tx_t3monitoring_domain_model_client.hidden=0', 'tx_t3monitoring_domain_model_core.version,version_integer,insecureCore,is_stable,is_latest,is_active',
             'tx_t3monitoring_domain_model_core.version_integer');
     }
 
+    /**
+     * @return string
+     */
+    public function getUsedCoreVersionCountJson()
+    {
+        $data = $this->getUsedCoreVersionCount();
+        $result = [];
+        foreach ($data as $row) {
+            $result[] = [$row['version'], (int)$row['count']];
+        }
+        return json_encode($result);
+    }
 }

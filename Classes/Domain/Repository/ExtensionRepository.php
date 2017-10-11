@@ -17,11 +17,18 @@ use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 class ExtensionRepository extends BaseRepository
 {
 
-    /** @var array */
-    protected $defaultOrderings = [
-        'name' => QueryInterface::ORDER_ASCENDING
-    ];
+    /**
+     * Initialize object
+     */
+    public function initializeObject()
+    {
+        $this->setDefaultOrderings(['name' => QueryInterface::ORDER_ASCENDING]);
+    }
 
+    /**
+     * @param string $name
+     * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+     */
     public function findAllVersionsByName($name)
     {
         $query = $this->getQuery();
@@ -33,6 +40,10 @@ class ExtensionRepository extends BaseRepository
         return $query->execute();
     }
 
+    /**
+     * @param ExtensionFilterDemand $demand
+     * @return array
+     */
     public function findByDemand(ExtensionFilterDemand $demand)
     {
         $rows = $this->getDatabaseConnection()->exec_SELECTgetRows(
@@ -40,7 +51,7 @@ class ExtensionRepository extends BaseRepository
             'tx_t3monitoring_domain_model_extension ext
                 RIGHT JOIN tx_t3monitoring_client_extension_mm mm on mm.uid_foreign = ext.uid
                 RIGHT JOIN tx_t3monitoring_domain_model_client client on mm.uid_local=client.uid',
-            'ext.name is not null' . $this->extendWhereClause($demand),
+            'ext.name is not null AND client.deleted=0 AND client.hidden=0' . $this->extendWhereClause($demand),
             '',
             'ext.name,ext.version_integer DESC,client.title'
         );
@@ -79,6 +90,4 @@ class ExtensionRepository extends BaseRepository
             return '';
         }
     }
-
-
 }

@@ -1,10 +1,19 @@
 <?php
+namespace T3Monitor\T3monitoring\Tests\Unit\Service\Import;
 
-namespace T3Monitor\T3monitoring\Tests\Unit\Service\Impport;
+/*
+ * This file is part of the t3monitoring extension for TYPO3 CMS.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE.txt file that was distributed with this source code.
+ */
 
 use T3Monitor\T3monitoring\Service\Import\ClientImport;
 use TYPO3\CMS\Core\Tests\UnitTestCase;
 
+/**
+ * Class ClientImportTest
+ */
 class ClientImportTest extends UnitTestCase
 {
 
@@ -40,5 +49,4 @@ class ClientImportTest extends UnitTestCase
             ],
         ];
     }
-
 }

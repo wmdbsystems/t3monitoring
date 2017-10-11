@@ -19,11 +19,17 @@ class CoreRepository extends BaseRepository
     const USED_ALL = 0;
     const USED_ONLY = 1;
 
-        /** @var array */
-    protected $defaultOrderings = [
-        'versionInteger' => QueryInterface::ORDER_DESCENDING
-    ];
+    /**
+     * Initialize object
+     */
+    public function initializeObject() {
+        $this->setDefaultOrderings(['versionInteger' => QueryInterface::ORDER_DESCENDING]);
+    }
 
+    /**
+     * @param CoreFilterDemand $demand
+     * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+     */
     public function findByDemand(CoreFilterDemand $demand)
     {
         $query = $this->getQuery();
@@ -42,6 +48,10 @@ class CoreRepository extends BaseRepository
         return $query->execute();
     }
 
+    /**
+     * @param int $mode
+     * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+     */
     public function findAllCoreVersions($mode = self::USED_ONLY)
     {
         $query = $this->getQuery();
@@ -53,6 +63,10 @@ class CoreRepository extends BaseRepository
         return $query->execute();
     }
 
+    /**
+     * @param string $version
+     * @return \T3Monitor\T3monitoring\Domain\Model\Core
+     */
     public function findByVersionAsInteger($version)
     {
         $query = $this->getQuery();
@@ -61,5 +75,4 @@ class CoreRepository extends BaseRepository
                 $query->equals('versionInteger', $version)
             ))->execute()->getFirst();
     }
-
 }

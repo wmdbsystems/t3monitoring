@@ -33,10 +33,14 @@ CREATE TABLE tx_t3monitoring_domain_model_client (
 
 	title varchar(255) DEFAULT '' NOT NULL,
 	domain varchar(255) DEFAULT '' NOT NULL,
+	basic_auth_username varchar(255) DEFAULT '' NOT NULL,
+	basic_auth_password varchar(255) DEFAULT '' NOT NULL,
 	secret varchar(255) DEFAULT '' NOT NULL,
 	email varchar(255) DEFAULT '' NOT NULL,
 	php_version varchar(255) DEFAULT '' NOT NULL,
 	mysql_version varchar(255) DEFAULT '' NOT NULL,
+	disk_free_space bigint(20) unsigned DEFAULT '0' NOT NULL,
+	disk_total_space bigint(20) unsigned DEFAULT '0' NOT NULL,
 	insecure_core tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	outdated_core tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	insecure_extensions int(11) DEFAULT '0' NOT NULL,
@@ -50,6 +54,7 @@ CREATE TABLE tx_t3monitoring_domain_model_client (
 	backend_users int(11) unsigned DEFAULT '0' NOT NULL,
 	core int(11) unsigned DEFAULT '0',
 	sla int(11) unsigned DEFAULT '0',
+	tag int(11) unsigned DEFAULT '0',
 
 	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
 	crdate int(11) unsigned DEFAULT '0' NOT NULL,
@@ -169,6 +174,29 @@ CREATE TABLE tx_t3monitoring_client_backend_user_mm (
 );
 
 #
+# Table structure for table 'tx_t3monitoring_domain_model_tag'
+#
+CREATE TABLE tx_t3monitoring_domain_model_tag (
+
+	uid int(11) NOT NULL auto_increment,
+	pid int(11) DEFAULT '0' NOT NULL,
+
+	title varchar(255) DEFAULT '' NOT NULL,
+	description text NOT NULL,
+
+	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
+	crdate int(11) unsigned DEFAULT '0' NOT NULL,
+	cruser_id int(11) unsigned DEFAULT '0' NOT NULL,
+	deleted tinyint(4) unsigned DEFAULT '0' NOT NULL,
+	hidden tinyint(4) unsigned DEFAULT '0' NOT NULL,
+
+	sorting int(11) DEFAULT '0' NOT NULL,
+
+	PRIMARY KEY (uid),
+	KEY parent (pid)
+);
+
+#
 # Table structure for table 'tx_t3monitoring_client_extension_mm'
 #
 CREATE TABLE tx_t3monitoring_client_extension_mm (
@@ -180,8 +208,6 @@ CREATE TABLE tx_t3monitoring_client_extension_mm (
 	KEY uid_local (uid_local),
 	KEY uid_foreign (uid_foreign)
 );
-
-## EXTENSION BUILDER DEFAULTS END TOKEN - Everything BEFORE this line is overwritten with the defaults of the extension builder
 
 CREATE TABLE tx_t3monitoring_client_extension_mm (
   is_loaded tinyint(4) unsigned DEFAULT '0' NOT NULL,
